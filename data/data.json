@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "profile": {
+    "title": "My Projects",
+    "tagline": "A collection of the apps, games and tools I've built. Click around, everything here is made by me.",
+    "github": "",
+    "itch": ""
+  },
+  "settings": {
+    "sort": "updated"
+  },
+  "categories": [
+    { "id": "games", "name": "Games", "color": "#d6457f" },
+    { "id": "apps", "name": "Apps", "color": "#3f67d6" },
+    { "id": "tools", "name": "Tools", "color": "#2a9d73" },
+    { "id": "web", "name": "Web", "color": "#e0792f" },
+    { "id": "other", "name": "Other", "color": "#8a5bd1" }
+  ],
+  "tags": ["sample", "javascript", "python", "unity", "puzzle", "cli", "pwa"],
+  "projects": [
+    {
+      "id": "sample-skyhopper",
+      "title": "Sample: Skyhopper",
+      "source": "itch",
+      "url": "https://itch.io/",
+      "category": "games",
+      "tags": ["sample", "unity", "puzzle"],
+      "summary": "An example game entry. Replace or delete it from the editor once you add your own.",
+      "description": "This is placeholder content so you can see how a game looks.\n\nGames from itch.io are added manually: paste the URL, add screenshots and fill in whatever facts you want to show (platform, engine, jam, price).",
+      "cover": "",
+      "screenshots": [],
+      "created": "2026-09-02",
+      "updated": "2026-11-08",
+      "featured": true,
+      "hidden": false,
+      "facts": [
+        { "label": "Platform", "value": "Windows, Web" },
+        { "label": "Engine", "value": "Unity" },
+        { "label": "Size", "value": "48 MB" },
+        { "label": "Downloads", "value": "1 240" }
+      ],
+      "links": [],
+      "stats": null
+    },
+    {
+      "id": "sample-taskflow",
+      "title": "Sample: Taskflow",
+      "source": "github",
+      "url": "https://github.com/",
+      "category": "apps",
+      "tags": ["sample", "javascript", "pwa"],
+      "summary": "An example GitHub project with cached statistics so the charts have something to show.",
+      "description": "Real GitHub projects get their statistics from the GitHub API when you press Sync in the settings. This sample shows what that looks like: languages, weekly commits, when you tend to commit, releases and contributors.",
+      "cover": "",
+      "screenshots": [],
+      "created": "2026-03-14",
+      "updated": "2026-11-12",
+      "featured": false,
+      "hidden": false,
+      "facts": [],
+      "links": [],
+      "stats": {
+        "stars": 128, "forks": 14, "watchers": 9, "issues": 3, "size": 2840,
+        "license": "MIT", "branch": "main", "language": "JavaScript",
+        "created": "2026-03-14T09:12:00Z", "pushed": "2026-11-12T19:40:00Z",
+        "commits": 214,
+        "languages": { "JavaScript": 58200, "CSS": 17400, "HTML": 9100, "Python": 3300 },
+        "weeks": [0,0,2,5,3,0,1,4,7,2,0,0,3,6,9,4,2,1,0,5,8,3,2,0,1,4,6,10,5,2,0,3,7,4,2,1,0,2,5,8,12,6,3,1,0,4,7,9,5,3,6,8],
+        "punch": [[1,9,2],[1,10,4],[1,14,3],[1,20,5],[2,9,3],[2,11,6],[2,15,4],[2,21,2],[3,10,5],[3,13,3],[3,19,7],[3,22,4],[4,9,2],[4,16,5],[4,20,6],[5,10,4],[5,14,3],[5,18,2],[6,11,6],[6,14,8],[6,16,5],[6,21,3],[0,12,4],[0,15,6],[0,20,3],[1,23,2],[3,1,1],[5,22,3]],
+        "releases": [
+          { "name": "v0.5", "downloads": 80, "date": "2026-05-01" },
+          { "name": "v0.8", "downloads": 210, "date": "2026-07-19" },
+          { "name": "v1.0", "downloads": 560, "date": "2026-09-30" },
+          { "name": "v1.1", "downloads": 340, "date": "2026-11-05" }
+        ],
+        "contributors": [
+          { "login": "you", "commits": 188, "avatar": "", "url": "" },
+          { "login": "friend", "commits": 21, "avatar": "", "url": "" },
+          { "login": "helper", "commits": 5, "avatar": "", "url": "" }
+        ],
+        "syncedAt": "2026-11-15T10:00:00Z"
+      }
+    },
+    {
+      "id": "sample-pixelpack",
+      "title": "Sample: PixelPack",
+      "source": "github",
+      "url": "https://github.com/",
+      "category": "tools",
+      "tags": ["sample", "python", "cli"],
+      "summary": "A small command-line tool that packs sprites into atlases.",
+      "description": "Another placeholder, this time a tool.",
+      "cover": "",
+      "screenshots": [],
+      "created": "2026-01-20",
+      "updated": "2026-10-02",
+      "featured": false,
+      "hidden": false,
+      "facts": [],
+      "links": [],
+      "stats": {
+        "stars": 42, "forks": 3, "watchers": 4, "issues": 1, "size": 410,
+        "license": "Apache-2.0", "branch": "main", "language": "Python",
+        "created": "2026-01-20T12:00:00Z", "pushed": "2026-10-02T08:15:00Z",
+        "commits": 67,
+        "languages": { "Python": 21000, "Shell": 1200 },
+        "weeks": [0,0,0,3,5,2,0,0,1,0,0,0,4,6,3,0,0,0,2,1,0,0,0,0,5,8,4,0,0,0,1,0,0,0,0,2,3,0,0,0,0,1,0,0,0,0,0,2,0,0,0,0],
+        "punch": [[2,20,3],[2,21,5],[3,20,4],[4,22,6],[6,13,5],[6,14,7],[0,15,4]],
+        "releases": [],
+        "contributors": [{ "login": "you", "commits": 67, "avatar": "", "url": "" }],
+        "syncedAt": "2026-11-15T10:00:00Z"
+      }
+    },
+    {
+      "id": "sample-portfolio",
+      "title": "Sample: Tiny Site",
+      "source": "other",
+      "url": "https://example.com/",
+      "category": "web",
+      "tags": ["sample", "javascript"],
+      "summary": "A site or anything else that isn't on GitHub or itch.io.",
+      "description": "Use the 'Other' source for websites, mods, music, art or anything else you have made.",
+      "cover": "",
+      "screenshots": [],
+      "created": "2025-12-01",
+      "updated": "2026-06-10",
+      "featured": false,
+      "hidden": false,
+      "facts": [{ "label": "Hosting", "value": "GitHub Pages" }],
+      "links": [],
+      "stats": null
+    }
+  ]
+}

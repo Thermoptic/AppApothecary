@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>My Projects</title>
+  <meta name="description" content="A personal collection of apps, games and tools.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234f6bed'/%3E%3Crect x='8' y='8' width='7' height='7' rx='2' fill='white'/%3E%3Crect x='17' y='8' width='7' height='7' rx='2' fill='white' opacity='.6'/%3E%3Crect x='8' y='17' width='7' height='7' rx='2' fill='white' opacity='.6'/%3E%3Crect x='17' y='17' width='7' height='7' rx='2' fill='white'/%3E%3C/svg%3E">
+  <script>
+    // Apply saved theme before first paint to avoid a flash.
+    try { var t = localStorage.getItem('ma_theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header id="header" class="header"></header>
+  <main id="main" class="container" tabindex="-1"><div class="loading">Loading…</div></main>
+  <footer id="footer" class="footer container"></footer>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

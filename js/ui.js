@@ -86,7 +86,7 @@ export function prose(text) {
     if (!para.trim()) continue;
     const p = h('p');
     para.split(/(https?:\/\/[^\s]+)/g).forEach((part, i) => {
-      if (i % 2) p.append(h('a', { href: part, target: '_blank', rel: 'noopener', style: { color: 'var(--accent)' } }, part));
+      if (i % 2) p.append(h('a', { href: part, target: '_blank', rel: 'noopener' }, part));
       else part.split('\n').forEach((line, j) => { if (j) p.append(h('br')); p.append(line); });
     });
     box.append(p);
@@ -182,7 +182,7 @@ document.addEventListener('pointerdown', (e) => {
 });
 
 // ---------- shared project bits ----------
-const NEUTRAL = '#B7CF8E';
+const NEUTRAL = '#A5A6AA';
 /** Relative luminance (0..1) of a #rrggbb color. */
 export function lum(hex) {
   const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
@@ -190,7 +190,7 @@ export function lum(hex) {
   const [r, g, b] = [0, 2, 4].map((i) => { const v = parseInt(m[1].slice(i, i + 2), 16) / 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; });
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
-const PALETTE = ['#FF4E50', '#FC913A', '#F9D423', '#EDE574', '#E1F5C4'];
+const PALETTE = ['#D5FA4B', '#4A4C57', '#70C10A', '#A5A6AA', '#F2F2F5'];
 function hue(hex) {
   const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
   if (!m) return 0;

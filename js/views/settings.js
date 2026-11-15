@@ -63,7 +63,7 @@ function access() {
     h('div', { class: 'grid2' }, field('Branch', branch), field('Access token', token, 'Stored only in this browser.')),
     h('details', { class: 'small muted' }, h('summary', { style: { cursor: 'pointer' } }, 'How do I get a token?'),
       h('ol', { style: { 'padding-left': '20px', 'line-height': 1.7 } },
-        h('li', {}, 'Open ', h('a', { href: 'https://github.com/settings/personal-access-tokens/new', target: '_blank', rel: 'noopener', style: { color: 'var(--accent)' } }, 'GitHub → Fine-grained tokens'), '.'),
+        h('li', {}, 'Open ', h('a', { href: 'https://github.com/settings/personal-access-tokens/new', target: '_blank', rel: 'noopener', style: { 'text-decoration': 'underline' } }, 'GitHub → Fine-grained tokens'), '.'),
         h('li', {}, 'Repository access: "Only select repositories", then pick this site\'s repository.'),
         h('li', {}, 'Permissions → Repository → Contents: "Read and write".'),
         h('li', {}, 'Generate, copy the token and paste it here. Never share it or commit it.'))),
@@ -98,7 +98,7 @@ function categories() {
       d.projects.forEach((p) => { if (p.category === c.id) p.category = ''; });
       d.categories.splice(i, 1); safe(touch);
     } }, icon('trash', 16))));
-  const PALETTE = ['#FF4E50', '#FC913A', '#F9D423', '#EDE574', '#E1F5C4', '#23301F'];
+  const PALETTE = ['#D5FA4B', '#4A4C57', '#70C10A', '#A5A6AA', '#F2F2F5', '#111116'];
   return section('Categories', 'Each category has its own color on cards and filters.',
     h('div', { class: 'list' }, rows.length ? rows : h('p', { class: 'muted small' }, 'No categories yet.')),
     h('div', {}, h('button', { class: 'btn', onclick: () => {

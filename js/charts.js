@@ -25,7 +25,7 @@ const tooltip = () => ({
 function barConfig(labels, values, unit, tickEvery, color) {
   return {
     type: 'bar',
-    data: { labels, datasets: [{ data: values, backgroundColor: color || css('--accent'), borderRadius: 4, borderSkipped: 'bottom', maxBarThickness: 36, categoryPercentage: 0.82, barPercentage: 0.9 }] },
+    data: { labels, datasets: [{ data: values, backgroundColor: color || css('--bar'), borderRadius: 4, borderSkipped: 'bottom', maxBarThickness: 36, categoryPercentage: 0.82, barPercentage: 0.9 }] },
     options: {
       responsive: true, maintainAspectRatio: false, animation: { duration: 400 },
       plugins: { legend: { display: false }, tooltip: { ...tooltip(), callbacks: { label: (c) => fmtNum(c.parsed.y) + ' ' + unit } } },

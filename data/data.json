@@ -13,27 +13,27 @@
                        {
                            "id":  "games",
                            "name":  "Games",
-                           "color":  "#FF4E50"
+                           "color":  "#D5FA4B"
                        },
                        {
                            "id":  "apps",
                            "name":  "Apps",
-                           "color":  "#FC913A"
+                           "color":  "#4A4C57"
                        },
                        {
                            "id":  "tools",
                            "name":  "Tools",
-                           "color":  "#F9D423"
+                           "color":  "#70C10A"
                        },
                        {
                            "id":  "web",
                            "name":  "Web",
-                           "color":  "#EDE574"
+                           "color":  "#A5A6AA"
                        },
                        {
                            "id":  "other",
                            "name":  "Other",
-                           "color":  "#23301F"
+                           "color":  "#F2F2F5"
                        }
                    ],
     "tags":  [

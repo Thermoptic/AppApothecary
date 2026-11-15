@@ -330,3 +330,30 @@ details summary { cursor: pointer; }
   .prj:hover .d { background: var(--t); border-color: var(--t); }
 }
 @media (hover: none), (prefers-reduced-motion: reduce) { .btn::before, .cta::before, .prj::after { display: none; } }
+
+/* ---------- Readme (rendered Markdown) ---------- */
+.md-wrap { position: relative; min-width: 0; }
+.md-wrap.clamp { max-height: 560px; overflow: hidden; -webkit-mask-image: linear-gradient(#000 78%, transparent); mask-image: linear-gradient(#000 78%, transparent); }
+.md { max-width: 74ch; line-height: 1.65; font-size: 1rem; overflow-wrap: anywhere; }
+.md > * + * { margin-top: 14px; }
+.md h3, .md h4, .md h5, .md h6 { margin-top: 28px; letter-spacing: -.025em; line-height: 1.15; }
+.md > :first-child { margin-top: 0; }
+.md .md-h1 { font-size: 1.6rem; }
+.md .md-h2 { font-size: 1.35rem; padding-bottom: 6px; border-bottom: 1px solid var(--rule); }
+.md .md-h3 { font-size: 1.15rem; }
+.md .md-h4, .md .md-h5, .md .md-h6 { font-size: 1rem; }
+.md a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+.md a:hover { background: var(--accent); color: var(--on-accent); text-decoration-color: transparent; }
+.md img { display: inline-block; max-width: 100%; height: auto; vertical-align: middle; border-radius: 6px; }
+.md p > img:only-child { display: block; border-radius: 14px; border: 1px solid var(--rule); }
+.md code { font: .88em ui-monospace, "Cascadia Mono", Consolas, monospace; background: var(--surface-2); padding: 1px 6px; border-radius: 5px; }
+.md pre { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 14px 16px; overflow-x: auto; max-width: 100%; }
+.md pre code { background: none; padding: 0; font-size: .85rem; line-height: 1.55; white-space: pre; overflow-wrap: normal; }
+.md ul, .md ol { padding-left: 1.4em; display: grid; gap: 5px; }
+.md li > ul, .md li > ol { margin-top: 5px; }
+.md blockquote { margin-left: 0; padding: 2px 0 2px 16px; border-left: 3px solid var(--accent); color: var(--muted); }
+.md hr { border: 0; border-top: 1px solid var(--rule); margin-block: 22px; }
+.md-table { overflow-x: auto; max-width: 100%; }
+.md table { border-collapse: collapse; font-size: .92rem; }
+.md th, .md td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.md th { font-weight: 800; }

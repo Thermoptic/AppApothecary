@@ -5,7 +5,7 @@ export const getToken = () => { try { return localStorage.getItem('ma_token') ||
 
 export async function gh(path, opts = {}) {
   const token = opts.anon ? '' : getToken();
-  const headers = { Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+  const headers = { Accept: opts.raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
   if (token) headers.Authorization = 'Bearer ' + token;
   const method = opts.method || 'GET';
   const res = await fetch(API + path, { method, headers, body: opts.body ? JSON.stringify(opts.body) : undefined, cache: 'no-store' });
@@ -14,7 +14,7 @@ export async function gh(path, opts = {}) {
     return gh(path, { ...opts, anon: true });
   }
   let json = null;
-  if (res.status !== 204) { try { json = await res.json(); } catch { json = null; } }
+  if (res.status !== 204) { try { json = opts.raw && res.ok ? await res.text() : await res.json(); } catch { json = null; } }
   if (!res.ok && !opts.soft) {
     const err = new Error(friendly(res, json));
     err.status = res.status;
@@ -130,6 +130,19 @@ export async function fetchStats(full, info) {
     contributors: Array.isArray(contributors) ? contributors.map((c) => ({ login: c.login, commits: c.contributions, avatar: c.avatar_url, url: c.html_url })) : [],
     syncedAt: new Date().toISOString(),
   };
+}
+
+/** The repository's README as Markdown text ('' if it has none). Long ones are cut at a paragraph. */
+export async function fetchReadme(full, cap = 30000) {
+  const { res, json } = await gh(`/repos/${full}/readme`, { soft: true, raw: true });
+  if (!res.ok || typeof json !== 'string') return '';
+  let text = json.replace(/\r\n?/g, '\n').replace(/^﻿/, '').trim();
+  if (text.length > cap) {
+    let cut = text.lastIndexOf('\n\n', cap);
+    if (cut < cap / 2) cut = cap;
+    text = text.slice(0, cut).trimEnd() + '\n\n*The rest of this readme is on GitHub.*';
+  }
+  return text;
 }
 
 // Fields a project takes from its repository (used by import and by the editor's fetch button).

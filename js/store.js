@@ -64,7 +64,7 @@ function normalize(d) {
   d.tags = Array.isArray(d.tags) ? d.tags : [];
   d.projects = (Array.isArray(d.projects) ? d.projects : []).map((p) => ({
     id: uid(), title: 'Untitled', source: 'other', repo: '', url: '', category: '', tags: [], summary: '', description: '',
-    cover: '', screenshots: [], created: '', updated: '', featured: false, hidden: false, facts: [], links: [], itchId: '', stats: null, ...p,
+    cover: '', screenshots: [], created: '', updated: '', featured: false, hidden: false, facts: [], links: [], itchId: '', readme: '', stats: null, ...p,
   }));
   return d;
 }

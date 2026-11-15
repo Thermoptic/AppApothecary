@@ -2,7 +2,8 @@
 
 import { h, set, icon, fmtDate, fmtDateTime, fmtNum, fmtSize, modColors, prose, lightbox, toast, SOURCE } from '../ui.js';
 import { state, isAdmin, catOf, imgSrc, touch } from '../store.js';
-import { fetchStats } from '../github.js';
+import { fetchStats, fetchReadme } from '../github.js';
+import { renderMarkdown } from '../md.js';
 import { weeklyChart, releasesChart, languagesChart, heatmap } from '../charts.js';
 import { openEditor } from './editor.js';
 import { unitNumbers } from './home.js';
@@ -31,7 +32,7 @@ export function renderProject(root, id) {
 
   async function refresh(btn) {
     btn.disabled = true;
-    try { p.stats = await fetchStats(p.repo); p.updated = (p.stats.pushed || p.updated || '').slice(0, 10); touch(); toast('Statistics updated.'); }
+    try { p.stats = await fetchStats(p.repo); p.updated = (p.stats.pushed || p.updated || '').slice(0, 10); p.readme = (await fetchReadme(p.repo)) || p.readme; touch(); toast('Statistics and readme updated.'); }
     catch (e) { toast(e.message, true); btn.disabled = false; }
   }
 
@@ -66,6 +67,8 @@ export function renderProject(root, id) {
     p.source === 'itch' && /^\d+$/.test(p.itchId || '') ? sec('Get it', null,
       h('iframe', { class: 'embed', src: `https://itch.io/embed/${p.itchId}`, title: p.title + ' on itch.io', loading: 'lazy' })) : null,
 
+    p.readme ? readmeSection(p) : null,
+
     sec('Details', null, [
       h('div', { class: 'tiles' },
         s && [
@@ -90,6 +93,21 @@ export function renderProject(root, id) {
   wipeOnView(root.querySelectorAll('.panel'), { color: 'var(--accent)', dur: 620 });
   wipeOnView(root.querySelectorAll('.shot'), { color: 'var(--accent)' });
   return p.title;
+}
+
+/** The README, rendered from Markdown. Tall ones are folded behind a button. */
+function readmeSection(p) {
+  const base = { repo: p.repo, branch: (p.stats && p.stats.branch) || 'main' };
+  const wrap = h('div', { class: 'md-wrap', id: 'readme-' + p.id }, renderMarkdown(p.readme, base));
+  const more = h('button', { class: 'btn sm', hidden: true, 'aria-expanded': 'false', 'aria-controls': 'readme-' + p.id }, 'Show full readme');
+  more.addEventListener('click', () => {
+    const open = wrap.classList.toggle('clamp') === false;
+    more.textContent = open ? 'Show less' : 'Show full readme';
+    more.setAttribute('aria-expanded', String(open));
+    if (!open) wrap.scrollIntoView({ block: 'start' });
+  });
+  requestAnimationFrame(() => { if (wrap.scrollHeight > 640) { wrap.classList.add('clamp'); more.hidden = false; } });
+  return sec('Readme', p.repo ? 'README.md from ' + p.repo : null, [wrap, more]);
 }
 
 function statsSection(s) {

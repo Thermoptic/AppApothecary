@@ -2,7 +2,7 @@
 
 import { h, set, icon, modal, confirmDialog, toast, slug, uid } from '../ui.js';
 import { state, touch, imgSrc, tagCounts } from '../store.js';
-import { parseRepo, getRepoInfo, fetchStats, repoFields } from '../github.js';
+import { parseRepo, getRepoInfo, fetchStats, fetchReadme, repoFields } from '../github.js';
 
 // Downscale in the browser so uploads stay small.
 async function fileToDataUrl(file, max = 1600) {
@@ -36,6 +36,7 @@ export function openEditor(project) {
     tags: h('input', { value: p.tags.join(', '), placeholder: 'comma, separated' }),
     summary: h('textarea', { maxlength: 220, style: { 'min-height': '72px' } }, p.summary || ''),
     description: h('textarea', { style: { 'min-height': '140px' } }, p.description || ''),
+    readme: h('textarea', { style: { 'min-height': '140px', 'font-family': 'ui-monospace, Consolas, monospace', 'font-size': '.85rem' } }, p.readme || ''),
     created: h('input', { type: 'date', value: (p.created || '').slice(0, 10) }),
     updated: h('input', { type: 'date', value: (p.updated || new Date().toISOString()).slice(0, 10) }),
     facts: h('textarea', { placeholder: 'Platform | Windows, Web\nEngine | Godot', style: { 'min-height': '80px' } }, pairsToText(p.facts, 'label', 'value')),
@@ -60,6 +61,8 @@ export function openEditor(project) {
       if (!f.tags.value) f.tags.value = r.tags.join(', ');
       f.created.value = r.created; f.updated.value = r.updated;
       stats = await fetchStats(full, info);
+      const rd = await fetchReadme(full);
+      if (rd) f.readme.value = rd;
       toast('Fetched details and statistics from GitHub.');
     } catch (e) { toast(e.message, true); }
     fetchBtn.disabled = false;
@@ -100,6 +103,7 @@ export function openEditor(project) {
     field('Short description', f.summary, 'Shown on the card. Max 220 characters.'),
     field('Tags', f.tags), known.length ? suggest : null,
     field('About', f.description, 'Longer text for the project page. Blank lines make paragraphs.'),
+    field('Readme', f.readme, 'Markdown, usually the repository readme. Shown on the project page.'),
     h('div', { class: 'grid2' }, field('Created', f.created), field('Last updated', f.updated)),
     h('div', { class: 'field' }, h('span', { class: 'small', style: { 'font-weight': 550 } }, 'Cover image'), coverBox, pick(false, (u) => { cover = u; })),
     h('div', { class: 'field' }, h('span', { class: 'small', style: { 'font-weight': 550 } }, 'Screenshots'), shotsBox, pick(true, (u) => shots.push(u))),
@@ -116,7 +120,7 @@ export function openEditor(project) {
       title: f.title.value.trim(), source: f.source.value, url, category: f.category.value,
       repo: f.source.value === 'github' ? parseRepo(f.repo.value) : '',
       tags: [...new Set(f.tags.value.split(',').map((s) => s.trim().toLowerCase().replace(/^#/, '')).filter(Boolean))],
-      summary: f.summary.value.trim(), description: f.description.value.trim(),
+      summary: f.summary.value.trim(), description: f.description.value.trim(), readme: f.readme.value.trim(),
       created: f.created.value, updated: f.updated.value, cover, screenshots: shots,
       facts: textToPairs(f.facts.value, 'label', 'value'),
       links: textToPairs(f.links.value, 'label', 'url').filter((l) => safeUrl(l.url)),

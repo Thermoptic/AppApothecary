@@ -3,7 +3,7 @@
 
 import { h, set, icon, modal, confirmDialog, toast, slug, uid, getThemePref, setTheme } from '../ui.js';
 import { state, mode, isAdmin, isLocal, getRepo, setAccess, signOut, touch, load, tagCounts, hasDraft, discardDraft, replaceData } from '../store.js';
-import { getToken, checkAccess, listRepos, fetchStats, repoFields } from '../github.js';
+import { getToken, checkAccess, listRepos, fetchStats, fetchReadme, repoFields } from '../github.js';
 import { SORTS } from './home.js';
 
 const field = (label, input, hint) => h('label', { class: 'field' }, label, input, hint && h('span', { class: 'hint' }, hint));
@@ -150,7 +150,7 @@ function github() {
     btn.disabled = true; let failed = 0;
     for (let i = 0; i < linked.length; i++) {
       setP(i, linked.length);
-      try { const p = linked[i]; p.stats = await fetchStats(p.repo); p.updated = (p.stats.pushed || p.updated || '').slice(0, 10); }
+      try { const p = linked[i]; p.stats = await fetchStats(p.repo); p.updated = (p.stats.pushed || p.updated || '').slice(0, 10); p.readme = (await fetchReadme(p.repo)) || p.readme; }
       catch (e) { failed++; if (/rate limit/i.test(e.message)) { toast(e.message, true); break; } }
     }
     safe(touch);
@@ -177,12 +177,12 @@ function github() {
       for (let i = 0; i < picked.length; i++) {
         mbar.style.width = (i / picked.length * 100) + '%';
         const r = picked[i]; const f = repoFields(r);
-        let stats = null;
-        try { stats = await fetchStats(r.full_name, r); } catch (e) { if (/rate limit/i.test(e.message)) toast(e.message, true); }
+        let stats = null, readme = '';
+        try { stats = await fetchStats(r.full_name, r); readme = await fetchReadme(r.full_name); } catch (e) { if (/rate limit/i.test(e.message)) toast(e.message, true); }
         let id = slug(f.title); while (d.projects.some((x) => x.id === id)) id = slug(f.title) + '-' + uid();
         d.projects.push({ id, source: 'github', category: cat.value, description: '', cover: '', screenshots: [], featured: false, hidden: false,
           facts: [], links: f.homepage && /^https?:/.test(f.homepage) ? [{ label: 'Website', url: f.homepage }] : [], itchId: '',
-          title: f.title, repo: f.repo, url: f.url, summary: f.summary.slice(0, 220), created: f.created, updated: f.updated, tags: f.tags, stats });
+          title: f.title, repo: f.repo, url: f.url, summary: f.summary.slice(0, 220), created: f.created, updated: f.updated, tags: f.tags, stats, readme });
         f.tags.forEach((t) => { if (!d.tags.includes(t)) d.tags.push(t); });
       }
       dlg.close(); safe(touch); toast(`Imported ${picked.length} project${picked.length === 1 ? '' : 's'}.`);

@@ -68,7 +68,7 @@ export function openEditor(project) {
     fetchBtn.disabled = false;
   } }, icon('sync', 16), 'Fetch');
   const repoRow = h('div', {}, field('GitHub repository', h('div', { class: 'row' }, f.repo, fetchBtn), 'Fetch fills in name, dates, tags and statistics.'));
-  const itchRow = h('div', {}, field('itch.io game ID (optional)', f.itchId, 'Shows the itch.io widget. Find the number under "Embed game" on your game page.'));
+  const itchRow = h('div', {}, field('itch.io game ID (optional)', f.itchId, 'Shows the itch.io widget. Paste the number, or the whole embed code or link (itch.io/embed/123456). The game must be published as Public on itch.io, otherwise the widget stays empty.'));
   const syncSource = () => { repoRow.hidden = f.source.value !== 'github'; itchRow.hidden = f.source.value !== 'itch'; };
   f.source.addEventListener('change', syncSource); syncSource();
 
@@ -124,7 +124,7 @@ export function openEditor(project) {
       created: f.created.value, updated: f.updated.value, cover, screenshots: shots,
       facts: textToPairs(f.facts.value, 'label', 'value'),
       links: textToPairs(f.links.value, 'label', 'url').filter((l) => safeUrl(l.url)),
-      itchId: f.itchId.value.trim(), featured: f.featured.checked, hidden: f.hidden.checked,
+      itchId: ((/embed\/(\d+)/.exec(f.itchId.value) || /^\s*(\d+)\s*$/.exec(f.itchId.value) || [])[1]) || '', featured: f.featured.checked, hidden: f.hidden.checked,
       stats: f.source.value === 'github' ? stats : null,
     };
     for (const t of next.tags) if (!d.tags.includes(t)) d.tags.push(t);

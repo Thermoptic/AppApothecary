@@ -3347,6 +3347,52 @@
       "featured": false,
       "hidden": false,
       "stats": null
+    },
+    {
+      "id": "bratwurst-reheated-itch",
+      "title": "Bratwurst Reheated",
+      "source": "itch",
+      "url": "https://thermoptic.itch.io/bratwurst-reheated",
+      "category": "games",
+      "repo": "",
+      "tags": [
+            "game",
+            "gamemaker",
+            "windows"
+          ],
+      "summary": "A fan remake of the Amiga shooter Bratwurst, built in GameMaker Studio 1.4 as a stand-alone Windows game. Float, shoot, crash and repeat, with one to four players.",
+      "description": "A fan remake of the Amiga shooter Bratwurst, built in GameMaker Studio 1.4 as a stand-alone Windows game. Float, shoot, crash and repeat, with one to four players, keyboard and Xbox controllers, and a terminal-style look with 34 colour themes and a team mode, Capture the Bratwurst.\n\nThe goal is to keep the feel and the physics of the original wherever it can be verified, and then grow it with new maps, game modes, ships, weapons and music.",
+      "readme": "",
+      "created": "2026-10-13",
+      "updated": "2026-11-11",
+      "cover": "https://raw.githubusercontent.com/Thermoptic/Bratwurst-Reheated/main/assets/logo.png",
+      "screenshots": [
+    
+              ],
+      "facts": [
+             {
+               "label": "Platform",
+               "value": "Windows"
+             },
+             {
+               "label": "Engine",
+               "value": "GameMaker Studio 1.4"
+             },
+             {
+               "label": "Players",
+               "value": "1–4"
+             }
+           ],
+      "links": [
+             {
+               "label": "Source on GitHub",
+               "url": "https://github.com/Thermoptic/Bratwurst-Reheated"
+             }
+           ],
+      "itchId": "",
+      "featured": false,
+      "hidden": false,
+      "stats": null
     }
   ]
 }

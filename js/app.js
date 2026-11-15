@@ -18,12 +18,12 @@ function chrome() {
   const m = mode();
   const dark = effectiveTheme() === 'dark';
   set(header, h('div', { class: 'header-inner' },
-    h('a', { class: 'brand', href: '#/' }, h('span', { class: 'brand-mark' }, h('i'), h('i'), h('i'), h('i')), h('span', {}, state.data ? state.data.profile.title : '')),
-    m !== 'view' && h('span', { class: 'pill-admin' }, m === 'remote' ? 'Editing' : 'Local draft'),
+    h('a', { class: 'brand', href: '#/' }, h('span', {}, state.data ? state.data.profile.title : '')),
+    m !== 'view' && h('span', { class: 'lb mode' }, m === 'remote' ? 'Editing' : 'Local draft'),
     h('span', { class: 'spacer' }),
-    isAdmin() && state.data && h('button', { class: 'btn primary sm', onclick: () => openEditor() }, icon('plus', 16), 'Add'),
-    h('button', { class: 'btn ghost icon', 'aria-label': dark ? 'Switch to light theme' : 'Switch to dark theme', onclick: () => setTheme(dark ? 'light' : 'dark') }, icon(dark ? 'sun' : 'moon')),
-    h('a', { class: 'btn ghost icon', href: '#/settings', 'aria-label': 'Settings' }, icon('gear'))));
+    h('button', { class: 'hbtn', 'aria-label': dark ? 'Switch to light theme' : 'Switch to dark theme', onclick: () => setTheme(dark ? 'light' : 'dark') }, icon(dark ? 'sun' : 'moon')),
+    h('a', { class: 'hbtn', href: '#/settings', 'aria-label': 'Settings' }, icon('gear')),
+    isAdmin() && state.data && h('button', { class: 'cta', onclick: () => openEditor() }, 'Add project', h('i'))));
 
   set(footer, 
     h('span', {}, '© ' + new Date().getFullYear() + ' ' + (state.data ? state.data.profile.title : '')),

@@ -10,11 +10,11 @@
     "sort": "updated"
   },
   "categories": [
-    { "id": "games", "name": "Games", "color": "#d6457f" },
-    { "id": "apps", "name": "Apps", "color": "#3f67d6" },
-    { "id": "tools", "name": "Tools", "color": "#2a9d73" },
-    { "id": "web", "name": "Web", "color": "#e0792f" },
-    { "id": "other", "name": "Other", "color": "#8a5bd1" }
+    { "id": "games", "name": "Games", "color": "#ff4f1a" },
+    { "id": "apps", "name": "Apps", "color": "#6f93ff" },
+    { "id": "tools", "name": "Tools", "color": "#2fc98a" },
+    { "id": "web", "name": "Web", "color": "#f0bf00" },
+    { "id": "other", "name": "Other", "color": "#b9a7ff" }
   ],
   "tags": ["sample", "javascript", "python", "unity", "puzzle", "cli", "pwa"],
   "projects": [

@@ -144,7 +144,7 @@ export function lightbox(srcs, start = 0) {
   const img = h('img', { src: srcs[i], alt: 'Screenshot ' + (i + 1) });
   const go = (n) => { i = (i + n + srcs.length) % srcs.length; img.src = srcs[i]; img.alt = 'Screenshot ' + (i + 1); };
   const d = h('dialog', { class: 'lightbox' },
-    h('div', { class: 'lb', onclick: (e) => { if (e.target === e.currentTarget) d.close(); } },
+    h('div', { class: 'lb-box', onclick: (e) => { if (e.target === e.currentTarget) d.close(); } },
       img,
       h('button', { class: 'btn icon', 'aria-label': 'Close', onclick: () => d.close() }, icon('x')),
       srcs.length > 1 && h('button', { class: 'btn icon nav prev', 'aria-label': 'Previous', onclick: () => go(-1) }, icon('back')),
@@ -178,12 +178,28 @@ document.addEventListener('pointerdown', (e) => {
 });
 
 // ---------- shared project bits ----------
-export function coverEl(project, cat, src) {
-  if (src) return h('div', { class: 'cover' }, h('img', { src, alt: '', loading: 'lazy' }));
-  const initial = (project.title || '?').replace(/^Sample:\s*/i, '').trim().charAt(0).toUpperCase();
-  return h('div', { class: 'cover ph', style: { '--cat': cat ? cat.color : '#8d9199' } }, h('span', {}, initial));
+const NEUTRAL = '#c9c9c3';
+/** Relative luminance (0..1) of a #rrggbb color. */
+export function lum(hex) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
+  if (!m) return 0.6;
+  const [r, g, b] = [0, 2, 4].map((i) => { const v = parseInt(m[1].slice(i, i + 2), 16) / 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
-export function catBadge(cat) {
-  return cat ? h('span', { class: 'cat-badge', style: { '--cat': cat.color } }, cat.name) : null;
+/** Module colors for a category: fill, readable ink on it, and a color that shows on a black screen. */
+export function modColors(cat) {
+  const c = cat ? cat.color : NEUTRAL;
+  const l = lum(c);
+  return { '--c': c, '--t': l > 0.2 ? '#101010' : '#ffffff', '--pc': l < 0.06 ? '#f2f2ee' : c };
 }
+/** The black "screen" of a module: the cover image, or a line pattern in the category color. */
+export function screenEl(project, src, label) {
+  let hash = 0;
+  for (const ch of project.id || '') hash = (hash * 31 + ch.charCodeAt(0)) >>> 0;
+  return h('div', { class: 'scr' },
+    src ? h('img', { src, alt: '', loading: 'lazy' }) : h('span', { class: 'pt pt' + (hash % 4) }),
+    label && h('span', { class: 'lb' }, label),
+    project.hidden && h('span', { class: 'lb r' }, 'Hidden'));
+}
+export const fmtShort = (s) => { const d = new Date(s); return s && !isNaN(d) ? [d.getDate(), d.getMonth() + 1, d.getFullYear() % 100].map((n) => String(n).padStart(2, '0')).join('.') : ''; };
 export const SOURCE = { github: 'GitHub', itch: 'itch.io', other: 'Project' };

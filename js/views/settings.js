@@ -14,7 +14,7 @@ const reload = () => window.dispatchEvent(new Event('ma-reload'));
 export function renderSettings(root) {
   set(root, 
     h('h1', { class: 'page-title' }, 'Settings'),
-    h('div', { class: 'stack', style: { 'max-width': '760px', 'padding-bottom': '40px' } },
+    h('div', { class: 'settings' },
       appearance(), access(),
       isAdmin() ? [profile(), categories(), tags(), display(), github(), backup()] : null));
   return 'Settings';
@@ -97,7 +97,7 @@ function categories() {
       d.projects.forEach((p) => { if (p.category === c.id) p.category = ''; });
       d.categories.splice(i, 1); safe(touch);
     } }, icon('trash', 16))));
-  const PALETTE = ['#3f67d6', '#e0792f', '#2a9d73', '#8a5bd1', '#d6457f', '#1da1b8', '#c4a021', '#c93c37'];
+  const PALETTE = ['#ff4f1a', '#6f93ff', '#2fc98a', '#f0bf00', '#b9a7ff', '#f5a3d7', '#3fbfff', '#ff8f70'];
   return section('Categories', 'Each category has its own color on cards and filters.',
     h('div', { class: 'list' }, rows.length ? rows : h('p', { class: 'muted small' }, 'No categories yet.')),
     h('div', {}, h('button', { class: 'btn', onclick: () => {

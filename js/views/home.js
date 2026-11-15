@@ -1,6 +1,6 @@
-// Start page: profile intro, search, filters, sorting and the project grid.
+// Start page: the module wall. Head row, category cells, search + tags, then one module per project.
 
-import { h, set, icon, fmtDate, fmtNum, coverEl, catBadge, SOURCE } from '../ui.js';
+import { h, set, icon, fmtShort, fmtNum, fmtSize, screenEl, modColors, SOURCE } from '../ui.js';
 import { state, isAdmin, visibleProjects, catOf, imgSrc, tagCounts } from '../store.js';
 import { openEditor } from './editor.js';
 
@@ -13,6 +13,13 @@ export const SORTS = {
 };
 const time = (s) => { const t = Date.parse(s); return isNaN(t) ? 0 : t; };
 const when = (p) => time(p.updated) || time(p.created);
+const pad3 = (n) => String(n).padStart(3, '0');
+
+/** Each project's unit number: 1 is the oldest. Stable under filtering and sorting. */
+export function unitNumbers() {
+  const sorted = [...state.data.projects].sort((a, b) => (time(a.created) || when(a)) - (time(b.created) || when(b)));
+  return new Map(sorted.map((p, i) => [p.id, i + 1]));
+}
 
 // Filter state survives navigating to a project and back.
 const ui = { q: '', cat: '', tags: new Set(), sort: '' };
@@ -22,32 +29,32 @@ export function renderHome(root) {
   if (!ui.sort || !SORTS[ui.sort]) ui.sort = SORTS[d.settings.sort] ? d.settings.sort : 'updated';
   if (ui.cat && !d.categories.some((c) => c.id === ui.cat)) ui.cat = '';
   const all = visibleProjects();
+  const numbers = unitNumbers();
 
-  const gridBox = h('div');
-  const catRow = h('div', { class: 'chips', role: 'group', 'aria-label': 'Filter by category' });
-  const tagRow = h('div', { class: 'chips', role: 'group', 'aria-label': 'Filter by tag' });
+  const wallBox = h('div');
+  const catRow = h('div', { class: 'cells', role: 'group', 'aria-label': 'Filter by category' });
+  const tagCells = h('div', { style: { display: 'contents' } });
 
   function drawFilters() {
-    set(catRow, 
-      h('button', { class: 'chip', 'aria-pressed': String(!ui.cat), onclick: () => { ui.cat = ''; draw(); } }, 'All', h('span', { class: 'count' }, all.length)),
+    set(catRow,
+      h('button', { class: 'cell-btn', 'aria-pressed': String(!ui.cat), onclick: () => { ui.cat = ''; draw(); } }, 'All', h('span', { class: 'n' }, pad3(all.length))),
       d.categories.map((c) => {
         const n = all.filter((p) => p.category === c.id).length;
         return n || isAdmin() ? h('button', {
-          class: 'chip', style: { '--cat': c.color }, 'aria-pressed': String(ui.cat === c.id),
+          class: 'cell-btn', style: { '--c': c.color }, 'aria-pressed': String(ui.cat === c.id),
           onclick: () => { ui.cat = ui.cat === c.id ? '' : c.id; draw(); },
-        }, h('span', { class: 'dot' }), c.name, h('span', { class: 'count' }, n)) : null;
+        }, h('i'), c.name, h('span', { class: 'n' }, pad3(n))) : null;
       }));
     const used = tagCounts().filter(([t, n]) => n > 0 && all.some((p) => p.tags.includes(t)));
-    set(tagRow, used.slice(0, 24).map(([t]) => h('button', {
-      class: 'chip', 'aria-pressed': String(ui.tags.has(t)),
+    set(tagCells, used.slice(0, 24).map(([t]) => h('button', {
+      class: 'cell-btn', 'aria-pressed': String(ui.tags.has(t)),
       onclick: () => { ui.tags.has(t) ? ui.tags.delete(t) : ui.tags.add(t); draw(); },
     }, '#' + t)));
-    tagRow.hidden = !used.length;
   }
 
-  function drawGrid() {
+  function drawWall() {
     const q = ui.q.trim().toLowerCase();
-    let list = all.filter((p) =>
+    const list = all.filter((p) =>
       (!ui.cat || p.category === ui.cat) &&
       [...ui.tags].every((t) => p.tags.includes(t)) &&
       (!q || [p.title, p.summary, p.description, p.tags.join(' '), (catOf(p) || {}).name || ''].join(' ').toLowerCase().includes(q)));
@@ -55,60 +62,61 @@ export function renderHome(root) {
     list.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || cmp(a, b));
 
     const filtered = list.length !== all.length;
-    set(gridBox, 
-      h('div', { class: 'result-meta' }, filtered ? `${list.length} of ${all.length} projects` : `${all.length} project${all.length === 1 ? '' : 's'}`,
-        filtered && h('button', { class: 'btn ghost sm', style: { 'margin-left': '8px' }, onclick: () => { ui.q = ''; ui.cat = ''; ui.tags.clear(); search.value = ''; draw(); } }, 'Clear filters')),
+    set(wallBox,
+      filtered && h('div', { class: 'result-meta lb' }, `Showing ${pad3(list.length)} of ${pad3(all.length)}`,
+        h('button', { onclick: () => { ui.q = ''; ui.cat = ''; ui.tags.clear(); search.value = ''; draw(); } }, 'Clear filters')),
       list.length
-        ? h('div', { class: 'grid' }, list.map(card))
+        ? h('div', { class: 'flush wall' }, list.map((p) => module(p, numbers.get(p.id))))
         : h('div', { class: 'empty' }, all.length ? 'Nothing matches these filters.' : 'No projects yet.',
           isAdmin() && !all.length && h('div', { style: { 'margin-top': '14px' } }, h('button', { class: 'btn primary', onclick: () => openEditor() }, icon('plus'), 'Add your first project'))));
   }
-  const draw = () => { drawFilters(); drawGrid(); };
+  const draw = () => { drawFilters(); drawWall(); };
 
   const search = h('input', {
-    type: 'search', placeholder: 'Search projects', 'aria-label': 'Search projects', value: ui.q,
-    oninput: (e) => { ui.q = e.target.value; drawGrid(); },
+    type: 'search', placeholder: 'SEARCH PROJECTS', 'aria-label': 'Search projects', value: ui.q,
+    oninput: (e) => { ui.q = e.target.value; drawWall(); },
   });
-  const sort = h('select', { class: 'sort', 'aria-label': 'Sort by', value: ui.sort, onchange: (e) => { ui.sort = e.target.value; drawGrid(); } },
+  const sort = h('select', { class: 'bigsel', 'aria-label': 'Sort by', value: ui.sort, onchange: (e) => { ui.sort = e.target.value; drawWall(); } },
     Object.entries(SORTS).map(([k, v]) => h('option', { value: k }, v[0])));
 
   const p = d.profile;
   const gh = all.filter((x) => x.source === 'github').length;
-  const games = all.filter((x) => x.source === 'itch').length;
-  set(root, 
-    h('section', { class: 'hero' },
-      h('h1', {}, p.title),
-      p.tagline && h('p', { class: 'tagline' }, p.tagline),
-      (p.github || p.itch) && h('div', { class: 'hero-links' },
-        p.github && h('a', { class: 'btn sm', href: 'https://github.com/' + encodeURIComponent(p.github), target: '_blank', rel: 'noopener' }, icon('code', 16), 'GitHub'),
-        p.itch && h('a', { class: 'btn sm', href: p.itch, target: '_blank', rel: 'noopener' }, icon('play', 16), 'itch.io')),
-      h('div', { class: 'hero-stats' },
-        h('span', {}, h('b', {}, all.length), ' projects'),
-        gh ? h('span', {}, h('b', {}, gh), ' on GitHub') : null,
-        games ? h('span', {}, h('b', {}, games), ' on itch.io') : null,
-        h('span', {}, h('b', {}, d.categories.length), ' categories'))),
-    h('section', { class: 'toolbar', 'aria-label': 'Filters' },
-      h('div', { class: 'toolbar-top' }, h('div', { class: 'search' }, h('span', { class: 'ico' }, icon('search')), search), sort),
-      catRow, tagRow),
-    gridBox);
+  const itch = all.filter((x) => x.source === 'itch').length;
+  set(root,
+    h('section', { class: 'flush wall-head' },
+      h('div', {},
+        h('h1', {}, p.title),
+        p.tagline && h('p', { class: 'tagline' }, p.tagline),
+        (p.github || p.itch) && h('div', { class: 'links' },
+          p.github && h('a', { class: 'btn sm', href: 'https://github.com/' + encodeURIComponent(p.github), target: '_blank', rel: 'noopener' }, 'GitHub', icon('ext', 14)),
+          p.itch && h('a', { class: 'btn sm', href: p.itch, target: '_blank', rel: 'noopener' }, 'itch.io', icon('ext', 14)))),
+      h('div', {}, h('span', { class: 'lb' }, 'Sort'), sort),
+      h('div', {}, h('span', { class: 'lb' }, 'Units'), h('span', { class: 'big' }, pad3(all.length)),
+        h('span', { class: 'lb muted' }, [gh && gh + ' GitHub', itch && itch + ' itch.io'].filter(Boolean).join(' · ') || 'On the wall'))),
+    catRow,
+    h('div', { class: 'cells', role: 'group', 'aria-label': 'Search and tags' },
+      h('div', { class: 'search' }, h('span', { class: 'ico' }, icon('search', 16)), search), tagCells),
+    wallBox);
   draw();
 }
 
-function card(p) {
-  const cat = catOf(p);
+function specOf(p) {
   const s = p.stats;
-  return h('a', { class: 'card', href: '#/p/' + encodeURIComponent(p.id), style: { '--cat': cat ? cat.color : 'var(--border)' } },
-    p.hidden && h('span', { class: 'badge-hidden' }, 'Hidden'),
-    coverEl(p, cat, imgSrc(p.cover)),
-    h('div', { class: 'card-body' },
-      h('div', { class: 'card-top' }, catBadge(cat) || h('span'),
-        p.featured && h('span', { class: 'muted', title: 'Pinned', 'aria-label': 'Pinned' }, icon('pin', 16))),
-      h('h3', {}, p.title),
-      p.summary && h('p', { class: 'summary' }, p.summary),
-      p.tags.length ? h('div', { class: 'tags' }, p.tags.slice(0, 4).map((t) => h('span', { class: 'tag' }, '#' + t))) : null,
-      h('div', { class: 'card-foot' },
-        (p.updated || p.created) && h('span', { class: 'it' }, icon('cal', 14), fmtDate(p.updated || p.created)),
-        h('span', { class: 'it' }, SOURCE[p.source] || 'Project'),
-        s && s.stars ? h('span', { class: 'it' }, icon('star', 14), fmtNum(s.stars)) : null,
-        s && s.language ? h('span', { class: 'it' }, s.language) : null)));
+  if (s) return [['stars', fmtNum(s.stars)], ['commits', fmtNum(s.commits)]];
+  if (p.facts.length) return p.facts.slice(0, 2).map((f) => [f.label, f.value]);
+  return [['src', SOURCE[p.source] || 'Project']];
+}
+
+function module(p, n) {
+  const cat = catOf(p);
+  return h('a', { class: 'mod', href: '#/p/' + encodeURIComponent(p.id), style: modColors(cat), 'aria-label': p.title },
+    screenEl(p, imgSrc(p.cover), cat ? cat.name : ''),
+    h('div', { class: 'nrow' }, h('div', { class: 'num' }, n), h('span', { class: 'lb' }, SOURCE[p.source] || 'Project')),
+    h('div', { class: 'info' },
+      h('b', {}, p.title),
+      p.summary && h('p', {}, p.summary),
+      h('div', { class: 'spec' }, specOf(p).map(([k, v]) => [h('span', {}, k), h('b', {}, v)]))),
+    h('div', { class: 'foot' },
+      h('div', { class: 'keys', title: p.featured ? 'Pinned' : null }, h('i', { class: p.featured ? 'k' : null }), h('i')),
+      h('span', { class: 'lb' }, fmtShort(p.updated || p.created))));
 }

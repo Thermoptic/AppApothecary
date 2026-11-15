@@ -278,3 +278,38 @@ dialog.lightbox::backdrop { background: rgba(0, 0, 0, .92); }
 .progress { height: 8px; background: var(--surface-2); overflow: hidden; }
 .progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
 details summary { cursor: pointer; }
+
+/* ---------- Dither sweeps (see js/fx.js) ---------- */
+.fx-host { position: relative; }
+.fx-shut { --ew: 128px; --eh: 32px; position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 6; }
+.fx-shut.big { --ew: 256px; --eh: 64px; }
+.fx-shut.page { position: fixed; z-index: 80; }
+.fx-blade { position: absolute; top: 0; bottom: 0; left: calc(var(--ew) * -1); right: 0; display: flex; animation: fx-out var(--dur, .52s) steps(18) var(--d, 0s) both; }
+.fx-solid { flex: 1; background: currentColor; }
+.fx-edge { flex: none; width: var(--ew); background: currentColor; image-rendering: pixelated;
+  -webkit-mask: var(--dithR, linear-gradient(#000, #000)) 0 0 / var(--ew) var(--eh) repeat-y; mask: var(--dithR, linear-gradient(#000, #000)) 0 0 / var(--ew) var(--eh) repeat-y; }
+.fx-shut.cover .fx-blade { left: 0; right: calc(var(--ew) * -1); animation-name: fx-in; }
+.fx-shut.cover .fx-edge { -webkit-mask-image: var(--dith, none); mask-image: var(--dith, none); }
+@keyframes fx-out { to { transform: translateX(100%); } }
+@keyframes fx-in { from { transform: translateX(-100%); } }
+
+/* hover: a dithered band crosses the module screen, inverting what it passes */
+.mod .scr::after, .p-slab .scr::after { content: ""; position: absolute; top: 0; bottom: 0; left: -256px; width: 256px; background: #fff; mix-blend-mode: difference; pointer-events: none; image-rendering: pixelated;
+  -webkit-mask: var(--dithR, none) left / 128px 32px repeat-y, var(--dith, none) right / 128px 32px repeat-y;
+  mask: var(--dithR, none) left / 128px 32px repeat-y, var(--dith, none) right / 128px 32px repeat-y;
+  transition: transform .7s steps(20); }
+.mod:hover .scr::after, .mod:focus-visible .scr::after, .p-slab:hover .scr::after { transform: translateX(calc(100cqw + 256px)); }
+
+/* hover: accent floods a control from the left behind a dithered front */
+.cta, .btn.primary, .cell-btn, .backrow, .actions .btn { position: relative; isolation: isolate; overflow: hidden; }
+.cta::before, .btn.primary::before, .cell-btn::before, .backrow::before, .actions .btn::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; right: 100%; width: calc(100% + 128px); background: var(--accent); image-rendering: pixelated;
+  -webkit-mask: linear-gradient(#000, #000) left / calc(100% - 128px) 100% no-repeat, var(--dith, none) right / 128px 32px repeat-y;
+  mask: linear-gradient(#000, #000) left / calc(100% - 128px) 100% no-repeat, var(--dith, none) right / 128px 32px repeat-y;
+  transition: transform .45s steps(14); }
+.cta:hover::before, .btn.primary:hover::before, .cell-btn:hover::before, .backrow:hover::before, .actions .btn:hover::before { transform: translateX(100%); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .cell-btn:hover, .backrow:hover, .actions .btn:hover { background: transparent; }
+  .btn.primary:hover, .actions .btn.primary:hover, .cell-btn[aria-pressed="true"]:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
+}
+@media (prefers-reduced-motion: reduce) { .mod .scr::after, .p-slab .scr::after, .cta::before, .btn.primary::before, .cell-btn::before, .backrow::before, .actions .btn::before { display: none; } }
+@media (hover: none) { .cta::before, .btn.primary::before, .cell-btn::before, .backrow::before, .actions .btn::before { display: none; } }

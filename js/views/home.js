@@ -3,6 +3,7 @@
 import { h, set, icon, fmtShort, fmtNum, fmtSize, screenEl, modColors, SOURCE } from '../ui.js';
 import { state, isAdmin, visibleProjects, catOf, imgSrc, tagCounts } from '../store.js';
 import { openEditor } from './editor.js';
+import { wipe } from '../fx.js';
 
 export const SORTS = {
   updated: ['Recently updated', (a, b) => when(b) - when(a)],
@@ -23,6 +24,7 @@ export function unitNumbers() {
 
 // Filter state survives navigating to a project and back.
 const ui = { q: '', cat: '', tags: new Set(), sort: '' };
+let shown = null; // ids on the wall after the last draw, so only newcomers sweep in
 
 export function renderHome(root) {
   const d = state.data;
@@ -32,6 +34,7 @@ export function renderHome(root) {
   const numbers = unitNumbers();
 
   const wallBox = h('div');
+  shown = null;
   const catRow = h('div', { class: 'cells', role: 'group', 'aria-label': 'Filter by category' });
   const tagCells = h('div', { style: { display: 'contents' } });
 
@@ -69,7 +72,17 @@ export function renderHome(root) {
         ? h('div', { class: 'flush wall' }, list.map((p) => module(p, numbers.get(p.id))))
         : h('div', { class: 'empty' }, all.length ? 'Nothing matches these filters.' : 'No projects yet.',
           isAdmin() && !all.length && h('div', { style: { 'margin-top': '14px' } }, h('button', { class: 'btn primary', onclick: () => openEditor() }, icon('plus'), 'Add your first project'))));
+    sweepIn();
   }
+  const sweepIn = () => {
+    const first = !shown; let i = 0;
+    const now = new Set();
+    wallBox.querySelectorAll('.mod').forEach((m) => {
+      now.add(m.dataset.id);
+      if (first || !shown.has(m.dataset.id)) wipe(m, { color: 'var(--t)', delay: (first ? 260 : 0) + Math.min(i++, 11) * 60 });
+    });
+    shown = now;
+  };
   const draw = () => { drawFilters(); drawWall(); };
 
   const search = h('input', {
@@ -109,7 +122,7 @@ function specOf(p) {
 
 function module(p, n) {
   const cat = catOf(p);
-  return h('a', { class: 'mod', href: '#/p/' + encodeURIComponent(p.id), style: modColors(cat), 'aria-label': p.title },
+  return h('a', { class: 'mod', href: '#/p/' + encodeURIComponent(p.id), style: modColors(cat), 'aria-label': p.title, 'data-id': p.id },
     screenEl(p, imgSrc(p.cover), cat ? cat.name : ''),
     h('div', { class: 'nrow' }, h('div', { class: 'num' }, n), h('span', { class: 'lb' }, SOURCE[p.source] || 'Project')),
     h('div', { class: 'info' },

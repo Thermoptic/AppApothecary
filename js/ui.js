@@ -1,5 +1,7 @@
 // Small DOM helpers, icons, dialogs, toasts and formatters shared by all views.
 
+import { wipe } from './fx.js';
+
 export function h(tag, attrs, ...kids) {
   const el = document.createElement(tag);
   let value;
@@ -107,6 +109,7 @@ export function setTheme(v) {
 export function toast(msg, isErr = false) {
   const t = h('div', { class: 'toast' + (isErr ? ' err' : ''), role: isErr ? 'alert' : 'status' }, msg);
   document.getElementById('toasts').append(t);
+  wipe(t, { color: 'var(--accent)', dur: 380 });
   setTimeout(() => t.remove(), isErr ? 7000 : 3500);
 }
 
@@ -121,6 +124,7 @@ export function modal({ title, body, foot, wide, onClose }) {
   d.addEventListener('close', () => { d.remove(); onClose && onClose(); });
   document.body.append(d);
   d.showModal();
+  wipe(d, { color: 'var(--accent)', dur: 420 });
   return d;
 }
 

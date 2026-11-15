@@ -3,6 +3,7 @@
 import { h, set, icon, toast, effectiveTheme, setTheme, confirmDialog } from './ui.js';
 import { state, load, onChange, mode, isAdmin, publish } from './store.js';
 import { destroyCharts } from './charts.js';
+import { initFx, pageSweep, coverSweep } from './fx.js';
 import { renderHome } from './views/home.js';
 import { renderProject } from './views/project.js';
 import { renderSettings } from './views/settings.js';
@@ -21,7 +22,7 @@ function chrome() {
     h('a', { class: 'brand', href: '#/' }, h('span', {}, state.data ? state.data.profile.title : '')),
     m !== 'view' && h('span', { class: 'lb mode' }, m === 'remote' ? 'Editing' : 'Local draft'),
     h('span', { class: 'spacer' }),
-    h('button', { class: 'hbtn', 'aria-label': dark ? 'Switch to light theme' : 'Switch to dark theme', onclick: () => setTheme(dark ? 'light' : 'dark') }, icon(dark ? 'sun' : 'moon')),
+    h('button', { class: 'hbtn', 'aria-label': dark ? 'Switch to light theme' : 'Switch to dark theme', onclick: () => coverSweep(() => setTheme(dark ? 'light' : 'dark')) }, icon(dark ? 'sun' : 'moon')),
     h('a', { class: 'hbtn', href: '#/settings', 'aria-label': 'Settings' }, icon('gear')),
     isAdmin() && state.data && h('button', { class: 'cta', onclick: () => openEditor() }, 'Add project', h('i'))));
 
@@ -58,7 +59,7 @@ function route() {
   else if (hash === '/settings') title = renderSettings(main);
   else renderHome(main);
   document.title = (title ? title + ' · ' : '') + state.data.profile.title;
-  if (hash !== lastRoute) { window.scrollTo(0, 0); lastRoute = hash; }
+  if (hash !== lastRoute) { window.scrollTo(0, 0); lastRoute = hash; pageSweep(); }
 }
 
 async function boot() {
@@ -72,4 +73,5 @@ window.addEventListener('themechange', () => { chrome(); route(); });
 window.addEventListener('ma-reload', boot);
 window.addEventListener('beforeunload', (e) => { if (state.dirty) { e.preventDefault(); e.returnValue = ''; } });
 onChange(({ rerender }) => { chrome(); if (rerender) route(); });
+initFx();
 boot();

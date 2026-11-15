@@ -6,6 +6,7 @@ import { fetchStats } from '../github.js';
 import { weeklyChart, releasesChart, languagesChart, heatmap } from '../charts.js';
 import { openEditor } from './editor.js';
 import { unitNumbers } from './home.js';
+import { wipe, wipeOnView } from '../fx.js';
 
 const tile = (k, v, sub, small) => h('div', { class: 'tile' },
   h('div', { class: 'k' }, k), h('div', { class: 'v' + (small ? ' sm' : '') }, v), sub && h('div', { class: 's' }, sub));
@@ -72,6 +73,11 @@ export function renderProject(root, id) {
     p.url && h('div', { class: 'urlrow lb' }, 'URL ', h('a', { href: p.url, target: '_blank', rel: 'noopener' }, p.url)),
 
     s ? statsSection(s, colors['--pc']) : null);
+  wipe(root.querySelector('.p-slab'), { color: 'var(--t)', delay: 240, dur: 620 });
+  wipeOnView(root.querySelectorAll('.sec-h'), { color: 'var(--accent)' });
+  wipeOnView(root.querySelectorAll('.tile'), { color: 'var(--text)', dur: 420 });
+  wipeOnView(root.querySelectorAll('.panel'), { color: colors['--pc'], dur: 620 });
+  wipeOnView(root.querySelectorAll('.shot'), { color: colors['--pc'] });
   return p.title;
 }
 

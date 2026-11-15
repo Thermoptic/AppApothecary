@@ -18,14 +18,15 @@ let lastRoute = '';
 function chrome() {
   const m = mode();
   const dark = effectiveTheme() === 'dark';
+  const onHome = (location.hash.replace(/^#/, '') || '/') === '/';
   set(header, h('div', { class: 'header-inner' },
     h('a', { class: 'brand', href: '#/' }, h('span', {}, state.data ? state.data.profile.title : '')),
     m !== 'view' && h('span', { class: 'lb mode' }, m === 'remote' ? 'Editing' : 'Local draft'),
     h('span', { class: 'spacer' }),
+    h('nav', { class: 'nav', 'aria-label': 'Main' }, h('a', { href: '#/', class: onHome ? 'on' : null }, 'Index')),
     h('button', { class: 'hbtn', 'aria-label': dark ? 'Switch to light theme' : 'Switch to dark theme', onclick: () => coverSweep(() => setTheme(dark ? 'light' : 'dark')) }, icon(dark ? 'sun' : 'moon')),
     h('a', { class: 'hbtn', href: '#/settings', 'aria-label': 'Settings' }, icon('gear')),
     isAdmin() && state.data && h('button', { class: 'cta', onclick: () => openEditor() }, 'Add project', h('i'))));
-
   set(footer, 
     h('span', {}, '© ' + new Date().getFullYear() + ' ' + (state.data ? state.data.profile.title : '')),
     h('a', { href: '#/settings' }, isAdmin() ? 'Settings' : 'Owner sign-in'));
@@ -59,6 +60,7 @@ function route() {
   else if (hash === '/settings') title = renderSettings(main);
   else renderHome(main);
   document.title = (title ? title + ' · ' : '') + state.data.profile.title;
+  chrome();
   if (hash !== lastRoute) { window.scrollTo(0, 0); lastRoute = hash; pageSweep(); }
 }
 

@@ -58,7 +58,7 @@ export function touch(rerender = true) {
 function normalize(d) {
   d = d && typeof d === 'object' ? d : {};
   d.version = 1;
-  d.profile = { title: 'My Projects', tagline: '', github: '', itch: '', ...(d.profile || {}) };
+  d.profile = { title: 'My Projects', headline: 'Things I have made.', tagline: '', github: '', itch: '', ...(d.profile || {}) };
   d.settings = { sort: 'updated', ...(d.settings || {}) };
   d.categories = Array.isArray(d.categories) ? d.categories : [];
   d.tags = Array.isArray(d.tags) ? d.tags : [];

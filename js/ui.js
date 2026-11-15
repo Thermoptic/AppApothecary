@@ -182,7 +182,7 @@ document.addEventListener('pointerdown', (e) => {
 });
 
 // ---------- shared project bits ----------
-const NEUTRAL = '#c9c9c3';
+const NEUTRAL = '#B7CF8E';
 /** Relative luminance (0..1) of a #rrggbb color. */
 export function lum(hex) {
   const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
@@ -190,7 +190,7 @@ export function lum(hex) {
   const [r, g, b] = [0, 2, 4].map((i) => { const v = parseInt(m[1].slice(i, i + 2), 16) / 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; });
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
-const PALETTE = ['#ff4f1a', '#6f93ff', '#2fc98a', '#f0bf00', '#b9a7ff', '#f5a3d7', '#3fbfff', '#ff8f70'];
+const PALETTE = ['#FF4E50', '#FC913A', '#F9D423', '#EDE574', '#E1F5C4'];
 function hue(hex) {
   const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
   if (!m) return 0;

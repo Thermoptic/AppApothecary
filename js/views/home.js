@@ -1,7 +1,8 @@
-// Start page: the module wall. Head row, category cells, search + tags, then one module per project.
+// Start page (Regal): category and tag filters on the left, the project list in the middle,
+// a sort knob and a random-project button on the right.
 
-import { h, set, icon, fmtShort, fmtNum, fmtSize, screenEl, modColors, SOURCE } from '../ui.js';
-import { state, isAdmin, visibleProjects, catOf, imgSrc, tagCounts } from '../store.js';
+import { h, set, icon, fmtDate, fmtNum, modColors, SOURCE } from '../ui.js';
+import { state, isAdmin, visibleProjects, catOf, tagCounts, mode } from '../store.js';
 import { openEditor } from './editor.js';
 import { wipe } from '../fx.js';
 
@@ -24,7 +25,7 @@ export function unitNumbers() {
 
 // Filter state survives navigating to a project and back.
 const ui = { q: '', cat: '', tags: new Set(), sort: '' };
-let shown = null; // ids on the wall after the last draw, so only newcomers sweep in
+let shown = null; // ids listed after the last draw, so only newcomers sweep in
 
 export function renderHome(root) {
   const d = state.data;
@@ -32,104 +33,151 @@ export function renderHome(root) {
   if (ui.cat && !d.categories.some((c) => c.id === ui.cat)) ui.cat = '';
   const all = visibleProjects();
   const numbers = unitNumbers();
-
-  const wallBox = h('div');
+  const sortKeys = Object.keys(SORTS);
+  const n = sortKeys.length;
   shown = null;
-  const catRow = h('div', { class: 'cells', role: 'group', 'aria-label': 'Filter by category' });
-  const tagCells = h('div', { style: { display: 'contents' } });
+
+  const list = h('div', { class: 'r-list' });
+  const catBox = h('div', { class: 'opts', role: 'group', 'aria-label': 'Filter by category' });
+  const tagBox = h('div', { class: 'tagopts', role: 'group', 'aria-label': 'Filter by tag' });
+  const tagWrap = h('div', {}, h('div', { class: 'lb' }, 'Tag'), tagBox);
+
+  const opt = (id, label, count, color) => h('button', {
+    class: 'opt', style: { '--c': color }, 'aria-pressed': String(ui.cat === id),
+    onclick: () => { ui.cat = ui.cat === id ? '' : id; draw(); },
+  }, h('i'), label, h('small', {}, count));
 
   function drawFilters() {
-    set(catRow,
-      h('button', { class: 'cell-btn', 'aria-pressed': String(!ui.cat), onclick: () => { ui.cat = ''; draw(); } }, 'All', h('span', { class: 'n' }, pad3(all.length))),
+    set(catBox,
+      opt('', 'All', all.length, 'var(--accent)'),
       d.categories.map((c) => {
-        const n = all.filter((p) => p.category === c.id).length;
-        return n || isAdmin() ? h('button', {
-          class: 'cell-btn', style: { '--c': c.color }, 'aria-pressed': String(ui.cat === c.id),
-          onclick: () => { ui.cat = ui.cat === c.id ? '' : c.id; draw(); },
-        }, h('i'), c.name, h('span', { class: 'n' }, pad3(n))) : null;
+        const count = all.filter((p) => p.category === c.id).length;
+        return count || isAdmin() ? opt(c.id, c.name, count, c.color) : null;
       }));
-    const used = tagCounts().filter(([t, n]) => n > 0 && all.some((p) => p.tags.includes(t)));
-    set(tagCells, used.slice(0, 24).map(([t]) => h('button', {
-      class: 'cell-btn', 'aria-pressed': String(ui.tags.has(t)),
+    const used = tagCounts().filter(([t, k]) => k > 0 && all.some((p) => p.tags.includes(t)));
+    set(tagBox, used.slice(0, 24).map(([t]) => h('button', {
+      class: 'tagbtn', 'aria-pressed': String(ui.tags.has(t)),
       onclick: () => { ui.tags.has(t) ? ui.tags.delete(t) : ui.tags.add(t); draw(); },
     }, '#' + t)));
+    tagWrap.hidden = !used.length;
   }
 
-  function drawWall() {
+  function current() {
     const q = ui.q.trim().toLowerCase();
-    const list = all.filter((p) =>
+    const out = all.filter((p) =>
       (!ui.cat || p.category === ui.cat) &&
       [...ui.tags].every((t) => p.tags.includes(t)) &&
       (!q || [p.title, p.summary, p.description, p.tags.join(' '), (catOf(p) || {}).name || ''].join(' ').toLowerCase().includes(q)));
     const cmp = SORTS[ui.sort][1];
-    list.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || cmp(a, b));
+    return out.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || cmp(a, b));
+  }
 
-    const filtered = list.length !== all.length;
-    set(wallBox,
-      filtered && h('div', { class: 'result-meta lb' }, `Showing ${pad3(list.length)} of ${pad3(all.length)}`,
+  function drawList() {
+    const items = current();
+    const filtered = items.length !== all.length;
+    set(list,
+      filtered && h('div', { class: 'result-meta' }, `Showing ${items.length} of ${all.length}`,
         h('button', { onclick: () => { ui.q = ''; ui.cat = ''; ui.tags.clear(); search.value = ''; draw(); } }, 'Clear filters')),
-      list.length
-        ? h('div', { class: 'flush wall' }, list.map((p) => module(p, numbers.get(p.id))))
+      items.length
+        ? h('div', { class: 'rows' }, items.map((p) => row(p, numbers.get(p.id))))
         : h('div', { class: 'empty' }, all.length ? 'Nothing matches these filters.' : 'No projects yet.',
           isAdmin() && !all.length && h('div', { style: { 'margin-top': '14px' } }, h('button', { class: 'btn primary', onclick: () => openEditor() }, icon('plus'), 'Add your first project'))));
-    sweepIn();
-  }
-  const sweepIn = () => {
     const first = !shown; let i = 0;
     const now = new Set();
-    wallBox.querySelectorAll('.mod').forEach((m) => {
-      now.add(m.dataset.id);
-      if (first || !shown.has(m.dataset.id)) wipe(m, { color: 'var(--t)', delay: (first ? 260 : 0) + Math.min(i++, 11) * 60 });
+    list.querySelectorAll('.prj').forEach((el) => {
+      now.add(el.dataset.id);
+      if (first || !shown.has(el.dataset.id)) wipe(el, { color: 'var(--accent)', delay: (first ? 240 : 0) + Math.min(i++, 10) * 55, dur: 460 });
     });
     shown = now;
-  };
-  const draw = () => { drawFilters(); drawWall(); };
+  }
+  const draw = () => { drawFilters(); drawList(); };
 
   const search = h('input', {
-    type: 'search', placeholder: 'SEARCH PROJECTS', 'aria-label': 'Search projects', value: ui.q,
-    oninput: (e) => { ui.q = e.target.value; drawWall(); },
+    type: 'search', placeholder: 'Search projects', 'aria-label': 'Search projects', value: ui.q,
+    oninput: (e) => { ui.q = e.target.value; drawList(); },
   });
-  const sort = h('select', { class: 'bigsel', 'aria-label': 'Sort by', value: ui.sort, onchange: (e) => { ui.sort = e.target.value; drawWall(); } },
-    Object.entries(SORTS).map(([k, v]) => h('option', { value: k }, v[0])));
+
+  // ---- the knob ----
+  const knob = h('div', { class: 'knob', role: 'slider', tabindex: '0', 'aria-label': 'Sort order', 'aria-valuemin': '0', 'aria-valuemax': String(n - 1) });
+  const read = h('div', { class: 'k-read', 'aria-hidden': 'true' });
+  const ticks = h('div', { class: 'ticks', 'aria-hidden': 'true' }, sortKeys.map(() => h('i')));
+  function paint() {
+    const i = sortKeys.indexOf(ui.sort);
+    knob.style.setProperty('--a', String(i / (n - 1)));
+    knob.setAttribute('aria-valuenow', String(i));
+    knob.setAttribute('aria-valuetext', SORTS[ui.sort][0]);
+    read.textContent = SORTS[ui.sort][0];
+    [...ticks.children].forEach((t, k) => t.classList.toggle('on', k === i));
+  }
+  function setIndex(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    if (sortKeys[i] === ui.sort) return;
+    ui.sort = sortKeys[i]; paint(); drawList();
+  }
+  const step = () => { ui.sort = sortKeys[(sortKeys.indexOf(ui.sort) + 1) % n]; paint(); drawList(); };
+  let drag = null;
+  knob.addEventListener('pointerdown', (e) => { knob.setPointerCapture(e.pointerId); drag = { x: e.clientX, y: e.clientY, moved: false }; });
+  knob.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    if (Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 6) drag.moved = true;
+    if (!drag.moved) return;
+    const r = knob.getBoundingClientRect();
+    let ang = Math.atan2(e.clientX - (r.left + r.width / 2), -(e.clientY - (r.top + r.height / 2))) * 180 / Math.PI; // 0 = up, clockwise
+    if (ang > 135) ang = 135; else if (ang < -135) ang = -135;
+    setIndex(Math.round((ang + 135) / 270 * (n - 1)));
+  });
+  knob.addEventListener('pointerup', () => { if (drag && !drag.moved) step(); drag = null; });
+  knob.addEventListener('pointercancel', () => { drag = null; });
+  knob.addEventListener('keydown', (e) => {
+    const i = sortKeys.indexOf(ui.sort);
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') setIndex(i + 1);
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') setIndex(i - 1);
+    else if (e.key === 'Home') setIndex(0);
+    else if (e.key === 'End') setIndex(n - 1);
+    else if (e.key === 'Enter' || e.key === ' ') step();
+    else return;
+    e.preventDefault();
+  });
+  const go = h('button', {
+    class: 'go', 'aria-label': 'Open a random project', title: 'Random project',
+    onclick: () => { const pool = current(); const pick = pool[Math.floor(Math.random() * pool.length)]; if (pick) location.hash = '#/p/' + encodeURIComponent(pick.id); },
+  }, icon('play', 22));
 
   const p = d.profile;
   const gh = all.filter((x) => x.source === 'github').length;
   const itch = all.filter((x) => x.source === 'itch').length;
+  const m = mode();
   set(root,
-    h('section', { class: 'flush wall-head' },
-      h('div', {},
-        h('h1', {}, p.title),
-        p.tagline && h('p', { class: 'tagline' }, p.tagline),
+    h('div', { class: 'r-body' },
+      h('aside', { class: 'r-side' }, h('div', {}, h('div', { class: 'lb' }, 'Category'), catBox), tagWrap),
+      h('section', { class: 'r-head' },
+        h('h1', {}, p.headline || 'Things I have made.'),
+        p.tagline && h('p', { class: 'sub' }, p.tagline),
         (p.github || p.itch) && h('div', { class: 'links' },
           p.github && h('a', { class: 'btn sm', href: 'https://github.com/' + encodeURIComponent(p.github), target: '_blank', rel: 'noopener' }, 'GitHub', icon('ext', 14)),
-          p.itch && h('a', { class: 'btn sm', href: p.itch, target: '_blank', rel: 'noopener' }, 'itch.io', icon('ext', 14)))),
-      h('div', {}, h('span', { class: 'lb' }, 'Sort'), sort),
-      h('div', {}, h('span', { class: 'lb' }, 'Units'), h('span', { class: 'big' }, pad3(all.length)),
-        h('span', { class: 'lb muted' }, [gh && gh + ' GitHub', itch && itch + ' itch.io'].filter(Boolean).join(' · ') || 'On the wall'))),
-    catRow,
-    h('div', { class: 'cells', role: 'group', 'aria-label': 'Search and tags' },
-      h('div', { class: 'search' }, h('span', { class: 'ico' }, icon('search', 16)), search), tagCells),
-    wallBox);
+          p.itch && h('a', { class: 'btn sm', href: p.itch, target: '_blank', rel: 'noopener' }, 'itch.io', icon('ext', 14))),
+        h('div', { class: 'search' }, h('span', { class: 'ico' }, icon('search', 18)), search)),
+      list,
+      h('aside', { class: 'r-knob' }, h('div', { class: 'lb' }, 'Sort'), knob, ticks, read, go)),
+    h('div', { class: 'r-foot' }, h('i'),
+      h('span', {}, m === 'remote' ? 'Editing live' : m === 'local' ? 'Local draft' : 'Up to date'),
+      h('span', {}, `${all.length} project${all.length === 1 ? '' : 's'}`),
+      gh ? h('span', {}, gh + ' on GitHub') : null,
+      itch ? h('span', {}, itch + ' on itch.io') : null));
+  paint();
   draw();
 }
 
-function specOf(p) {
-  const s = p.stats;
-  if (s) return [['stars', fmtNum(s.stars)], ['commits', fmtNum(s.commits)]];
-  if (p.facts.length) return p.facts.slice(0, 2).map((f) => [f.label, f.value]);
-  return [['src', SOURCE[p.source] || 'Project']];
-}
-
-function module(p, n) {
+function row(p, n) {
   const cat = catOf(p);
-  return h('a', { class: 'mod', href: '#/p/' + encodeURIComponent(p.id), style: modColors(cat), 'aria-label': p.title, 'data-id': p.id },
-    screenEl(p, imgSrc(p.cover), cat ? cat.name : ''),
-    h('div', { class: 'nrow' }, h('div', { class: 'num' }, n), h('span', { class: 'lb' }, SOURCE[p.source] || 'Project')),
-    h('div', { class: 'info' },
-      h('b', {}, p.title),
-      p.summary && h('p', {}, p.summary),
-      h('div', { class: 'spec' }, specOf(p).map(([k, v]) => [h('span', {}, k), h('b', {}, v)]))),
-    h('div', { class: 'foot' },
-      h('div', { class: 'keys', title: p.featured ? 'Pinned' : null }, h('i', { class: p.featured ? 'k' : null }), h('i')),
-      h('span', { class: 'lb' }, fmtShort(p.updated || p.created))));
+  const s = p.stats;
+  const meta = [cat && cat.name, SOURCE[p.source] || 'Project', s && s.language].filter(Boolean).join(' · ');
+  return h('a', { class: 'prj', href: '#/p/' + encodeURIComponent(p.id), style: modColors(cat), 'data-id': p.id },
+    h('span', { class: 'n' }, pad3(n)),
+    h('i', { class: 'd' }),
+    h('span', { class: 't' },
+      h('b', {}, p.title, p.hidden && h('em', { class: 'hid' }, 'Hidden')),
+      p.summary && h('span', { class: 'sub' }, p.summary),
+      h('span', { class: 'sub meta' }, meta)),
+    h('span', { class: 'y' }, fmtDate(p.updated || p.created), s && s.stars ? h('span', {}, '★ ' + fmtNum(s.stars)) : null));
 }

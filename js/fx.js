@@ -79,7 +79,7 @@ export function wipeOnView(targets, opts = {}) {
 /** Full-window sweep that uncovers a freshly drawn page. */
 export function pageSweep() {
   if (still()) return;
-  const { s, blade } = shutter('page big', 'var(--lcd-bg)', 0, 560, true);
+  const { s, blade } = shutter('page big', 'var(--accent)', 0, 560, true);
   const done = () => s.remove();
   blade.addEventListener('animationend', done);
   setTimeout(done, 1100);
@@ -89,7 +89,7 @@ export function pageSweep() {
 /** Sweep a cover across the whole window, run `change` behind it, then sweep it away. */
 export function coverSweep(change) {
   if (still()) return change();
-  const { s, blade } = shutter('page big cover', 'var(--lcd-bg)', 0, 420, false);
+  const { s, blade } = shutter('page big cover', 'var(--accent)', 0, 420, false);
   let ran = false;
   const go = () => { if (ran) return; ran = true; change(); s.remove(); pageSweep(); };
   blade.addEventListener('animationend', go);

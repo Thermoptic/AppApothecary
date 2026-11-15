@@ -11,27 +11,27 @@ const SERIES = ['--c1', '--c2', '--c3', '--c4', '--c5', '--c6', '--c7'];
 function make(canvas, config) {
   if (!window.Chart) { canvas.replaceWith(h('p', { class: 'note' }, 'Charts could not be loaded.')); return; }
   const C = window.Chart;
-  C.defaults.font.family = css('--f-mono');
+  C.defaults.font.family = css('--f-sans');
   C.defaults.font.size = 11;
-  C.defaults.color = css('--lcd-mute');
+  C.defaults.color = css('--muted');
   live.push(new C(canvas, config));
 }
 
 const tooltip = () => ({
-  backgroundColor: css('--lcd-fg'), titleColor: css('--lcd-bg'), bodyColor: css('--lcd-bg'),
-  padding: 8, cornerRadius: 0, displayColors: false,
+  backgroundColor: css('--text'), titleColor: css('--bg'), bodyColor: css('--bg'),
+  padding: 8, cornerRadius: 8, displayColors: false,
 });
 
 function barConfig(labels, values, unit, tickEvery, color) {
   return {
     type: 'bar',
-    data: { labels, datasets: [{ data: values, backgroundColor: color || css('--accent'), borderRadius: 0, maxBarThickness: 36, categoryPercentage: 0.82, barPercentage: 0.9 }] },
+    data: { labels, datasets: [{ data: values, backgroundColor: color || css('--accent'), borderRadius: 4, borderSkipped: 'bottom', maxBarThickness: 36, categoryPercentage: 0.82, barPercentage: 0.9 }] },
     options: {
       responsive: true, maintainAspectRatio: false, animation: { duration: 400 },
       plugins: { legend: { display: false }, tooltip: { ...tooltip(), callbacks: { label: (c) => fmtNum(c.parsed.y) + ' ' + unit } } },
       scales: {
-        x: { grid: { display: false }, border: { color: css('--lcd-mute') }, ticks: { autoSkip: !tickEvery, maxRotation: 0, callback(v, i) { return !tickEvery || i % tickEvery === 0 ? this.getLabelForValue(v) : ''; } } },
-        y: { beginAtZero: true, grid: { color: css('--lcd-grid') }, border: { display: false }, ticks: { precision: 0, maxTicksLimit: 5 } },
+        x: { grid: { display: false }, border: { color: css('--muted') }, ticks: { autoSkip: !tickEvery, maxRotation: 0, callback(v, i) { return !tickEvery || i % tickEvery === 0 ? this.getLabelForValue(v) : ''; } } },
+        y: { beginAtZero: true, grid: { color: css('--grid') }, border: { display: false }, ticks: { precision: 0, maxTicksLimit: 5 } },
       },
     },
   };
@@ -70,7 +70,7 @@ export function languagesChart(languages) {
     h('span', { class: 'pct' }, (r[1] / total * 100).toFixed(1) + '%'))));
   queueMicrotask(() => make(canvas, {
     type: 'doughnut',
-    data: { labels: rows.map((r) => r[0]), datasets: [{ data: rows.map((r) => r[1]), backgroundColor: colors, borderColor: css('--lcd-bg'), borderWidth: 2, hoverOffset: 4 }] },
+    data: { labels: rows.map((r) => r[0]), datasets: [{ data: rows.map((r) => r[1]), backgroundColor: colors, borderColor: css('--surface'), borderWidth: 2, hoverOffset: 4 }] },
     options: {
       responsive: true, maintainAspectRatio: false, cutout: '66%', animation: { duration: 400 },
       plugins: { legend: { display: false }, tooltip: { ...tooltip(), callbacks: { label: (c) => (c.parsed / total * 100).toFixed(1) + '% of code' } } },

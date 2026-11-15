@@ -77,6 +77,7 @@ function profile() {
   const bind = (key, attrs = {}) => h(attrs.area ? 'textarea' : 'input', { ...attrs, area: null, value: p[key] || '', onchange: (e) => { p[key] = e.target.value.trim(); safe(() => touch(false)); } });
   return section('Profile', 'Shown at the top of the start page.',
     field('Site title', bind('title', { maxlength: 60 })),
+    field('Headline', bind('headline', { maxlength: 60, placeholder: 'Things I have made.' })),
     field('Intro text', bind('tagline', { area: true, maxlength: 300 })),
     h('div', { class: 'grid2' },
       field('GitHub username', bind('github', { autocapitalize: 'off', spellcheck: 'false' })),
@@ -97,7 +98,7 @@ function categories() {
       d.projects.forEach((p) => { if (p.category === c.id) p.category = ''; });
       d.categories.splice(i, 1); safe(touch);
     } }, icon('trash', 16))));
-  const PALETTE = ['#ff4f1a', '#6f93ff', '#2fc98a', '#f0bf00', '#b9a7ff', '#f5a3d7', '#3fbfff', '#ff8f70'];
+  const PALETTE = ['#FF4E50', '#FC913A', '#F9D423', '#EDE574', '#E1F5C4', '#23301F'];
   return section('Categories', 'Each category has its own color on cards and filters.',
     h('div', { class: 'list' }, rows.length ? rows : h('p', { class: 'muted small' }, 'No categories yet.')),
     h('div', {}, h('button', { class: 'btn', onclick: () => {

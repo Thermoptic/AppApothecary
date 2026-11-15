@@ -294,11 +294,11 @@ details summary { cursor: pointer; }
 @keyframes fx-in { from { transform: translateX(-100%); } }
 
 /* hover: a dithered band crosses the module screen, inverting what it passes */
-.mod .scr::after, .p-slab .scr::after { content: ""; position: absolute; top: 0; bottom: 0; left: -256px; width: 256px; background: #fff; mix-blend-mode: difference; pointer-events: none; image-rendering: pixelated;
+.p-slab .scr::after { content: ""; position: absolute; top: 0; bottom: 0; left: -256px; width: 256px; background: #fff; mix-blend-mode: difference; pointer-events: none; image-rendering: pixelated;
   -webkit-mask: var(--dithR, none) left / 128px 32px repeat-y, var(--dith, none) right / 128px 32px repeat-y;
   mask: var(--dithR, none) left / 128px 32px repeat-y, var(--dith, none) right / 128px 32px repeat-y;
   transition: transform .7s steps(20); }
-.mod:hover .scr::after, .mod:focus-visible .scr::after, .p-slab:hover .scr::after { transform: translateX(calc(100cqw + 256px)); }
+.p-slab:hover .scr::after { transform: translateX(calc(100cqw + 256px)); }
 
 /* hover: accent floods a control from the left behind a dithered front */
 .cta, .btn.primary, .cell-btn, .backrow, .actions .btn { position: relative; isolation: isolate; overflow: hidden; }
@@ -311,5 +311,15 @@ details summary { cursor: pointer; }
   .cell-btn:hover, .backrow:hover, .actions .btn:hover { background: transparent; }
   .btn.primary:hover, .actions .btn.primary:hover, .cell-btn[aria-pressed="true"]:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
 }
-@media (prefers-reduced-motion: reduce) { .mod .scr::after, .p-slab .scr::after, .cta::before, .btn.primary::before, .cell-btn::before, .backrow::before, .actions .btn::before { display: none; } }
+@media (prefers-reduced-motion: reduce) { .p-slab .scr::after, .cta::before, .btn.primary::before, .cell-btn::before, .backrow::before, .actions .btn::before { display: none; } }
 @media (hover: none) { .cta::before, .btn.primary::before, .cell-btn::before, .backrow::before, .actions .btn::before { display: none; } }
+/* hover: a dither sweep inverts the whole module from left to right; leaving sweeps it back */
+.mod { overflow: clip; }
+.mod::after { content: ""; position: absolute; z-index: 5; top: 0; bottom: 0; left: 0; width: calc(100% + 128px); background: #fff; mix-blend-mode: difference; pointer-events: none; image-rendering: pixelated;
+  -webkit-mask: linear-gradient(#000, #000) left / calc(100% - 128px) 100% no-repeat, var(--dith, none) right / 128px 32px repeat-y;
+  mask: linear-gradient(#000, #000) left / calc(100% - 128px) 100% no-repeat, var(--dith, none) right / 128px 32px repeat-y;
+  transform: translateX(-100%); transition: transform .6s steps(16); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .mod:hover::after, .mod:focus-visible::after { transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) { .mod::after { display: none; } }

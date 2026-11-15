@@ -190,11 +190,32 @@ export function lum(hex) {
   const [r, g, b] = [0, 2, 4].map((i) => { const v = parseInt(m[1].slice(i, i + 2), 16) / 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; });
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
-/** Module colors for a category: fill, readable ink on it, and a color that shows on a black screen. */
+const PALETTE = ['#ff4f1a', '#6f93ff', '#2fc98a', '#f0bf00', '#b9a7ff', '#f5a3d7', '#3fbfff', '#ff8f70'];
+function hue(hex) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
+  if (!m) return 0;
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(m[1].slice(i, i + 2), 16) / 255);
+  const mx = Math.max(r, g, b), d = mx - Math.min(r, g, b);
+  if (!d) return 0;
+  const k = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+  return (k * 60 + 360) % 360;
+}
+/** The palette color furthest around the hue wheel from `hex`: blue gets yellow, orange gets sky blue. */
+export function partner(hex) {
+  const h0 = hue(hex);
+  let best = PALETTE[0], bestGap = 1e9;
+  for (const p of PALETTE) {
+    const dist = Math.abs(((hue(p) - h0 + 540) % 360) - 180); // 180 = directly opposite
+    if (dist < 30) continue; // too close to the original to read as a change
+    if (180 - dist < bestGap) { bestGap = 180 - dist; best = p; }
+  }
+  return best;
+}
+/** Module colors for a category: fill, readable ink on it, a color that shows on a black screen, and the hover color. */
 export function modColors(cat) {
   const c = cat ? cat.color : NEUTRAL;
   const l = lum(c);
-  return { '--c': c, '--t': l > 0.2 ? '#101010' : '#ffffff', '--pc': l < 0.06 ? '#f2f2ee' : c };
+  return { '--c': c, '--t': l > 0.2 ? '#101010' : '#ffffff', '--pc': l < 0.06 ? '#f2f2ee' : c, '--hv': partner(c) };
 }
 /** The black "screen" of a module: the cover image, or a line pattern in the category color. */
 export function screenEl(project, src, label) {

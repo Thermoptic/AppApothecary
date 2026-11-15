@@ -313,13 +313,14 @@ details summary { cursor: pointer; }
 }
 @media (prefers-reduced-motion: reduce) { .p-slab .scr::after, .cta::before, .btn.primary::before, .cell-btn::before, .backrow::before, .actions .btn::before { display: none; } }
 @media (hover: none) { .cta::before, .btn.primary::before, .cell-btn::before, .backrow::before, .actions .btn::before { display: none; } }
-/* hover: a dither sweep inverts the whole module from left to right; leaving sweeps it back */
-.mod { overflow: clip; }
-.mod::after { content: ""; position: absolute; z-index: 5; top: 0; bottom: 0; left: 0; width: calc(100% + 128px); background: #fff; mix-blend-mode: difference; pointer-events: none; image-rendering: pixelated;
+/* hover: a new palette color sweeps in over the whole module, behind the content, with a dithered edge; leaving sweeps it back */
+.mod { overflow: clip; isolation: isolate; }
+.mod::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; width: calc(100% + 128px); background: var(--hv, #f2f2ee); pointer-events: none; image-rendering: pixelated;
   -webkit-mask: linear-gradient(#000, #000) left / calc(100% - 128px) 100% no-repeat, var(--dith, none) right / 128px 32px repeat-y;
   mask: linear-gradient(#000, #000) left / calc(100% - 128px) 100% no-repeat, var(--dith, none) right / 128px 32px repeat-y;
   transform: translateX(-100%); transition: transform .6s steps(16); }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .mod:hover::after, .mod:focus-visible::after { transform: translateX(0); }
+  .mod:hover, .mod:focus-visible { --t: #101010; } /* every hover color is light, so ink stays dark */
 }
 @media (prefers-reduced-motion: reduce) { .mod::after { display: none; } }

@@ -371,3 +371,19 @@ details summary { cursor: pointer; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .r-foot .upd:hover { color: var(--bg); background: var(--accent); border-color: var(--text); }
 }
+/* ---------- Loader ---------- */
+.loading { min-height: calc(100vh - 230px); min-height: calc(100dvh - 230px); display: grid; place-content: center; justify-items: center; gap: 22px; padding: 0; color: var(--text); }
+.ld { position: relative; width: 150px; height: 150px; display: grid; place-items: center; }
+.ld-ball { position: relative; width: 74px; height: 74px; border-radius: 50%; background: var(--dot); overflow: hidden; isolation: isolate; }
+.ld-ball::after { content: ""; position: absolute; z-index: 1; top: 0; bottom: 0; left: 0; width: calc(100% + 128px); background: var(--accent); image-rendering: pixelated;
+  -webkit-mask: linear-gradient(#000, #000) left / calc(100% - 128px) 100% no-repeat, var(--dith, none) right / 128px 32px repeat-y;
+  mask: linear-gradient(#000, #000) left / calc(100% - 128px) 100% no-repeat, var(--dith, none) right / 128px 32px repeat-y;
+  transform: translateX(-100%); animation: ld-fill 1.5s steps(10) infinite; }
+@keyframes ld-fill { 0% { transform: translateX(-100%); } 45%, 55% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+.ld-dots i { position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px; border-radius: 50%; background: var(--dot);
+  transform: rotate(calc(var(--i) * 30deg)) translateY(-64px); animation: ld-dot 1.2s steps(12) infinite; animation-delay: calc(var(--i) * .1s - 1.2s); }
+@keyframes ld-dot { 0% { background: var(--text); scale: 1.6; } 40%, 100% { background: var(--dot); scale: 1; } }
+.ld-word { font-size: .8rem; font-weight: 800; letter-spacing: .5em; margin-right: -.5em; display: flex; }
+.ld-word span { color: var(--muted); animation: ld-ink 1.4s steps(1) infinite; animation-delay: calc(var(--i) * .15s - 1.4s); }
+@keyframes ld-ink { 0% { color: var(--text); } 14% { color: var(--muted); } }
+@media (prefers-reduced-motion: reduce) { .ld-ball::after { transform: translateX(-35%); } }

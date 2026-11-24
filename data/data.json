@@ -9,7 +9,9 @@
   },
   "settings": {
     "sort": "updated",
-    "ignored": []
+    "ignored": [
+      "thermoptic/appapothecary"
+    ]
   },
   "categories": [
     {
@@ -45,138 +47,6 @@
     "gms"
   ],
   "projects": [
-    {
-      "id": "appapothecary",
-      "title": "AppApothecary",
-      "source": "github",
-      "repo": "Thermoptic/AppApothecary",
-      "url": "https://github.com/Thermoptic/AppApothecary",
-      "category": "web",
-      "tags": [],
-      "summary": "",
-      "description": "",
-      "cover": "",
-      "screenshots": [],
-      "created": "2026-11-15",
-      "updated": "2026-11-24",
-      "featured": false,
-      "hidden": false,
-      "facts": [],
-      "links": [],
-      "itchId": "",
-      "readme": "# My Projects\n\nA personal showcase for everything you have built: GitHub projects, itch.io games and anything else. Static site, no build step, made for GitHub Pages.\n\n## Preview locally\n\nNo installs needed on Windows:\n\n```\npowershell -ExecutionPolicy Bypass -File serve.ps1\n```\n\nThen open http://localhost:5173/. On localhost you can edit freely; changes are kept as a draft in that browser only (Settings → Backup → Export to save them as a file).\n\n## Publish on GitHub Pages\n\n1. Create a repository on GitHub and upload every file in this folder (keep the folder structure, including `.nojekyll`).\n2. In the repository: Settings → Pages → Source \"Deploy from a branch\", branch `main`, folder `/ (root)`.\n3. Your site is at `https://<username>.github.io/<repository>/`.\n\n## Edit the live site\n\n1. Open the site → gear icon → **Owner access**.\n2. Create a fine-grained token at https://github.com/settings/personal-access-tokens/new with access to *only this repository* and the permission **Contents: Read and write**.\n3. Paste it and press Sign in. The token is stored only in that browser. Never commit it.\n\nAfter that you get Add / Edit / Delete buttons. Changes collect in an \"Unpublished changes\" bar; **Publish** commits them to `data/data.json` (and images to `assets/shots/`). Visitors see the update after about a minute.\n\n## GitHub statistics\n\nSettings → Profile: enter your GitHub username. Settings → GitHub: **Import repositories**, then **Sync statistics** whenever you want fresh numbers. Statistics are cached in `data.json`, so visitors never hit GitHub's rate limit.\n\nitch.io has no public API usable from a browser, so games are added by hand (link, images, facts). Add the numeric game ID to show the itch.io widget.\n\n## Files\n\n- `index.html`, `css/styles.css` – page shell and design (light/dark)\n- `js/app.js` – routing and header\n- `js/store.js` – loading, drafts, publishing\n- `js/github.js` – GitHub API\n- `js/views/` – start page, project page, editor, settings\n- `data/data.json` – all content (ships with four samples you can delete)",
-      "readmeEdited": false,
-      "stats": {
-        "stars": 0,
-        "forks": 0,
-        "watchers": 0,
-        "issues": 0,
-        "size": 198,
-        "license": "",
-        "branch": "main",
-        "language": "JavaScript",
-        "created": "2026-11-15T17:20:52Z",
-        "pushed": "2026-11-24T10:36:43Z",
-        "commits": 17,
-        "languages": {
-          "JavaScript": 87839,
-          "CSS": 29546,
-          "HTML": 1787,
-          "PowerShell": 1711
-        },
-        "weeks": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          12,
-          5
-        ],
-        "punch": [
-          [
-            0,
-            18,
-            2
-          ],
-          [
-            0,
-            19,
-            4
-          ],
-          [
-            0,
-            21,
-            2
-          ],
-          [
-            0,
-            23,
-            4
-          ],
-          [
-            2,
-            11,
-            5
-          ]
-        ],
-        "releases": [],
-        "contributors": [
-          {
-            "login": "Thermoptic",
-            "commits": 12,
-            "avatar": "https://avatars.githubusercontent.com/u/229534962?v=4",
-            "url": "https://github.com/Thermoptic"
-          }
-        ],
-        "syncedAt": "2026-11-24T10:38:36.620Z"
-      }
-    },
     {
       "id": "bratwurst-reheated",
       "title": "Bratwurst-Reheated",
@@ -3745,51 +3615,6 @@
       "facts": [],
       "links": [],
       "itchId": "5162238",
-      "readme": "",
-      "readmeEdited": false,
-      "stats": null
-    },
-    {
-      "id": "bratwurst-reheated-itch",
-      "title": "Bratwurst Reheated",
-      "source": "itch",
-      "repo": "",
-      "url": "https://thermoptic.itch.io/bratwurst-reheated",
-      "category": "games",
-      "tags": [
-        "game",
-        "gamemaker",
-        "windows"
-      ],
-      "summary": "A fan remake of the Amiga shooter Bratwurst, built in GameMaker Studio 1.4 as a stand-alone Windows game. Float, shoot, crash and repeat, with one to four players.",
-      "description": "A fan remake of the Amiga shooter Bratwurst, built in GameMaker Studio 1.4 as a stand-alone Windows game. Float, shoot, crash and repeat, with one to four players, keyboard and Xbox controllers, and a terminal-style look with 34 colour themes and a team mode, Capture the Bratwurst.\n\nThe goal is to keep the feel and the physics of the original wherever it can be verified, and then grow it with new maps, game modes, ships, weapons and music.",
-      "cover": "https://raw.githubusercontent.com/Thermoptic/Bratwurst-Reheated/main/assets/logo.png",
-      "screenshots": [],
-      "created": "2026-10-13",
-      "updated": "2026-11-11",
-      "featured": false,
-      "hidden": false,
-      "facts": [
-        {
-          "label": "Platform",
-          "value": "Windows"
-        },
-        {
-          "label": "Engine",
-          "value": "GameMaker Studio 1.4"
-        },
-        {
-          "label": "Players",
-          "value": "1–4"
-        }
-      ],
-      "links": [
-        {
-          "label": "Source on GitHub",
-          "url": "https://github.com/Thermoptic/Bratwurst-Reheated"
-        }
-      ],
-      "itchId": "",
       "readme": "",
       "readmeEdited": false,
       "stats": null

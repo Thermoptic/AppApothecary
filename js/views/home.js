@@ -1,8 +1,9 @@
 // Start page (Regal): category and tag filters on the left, the project list in the middle,
 // a sort knob and a random-project button on the right.
 
-import { h, set, icon, fmtDate, fmtNum, modColors, SOURCE } from '../ui.js';
-import { state, isAdmin, visibleProjects, catOf, tagCounts, mode } from '../store.js';
+import { h, set, icon, fmtDate, fmtNum, modColors, toast, SOURCE } from '../ui.js';
+import { state, isAdmin, visibleProjects, catOf, tagCounts, mode, touch } from '../store.js';
+import { syncFromGitHub } from '../sync.js';
 import { openEditor } from './editor.js';
 import { wipe } from '../fx.js';
 
@@ -147,6 +148,26 @@ export function renderHome(root) {
   const gh = all.filter((x) => x.source === 'github').length;
   const itch = all.filter((x) => x.source === 'itch').length;
   const m = mode();
+
+  // ---- "Update from GitHub" (owner only) ----
+  const statusEl = h('span', { class: 'st', role: 'status' }, m === 'remote' ? 'Editing live' : m === 'local' ? 'Local draft' : 'Up to date');
+  const idle = statusEl.textContent;
+  const updLabel = h('span', {}, 'Update from GitHub');
+  const updBtn = isAdmin() ? h('button', { class: 'btn sm upd', title: 'Look for new repositories and refresh statistics', onclick: runUpdate }, icon('sync', 16), updLabel) : null;
+  async function runUpdate() {
+    updBtn.disabled = true; updBtn.classList.add('spin'); updLabel.textContent = 'Checking…';
+    try {
+      const res = await syncFromGitHub(state.data, { onProgress: (t) => { statusEl.textContent = t; } });
+      const names = (list) => list.slice(0, 3).join(', ') + (list.length > 3 ? ` and ${list.length - 3} more` : '');
+      if (res.limited) toast('GitHub rate limit reached. Sign in with your token under Settings for a higher limit, or try again later.', true);
+      if (res.added.length || res.refreshed.length) {
+        touch();
+        toast([res.added.length && `Added ${names(res.added)}.`, res.refreshed.length && `Refreshed ${res.refreshed.length} project${res.refreshed.length === 1 ? '' : 's'}.`, mode() === 'remote' && 'Press Publish to save it.'].filter(Boolean).join(' '));
+      } else if (!res.limited) toast(res.failed ? 'Could not reach GitHub for some projects. Try again.' : 'Everything is up to date.', !!res.failed);
+    } catch (e) { toast(e.message, true); }
+    updBtn.disabled = false; updBtn.classList.remove('spin'); updLabel.textContent = 'Update from GitHub'; statusEl.textContent = idle;
+  }
+
   set(root,
     h('div', { class: 'r-body' },
       h('aside', { class: 'r-side' }, h('div', {}, h('div', { class: 'lb' }, 'Category'), catBox), tagWrap),
@@ -160,10 +181,11 @@ export function renderHome(root) {
       list,
       h('aside', { class: 'r-knob' }, h('div', { class: 'lb' }, 'Sort'), knob, ticks, read, go)),
     h('div', { class: 'r-foot' }, h('i'),
-      h('span', {}, m === 'remote' ? 'Editing live' : m === 'local' ? 'Local draft' : 'Up to date'),
+      statusEl,
       h('span', {}, `${all.length} project${all.length === 1 ? '' : 's'}`),
       gh ? h('span', {}, gh + ' on GitHub') : null,
-      itch ? h('span', {}, itch + ' on itch.io') : null));
+      itch ? h('span', {}, itch + ' on itch.io') : null,
+      updBtn));
   paint();
   draw();
 }

@@ -45,6 +45,8 @@ export function openEditor(project) {
     featured: h('input', { type: 'checkbox', checked: p.featured }),
     hidden: h('input', { type: 'checkbox', checked: p.hidden }),
   };
+  let readmeEdited = !!p.readmeEdited; // set when the text is changed by hand, so syncing does not overwrite it
+  f.readme.addEventListener('input', () => { readmeEdited = true; });
   const field = (label, input, hint) => h('label', { class: 'field' }, label, input, hint && h('span', { class: 'hint' }, hint));
 
   // --- GitHub fetch ---
@@ -62,7 +64,7 @@ export function openEditor(project) {
       f.created.value = r.created; f.updated.value = r.updated;
       stats = await fetchStats(full, info);
       const rd = await fetchReadme(full);
-      if (rd) f.readme.value = rd;
+      if (rd) { f.readme.value = rd; readmeEdited = false; }
       toast('Fetched details and statistics from GitHub.');
     } catch (e) { toast(e.message, true); }
     fetchBtn.disabled = false;
@@ -120,7 +122,7 @@ export function openEditor(project) {
       title: f.title.value.trim(), source: f.source.value, url, category: f.category.value,
       repo: f.source.value === 'github' ? parseRepo(f.repo.value) : '',
       tags: [...new Set(f.tags.value.split(',').map((s) => s.trim().toLowerCase().replace(/^#/, '')).filter(Boolean))],
-      summary: f.summary.value.trim(), description: f.description.value.trim(), readme: f.readme.value.trim(),
+      summary: f.summary.value.trim(), description: f.description.value.trim(), readme: f.readme.value.trim(), readmeEdited,
       created: f.created.value, updated: f.updated.value, cover, screenshots: shots,
       facts: textToPairs(f.facts.value, 'label', 'value'),
       links: textToPairs(f.links.value, 'label', 'url').filter((l) => safeUrl(l.url)),
@@ -141,6 +143,8 @@ export function openEditor(project) {
 
   async function remove() {
     if (!(await confirmDialog(`Delete "${p.title}"? This cannot be undone once you publish.`))) return;
+    // Remember deleted repositories so "Update from GitHub" does not add them back.
+    if (p.repo) d.settings.ignored = [...new Set([...(d.settings.ignored || []), p.repo.toLowerCase()])];
     d.projects.splice(d.projects.indexOf(p), 1);
     dlg.close();
     try { touch(false); } catch (e) { toast(e.message, true); }

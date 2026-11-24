@@ -59,12 +59,12 @@ function normalize(d) {
   d = d && typeof d === 'object' ? d : {};
   d.version = 1;
   d.profile = { title: 'My Projects', headline: 'Things I have made.', tagline: '', github: '', itch: '', ...(d.profile || {}) };
-  d.settings = { sort: 'updated', ...(d.settings || {}) };
+  d.settings = { sort: 'updated', ignored: [], ...(d.settings || {}) };
   d.categories = Array.isArray(d.categories) ? d.categories : [];
   d.tags = Array.isArray(d.tags) ? d.tags : [];
   d.projects = (Array.isArray(d.projects) ? d.projects : []).map((p) => ({
     id: uid(), title: 'Untitled', source: 'other', repo: '', url: '', category: '', tags: [], summary: '', description: '',
-    cover: '', screenshots: [], created: '', updated: '', featured: false, hidden: false, facts: [], links: [], itchId: '', readme: '', stats: null, ...p,
+    cover: '', screenshots: [], created: '', updated: '', featured: false, hidden: false, facts: [], links: [], itchId: '', readme: '', readmeEdited: false, stats: null, ...p,
   }));
   return d;
 }

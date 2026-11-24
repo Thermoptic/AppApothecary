@@ -356,3 +356,10 @@ details summary { cursor: pointer; }
 .md table { border-collapse: collapse; font-size: .92rem; }
 .md th, .md td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
 .md th { font-weight: 800; }
+/* ---------- Update button in the bottom bar ---------- */
+.r-foot .st { transition: color .2s; }
+.r-foot .upd { margin-left: auto; }
+.r-foot .upd[disabled] { opacity: 1; pointer-events: none; }
+.upd.spin svg { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 560px) { .r-foot { gap: 10px 16px; } .r-foot .upd { margin-left: 0; width: 100%; } }

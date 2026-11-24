@@ -153,17 +153,18 @@ export function renderHome(root) {
   const statusEl = h('span', { class: 'st', role: 'status' }, m === 'remote' ? 'Editing live' : m === 'local' ? 'Local draft' : 'Up to date');
   const idle = statusEl.textContent;
   const updLabel = h('span', {}, 'Update from GitHub');
-  const updBtn = isAdmin() ? h('button', { class: 'btn sm upd', title: 'Look for new repositories and refresh statistics', onclick: runUpdate }, icon('sync', 16), updLabel) : null;
+  const updBtn = h('button', { class: 'btn sm upd', title: 'Look for new repositories on GitHub', onclick: runUpdate }, icon('sync', 16), updLabel);
   async function runUpdate() {
+    const owner = isAdmin(); // the owner saves the result; a visitor only sees it until the page is reloaded
     updBtn.disabled = true; updBtn.classList.add('spin'); updLabel.textContent = 'Checking…';
     try {
-      const res = await syncFromGitHub(state.data, { onProgress: (t) => { statusEl.textContent = t; } });
+      const res = await syncFromGitHub(state.data, { refresh: owner, onProgress: (t) => { statusEl.textContent = t; } });
       const names = (list) => list.slice(0, 3).join(', ') + (list.length > 3 ? ` and ${list.length - 3} more` : '');
-      if (res.limited) toast('GitHub rate limit reached. Sign in with your token under Settings for a higher limit, or try again later.', true);
+      if (res.limited) toast(owner ? 'GitHub rate limit reached. Sign in with your token under Settings for a higher limit, or try again later.' : 'GitHub is limiting requests right now. Try again in a while.', true);
       if (res.added.length || res.refreshed.length) {
-        touch();
-        toast([res.added.length && `Added ${names(res.added)}.`, res.refreshed.length && `Refreshed ${res.refreshed.length} project${res.refreshed.length === 1 ? '' : 's'}.`, mode() === 'remote' && 'Press Publish to save it.'].filter(Boolean).join(' '));
-      } else if (!res.limited) toast(res.failed ? 'Could not reach GitHub for some projects. Try again.' : 'Everything is up to date.', !!res.failed);
+        if (owner) touch(); else window.dispatchEvent(new Event('hashchange')); // redraw the list
+        toast([res.added.length && `Added ${names(res.added)}.`, owner && res.refreshed.length && `Refreshed ${res.refreshed.length} project${res.refreshed.length === 1 ? '' : 's'}.`, owner && mode() === 'remote' && 'Press Publish to save it.', !owner && 'Shown for this visit only.'].filter(Boolean).join(' '));
+      } else if (!res.limited) toast(res.failed ? 'Could not reach GitHub for some projects. Try again.' : owner ? 'Everything is up to date.' : 'No new repositories found.', !!res.failed);
     } catch (e) { toast(e.message, true); }
     updBtn.disabled = false; updBtn.classList.remove('spin'); updLabel.textContent = 'Update from GitHub'; statusEl.textContent = idle;
   }

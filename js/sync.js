@@ -39,7 +39,7 @@ function stale(p, r) {
  * Mutates `data`. Returns { added: [titles], refreshed: [titles], failed: n, limited: bool }.
  * `onProgress(text)` is called with short status messages.
  */
-export async function syncFromGitHub(data, { onProgress = () => {} } = {}) {
+export async function syncFromGitHub(data, { onProgress = () => {}, refresh = true } = {}) {
   const user = data.profile.github;
   if (!user) throw new Error('Add your GitHub username under Settings → Profile first.');
   onProgress('Reading your repositories…');
@@ -51,7 +51,7 @@ export async function syncFromGitHub(data, { onProgress = () => {} } = {}) {
   const todo = [];
   for (const r of repos) {
     const key = r.full_name.toLowerCase();
-    if (known.has(key)) { if (stale(known.get(key), r)) todo.push({ r, p: known.get(key) }); }
+    if (known.has(key)) { if (refresh && stale(known.get(key), r)) todo.push({ r, p: known.get(key) }); }
     else if (!ignored.has(key) && !r.archived) todo.push({ r, p: null });
   }
 

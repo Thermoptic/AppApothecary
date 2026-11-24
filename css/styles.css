@@ -363,3 +363,11 @@ details summary { cursor: pointer; }
 .upd.spin svg { animation: spin 1s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (max-width: 560px) { .r-foot { gap: 10px 16px; } .r-foot .upd { margin-left: 0; width: 100%; } }
+/* The refresh button: solid lime, one word. Ink floods in on hover. */
+.r-foot .upd { background: var(--accent); border-color: var(--accent); color: var(--on-accent); min-height: 42px; padding: 0 32px; font-weight: 800; font-size: .85rem; letter-spacing: .14em; }
+.r-foot .upd::before { background: var(--text); }
+.upd.spin { animation: blink .9s steps(2, jump-none) infinite; }
+@keyframes blink { from { opacity: 1; } to { opacity: .5; } }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .r-foot .upd:hover { color: var(--bg); background: var(--accent); border-color: var(--text); }
+}

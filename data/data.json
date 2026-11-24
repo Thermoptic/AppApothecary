@@ -8,7 +8,8 @@
     "itch": ""
   },
   "settings": {
-    "sort": "updated"
+    "sort": "updated",
+    "ignored": []
   },
   "categories": [
     {
@@ -57,49 +58,123 @@
       "cover": "",
       "screenshots": [],
       "created": "2026-11-15",
-      "updated": "2026-11-15",
+      "updated": "2026-11-24",
       "featured": false,
       "hidden": false,
       "facts": [],
       "links": [],
       "itchId": "",
       "readme": "# My Projects\n\nA personal showcase for everything you have built: GitHub projects, itch.io games and anything else. Static site, no build step, made for GitHub Pages.\n\n## Preview locally\n\nNo installs needed on Windows:\n\n```\npowershell -ExecutionPolicy Bypass -File serve.ps1\n```\n\nThen open http://localhost:5173/. On localhost you can edit freely; changes are kept as a draft in that browser only (Settings → Backup → Export to save them as a file).\n\n## Publish on GitHub Pages\n\n1. Create a repository on GitHub and upload every file in this folder (keep the folder structure, including `.nojekyll`).\n2. In the repository: Settings → Pages → Source \"Deploy from a branch\", branch `main`, folder `/ (root)`.\n3. Your site is at `https://<username>.github.io/<repository>/`.\n\n## Edit the live site\n\n1. Open the site → gear icon → **Owner access**.\n2. Create a fine-grained token at https://github.com/settings/personal-access-tokens/new with access to *only this repository* and the permission **Contents: Read and write**.\n3. Paste it and press Sign in. The token is stored only in that browser. Never commit it.\n\nAfter that you get Add / Edit / Delete buttons. Changes collect in an \"Unpublished changes\" bar; **Publish** commits them to `data/data.json` (and images to `assets/shots/`). Visitors see the update after about a minute.\n\n## GitHub statistics\n\nSettings → Profile: enter your GitHub username. Settings → GitHub: **Import repositories**, then **Sync statistics** whenever you want fresh numbers. Statistics are cached in `data.json`, so visitors never hit GitHub's rate limit.\n\nitch.io has no public API usable from a browser, so games are added by hand (link, images, facts). Add the numeric game ID to show the itch.io widget.\n\n## Files\n\n- `index.html`, `css/styles.css` – page shell and design (light/dark)\n- `js/app.js` – routing and header\n- `js/store.js` – loading, drafts, publishing\n- `js/github.js` – GitHub API\n- `js/views/` – start page, project page, editor, settings\n- `data/data.json` – all content (ships with four samples you can delete)",
+      "readmeEdited": false,
       "stats": {
         "stars": 0,
         "forks": 0,
         "watchers": 0,
         "issues": 0,
-        "size": 44,
+        "size": 198,
         "license": "",
         "branch": "main",
         "language": "JavaScript",
         "created": "2026-11-15T17:20:52Z",
-        "pushed": "2026-11-15T18:19:59Z",
-        "commits": 2,
+        "pushed": "2026-11-24T10:03:21Z",
+        "commits": 13,
         "languages": {
-          "JavaScript": 68675,
-          "CSS": 20561,
-          "PowerShell": 1711,
-          "HTML": 1531
+          "JavaScript": 87839,
+          "CSS": 29546,
+          "HTML": 1787,
+          "PowerShell": 1711
         },
-        "weeks": [],
+        "weeks": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          12,
+          1
+        ],
         "punch": [
           [
             0,
             18,
             2
+          ],
+          [
+            0,
+            19,
+            4
+          ],
+          [
+            0,
+            21,
+            2
+          ],
+          [
+            0,
+            23,
+            4
+          ],
+          [
+            2,
+            11,
+            1
           ]
         ],
         "releases": [],
         "contributors": [
           {
             "login": "Thermoptic",
-            "commits": 1,
+            "commits": 12,
             "avatar": "https://avatars.githubusercontent.com/u/229534962?v=4",
             "url": "https://github.com/Thermoptic"
           }
         ],
-        "syncedAt": "2026-11-15T18:31:04Z"
+        "syncedAt": "2026-11-24T10:06:41.662Z"
       }
     },
     {
@@ -122,6 +197,7 @@
       "links": [],
       "itchId": "",
       "readme": "<p align=\"center\">\n  <img src=\"assets/logo.png\" alt=\"Bratwurst Reheated\" width=\"640\">\n</p>\n\n# Bratwurst Reheated\n\nA fan remake of the Amiga shooter **Bratwurst**, built in GameMaker Studio 1.4 as a stand-alone Windows game. Float, shoot, crash and repeat, with one to four players, keyboard and Xbox controllers, and a terminal-style look with 34 colour themes and a team mode, Capture the Bratwurst.\n\nThe goal is to keep the feel and the physics of the original wherever it can be verified, and then grow it with new maps, game modes, ships, weapons and music.\n\n## What's new\n\n<!-- UPDATES:START -->\n\n### UPDATE 57 - 2026-11-10 - Super Smashwurst: Push Strength\n\n- New setting PUSH STRENGTH in the Super Smashwurst menu. It sets how hard a hit throws a ship, without changing the Push percentage. 5 is normal (100%), every step up adds 20% more knockback and every step down takes 20% away. At 10 (200%) a ship with 100% Push is thrown twice as far.\n\n### UPDATE 56 - 2026-11-09 - Missiles hit the whole ship\n\n- Missiles (normal, guided and Mini Nuke) now hit as soon as they touch any of the lines that make up a ship. Before, a fast missile could slip straight through a ship or you had to hit almost the exact middle. Cannon shots work as before.\n\n### UPDATE 55 - 2026-11-08 - New game mode: Super Smashwurst\n\n- Game Modes -> SUPER SMASHWURST is a new last-ship-standing mode for 2 to 4 players, inspired by Super Smash Bros. There is no energy bar. Every hit raises the Push percentage of the ship that was hit (a cannon shot +1%, a missile +10%), and the higher the Push, the farther a hit throws the ship. At 0% a hit does not move you at all, at 100% or more it can launch you far outside the arena.\n- The red arena boundary no longer stops you: ships, shots and missiles fly straight through it. Once a ship is outside, it gets its own countdown (5 seconds by default) next to the ship. Fly back inside in time and the countdown is cancelled; fly out again and a new one starts. When it reaches zero the ship explodes and you lose a life.\n- Everyone starts with 3 lives. At zero lives you are out. The last ship standing wins the round; if everyone is out at once it is a draw.\n- Each player's panel shows PUSH in a colour that goes from blue to red as it rises, plus the lives left. Settings: STARTING LIVES, OUT-OF-BOUNDS TIME, CANNON PUSH and MISSILE PUSH, along with players, map, rounds and powerups (off by default). Guided missiles, Mini Nukes and the railgun count as missiles.\n- The default map is Proxima Merguez. You can pick any other Classic map on the MAP row.\n- This is a first version that is still being tested, so the knockback feel may change.\n\n### UPDATE 54 - 2026-11-07 - Capture the Bratwurst: missiles knock the sausage loose\n\n- If you carry the sausage and get hit by a missile (a direct hit, the red explosion ring, a guided missile or a Mini Nuke), you drop it. The sausage keeps its speed and either team can grab it, but you cannot pick it up again for one second.\n- Cannon shots and the railgun still only make the sausage spin extra fast. A missile from a teammate does nothing, as before.\n\n### UPDATE 53 - 2026-11-06 - Capture the Bratwurst, first playable version\n\n- Game Modes -> CAPTURE THE BRATWURST is now a real game mode. Choose PLAYERS (2 to 4), MAP, ROUNDS, SCORE LIMIT (default 5 points), TIME LIMIT (default 5 minutes) and POWERUPS. START checks that the map has a sausage spawn and both zones.\n- One sausage, two teams. Fly close to the sausage to pick it up; it trails softly behind you. Carry it into the OTHER team's zone to score one point. Your own zone never scores.\n- After a point: RED or BLUE TEAM SCORES for 3 seconds, then a big countdown 3, 2, 1, and the sausage grows back at its spawn. The round timer keeps running and ships can still fly and shoot, but the sausage cannot be picked up until it is back.\n- Hit the carrier and the sausage spins extra fast for a second. If the carrier is destroyed the sausage is dropped, keeps its speed, slows down and bounces off walls, and either team can grab it.\n- Teammates cannot hurt each other: shots, missiles, explosions and the railgun pass through them.\n- A round ends at the score limit or when the time runs out. Most points wins; if the points are level, the team that carried the sausage longest wins; if that is level too, it is a draw.\n- The round result shows the winning team, the score, kills (most kills marked) and the carry time of every player. After the last round you see the match result with round wins per team. Kills are statistics only and never give points.\n- This is a first version that is still being tested, so the feel (sausage speed, pick-up distance) may change.\n\n### UPDATE 52 - 2026-11-04 - Capture the Bratwurst: map editor and teams\n\n- The map editor has three new tools for Capture the Bratwurst: C places the sausage spawn (one per map), R draws the red team's zone and V draws the blue team's zone. The zones are not solid, ships fly straight through them. Everything is saved with the map.\n- The editor shows CTB READY, or what is missing, and warns when you save a Capture the Bratwurst map that is not finished.\n- Capture the Bratwurst only lists maps that were saved for it. Older maps no longer show up there by mistake.\n- Two teams: P1 and P3 are red, P2 and P4 are blue. The team colours are taken from the colour theme.\n\n### UPDATE 51 - 2026-10-28 - Galaxy Duel damage flash\n\n- A damaged ship in Galaxy Duel now flashes quickly in three colours from the theme until it is repaired, so you can see at a glance who is hurt.\n- The damage now lasts 4 seconds instead of 6.\n\n### UPDATE 50 - 2026-10-25 - Chromostereopsis themes\n\n- Four new colour themes: ChromostereopsisX2, X4, X6 and X8. They use a pure black background with red for things that should look close (walls, shots, explosions) and blue for things that should look far away (ships, text, dots). Many people see red as closer than blue, which gives a feeling of depth with colour alone.\n- X2 uses only pure red and pure blue. X4, X6 and X8 add more shades close to those colours.\n- There are now 34 colour themes.\n\n### UPDATE 49 - 2026-10-20 - Ship select\n\n- On the ship select screen every ship is now scaled automatically so it fits inside the radar circle, also when it rotates. The big ships no longer stick out of the frame.\n- The ship name is no longer shown inside the picture (it is still on the SHIP row).\n\n### UPDATE 48 - 2026-10-20 - New font\n\n- The whole game now uses the Rodchenko Light font (by ParaType), a thin constructivist-style typeface, with smooth edges. Small text, menu choices and headings use three sizes.\n- The temporary FONT TEST page in Options is gone again.\n\n### UPDATE 47 - 2026-10-20 - Map editor in the main menu, font test\n\n- The MAP EDITOR is now in the main menu, right under CONTROLS, instead of in Options.\n- A temporary FONT TEST page in Options shows several fonts in different sizes, with and without anti-aliasing, so a new font can be picked.\n\n### UPDATE 46 - 2026-10-19 - New pause menu\n\n- The pause menu is now a band across the screen: PAUSED on top, the choices (RESUME, OPTIONS, QUIT TO MENU) on one row, a line with match info, small player cards below and a button help row.\n- Press Y (or C on the keyboard) to see the controls. Left and right (or up and down) change the choice.\n- The button help row uses square boxes with the letter centered in each box.\n\n### UPDATE 45 - 2026-10-19 - Explosion knockback\n\n- Explosions now push ships away. When the red ring from a missile, a guided missile or a Mini Nuke reaches a ship, the ship is thrown away from the centre of the explosion, hardest close to the centre.\n- The missile knockback is strong by default. Both the missile and the Mini Nuke have a BLAST KNOCKBACK setting in the secret Powerup Editor (0 turns it off).\n\n### UPDATE 44 - 2026-10-18 - Missile blast and weapon settings\n\n- The red ring from a missile explosion now hurts as much as a direct hit (12 energy for a missile, 5 for a guided missile). A ship that is hit directly does not take both.\n- The secret Powerup Editor (press P in Options) has two new pages: CANNON (damage, shot speed, gravity, reload time, knockback) and MISSILE (speed, explosion time, direct damage, blast damage, blast radius, damage radius, particles, knockback, cooldown).\n- The missile explosion ring has a fixed size on the map now, so it no longer changes with the camera zoom.\n\n### UPDATE 43 - 2026-10-18 - Tidier HUD, fading arena edge, countdown sound\n\n- Player panels: the ship now sits alone in the middle of the right side, smaller, with the numbers in the corners: position (Race) or round at the top left, wins at the top right, and laps or lives with small boxes along the bottom. In Galaxy Duel a damaged ship shows its repair time.\n- The outer edge of the arena fades in when a ship gets close to it and disappears when you are far away.\n- The Race countdown (3, 2, 1, GO!) now has a sound.\n\n### UPDATE 42 - 2026-10-18 - LCD countdown\n\n- The Race countdown (3, 2, 1, GO!) is now drawn like a digital LCD display with straight segments and no rounded corners.\n\n### UPDATE 41 - 2026-10-18 - Sliding along walls\n\n- Ships no longer get stuck on walls. When you hit a wall you now slide along it and slow down. The more the nose points into the wall, the more you slow down, and you can turn away and keep flying.\n- Sparks fly from the ship while it scrapes along a wall.\n- Wall damage now depends on how hard you hit the wall head-on, so scraping along a wall hardly hurts.\n\n### UPDATE 40 - 2026-10-18 - Race maps and countdown\n\n- Race now only lists maps that were saved with Race ticked in the map editor. If there are none, the map row says NO RACE MAPS and START is locked. New maps start as Classic and Galaxy Duel only. Older maps without a finish box lose their Race mark once.\n- The 3, 2, 1, GO! countdown is drawn with sharp vector lines instead of a stretched font.\n\n### UPDATE 39 - 2026-10-18 - Map editor tools\n\n- The map editor tool panel is tidier: smaller text and the tools are split into STATUS, DRAW, PLACE, VIEW and FILE, each in its own colour. The active tool is highlighted and the help line at the bottom follows the tool.\n- Zoom in and out with the mouse wheel (it zooms around the mouse pointer). Hold SPACE and drag with the mouse (or drag with the middle button) to move around when zoomed in. HOME resets the view.\n- Over the finish box the wheel still turns the arrows.\n\n### UPDATE 38 - 2026-10-18 - Race countdown\n\n- Race starts with a big countdown in the middle of the screen: 3, 2, 1, GO! You cannot thrust until GO!, and the race time starts then.\n- Fullscreen: the Windows key no longer makes the game flicker out and back in. Alt+Tab still leaves fullscreen right away.\n\n### UPDATE 37 - 2026-10-18 - Race positions and results\n\n- Race position: the panel shows POS x / N. It depends on finished ships, laps, who crossed the finish box first and the start order.\n- Pickups now depend on your position: the leader only gets a plasma shot, the middle gets plasma or a missile, and last place gets a guided missile or drift fuel.\n- Ships that have finished fly on as ghosts: they cannot shoot, collide or be hit.\n- When only one racer is left, it has 4 seconds to finish (ELIMINATED IN 4, 3, 2, 1) or its ship explodes.\n- Race result screen with the winner, places and times, and PRESS TO ENTER NEXT RACE. The winner gets a round win.\n\n### UPDATE 36 - 2026-10-18 - Race pickups\n\n- Race pickups: round orange balls on the course. Fly into one to get a single plasma shot, a missile, a guided missile or a full drift fuel meter. The weapon is selected for you. The ball comes back after 5 seconds.\n- Map editor: new tool O places, moves and (with X) removes pickup points, up to 16 per map.\n- For now the pickup you get is random. Soon it will depend on your race position.\n\n### UPDATE 35 - 2026-10-18 - Race weapons\n\n- In Race everyone starts with no ammo and no drift. The cannon uses one ammo per shot, and drift fuel does not recharge on its own.\n- Weapons no longer damage or kill in Race. A hit makes the ship 80% slower for 3 seconds (a new hit restarts the time). The player panel shows the slow time as SL.\n- Pickups that give ammo and drift are still to come.\n\n### UPDATE 34 - 2026-10-18 - Race (first part)\n\n- New game mode: RACE. Pick laps, map, rounds and powerups (off by default) in the menu. The player panel shows your lap and the top bar shows the race time.\n- Map editor: new tool F draws a start/finish box. The box has arrows for the racing direction (turn them with the mouse wheel), and ships fly straight through it. Cross it in the arrow direction to finish a lap. Race maps without a finish box show a warning.\n- Hitting a wall no longer damages your ship in Race.\n- Race is not finished yet: no pickups or weapon rules and no race results screen.\n\n### UPDATE 33 - 2026-10-18 - Drifting fuel\n\n- Drifting now uses fuel. A full meter gives 8 seconds of drift. Fuel is only used while you drift, and what is left is kept for later.\n- When the meter is empty it recharges in exactly 6 seconds, and you cannot drift until it is full.\n- The player panel shows the meter as AB (blue, red while recharging) instead of RF LOCKED.\n- The length can be changed in the hidden Powerup Editor (P in Options) under DRIFT: DRIFTING FUEL.\n\n### UPDATE 32 - 2026-10-18 - Galaxy Duel\n\n- Astro Duel is now called GALAXY DUEL.\n- A hit no longer kills right away. The first hit damages your ship for 4 seconds: it is 60% slower and you cannot use any weapons, only steer and thrust. Sparks fly from the ship and little pieces fall off, and the ship flashes in three theme colours. After 4 seconds it is repaired and works like new.\n- If you are hit while damaged, your ship explodes.\n\n### UPDATE 31 - 2026-10-16 - Alt-tab in fullscreen\n\n- Another fix for the window disappearing when you alt-tab out of FULLSCREEN: the game now leaves fullscreen as soon as you press Alt+Tab or the Windows key, and returns when you come back.\n\n### UPDATE 30 - 2026-10-16 - Title screen credits\n\n- The title screen has a credits line at the bottom: Bratwurst (1995) originally fried by Three Little Elks (3LE) and Reheated (2026) by Thermoptic.\n- The ESC = QUIT text is gone from the title screen.\n\n### UPDATE 29 - 2026-10-15 - Pause menu music\n\n- The pause menu now lets you change song with LB / RB.\n- The pause menu only shows gamepad controls (the keyboard list is gone).\n- Options: WINDOW is renamed SCREEN MODE.\n\n### UPDATE 28 - 2026-10-15 - Cleaner options\n\n- Options: WIDE PLAYFIELD is gone (the playfield is always wide). SCANLINES and PHOSPHOR GLOW are now one switch: SCANLINES AND GLOW.\n- The MUSIC on/off row is gone. VOLUME now goes down to 0%, shown as OFF, which turns the music off.\n- The DATA box in the main menu shows the description right at the top, without the INFO heading.\n\n### UPDATE 27 - 2026-10-15 - Asteroids, zoom and polish\n\n- New game mode: ASTEROIDS. Waves of rocks fly in from the edges; shoot them and they split into smaller, faster ones. Options has a LEVEL setting (1 to 5, default 3) where every level doubles everything.\n- New option ZOOM (1 to 10): 1 is the normal camera, 10 shows twice as much of the arena. It changes smoothly and works in every game mode.\n- A seventh song: Juke to Jupiter. The music fades in when the game starts.\n- The music player buttons are lined up (plus and minus in line with play/pause, MUTE under next). Panels get corner brackets.\n- Title screen says PRESS START TO TURN UP THE HEAT.\n- Alt-tab from fullscreen no longer makes the window disappear.\n- Your own shots no longer hit you when you fire straight ahead at full speed.\n\n### UPDATE 26 - 2026-10-14 - Smaller music files\n\n- The five songs are re-encoded at a slightly lower quality, so the game is about 4 MB smaller (the music is about 15 MB instead of 19 MB). Length and the equalizer are unchanged.\n\n### UPDATE 25 - 2026-10-14 - Music player in the main menu\n\n- The right side of the main menu is now two boxes: DATA on top and a MUSIC player below it. The player has the spectrum, the song name and number, a timeline with elapsed and remaining time, previous / play-pause / next buttons, shuffle, repeat, volume (minus, LED bar, plus), a MUTE button and the next track at the bottom.\n- Everything in the player can be clicked with the mouse; click the timeline to seek. LB / RB change song, Y (or M on the keyboard) plays and pauses.\n- Songs no longer loop forever: when a song ends the next one starts (shuffle picks a random one, repeat plays the same). The title song still loops on the title screen.\n- The Palette and Files boxes are gone to make room.\n\n### UPDATE 24 - 2026-10-14 - Navigation dots, safer shots\n\n- Navigation dots: a fixed grid of coloured pixels, 100 pixels apart, covers the whole arena so you can tell where you are and how fast you move when nothing else is in view. They only show when the camera is zoomed in and fade out completely when it zooms out.\n- Shots and missiles now get the forward speed of your ship on top of their own speed (in the direction you fire), so a fast ship at full speed can no longer fly into its own shots. They still go exactly where the nose points.\n- Solid colors: the fill now covers the whole hull, with no thin edge next to the outline.\n\n### UPDATE 23 - 2026-10-14 - Solid colors, side thruster, B to go back\n\n- New option SOLID COLORS (Options, OFF by default): fills all solid walls and the ships with their colour.\n- Drift: new SIDE THRUSTER setting (secret Powerup Editor, DRIFT page). While you drift, thrust and turn, a side thruster pushes the ship out of the curve (turn right = pushed left, turn left = pushed right), like a rally car sliding through a corner.\n- B on the gamepad goes back one step on the ship select screen (and back to the menu from the first row).\n- Fixed a crash when the camera zoomed after a ship was destroyed.\n\n### UPDATE 22 - 2026-10-14 - New icon, Dracula theme\n\n- The game has a new icon: the BW logo with the equalizer ring.\n- Dracula is now the default theme. A theme you pick is still saved and used next time.\n- The debug text in the top left of the play area is hidden by default. Press F1 to show it.\n\n### UPDATE 21 - 2026-10-14 - Options in the pause menu, drift settings\n\n- The pause menu has a new OPTIONS entry. It opens the normal options menu on top of the match, so you can change theme, volume and so on while you play. Esc goes back to the pause menu.\n- The secret Powerup Editor (Options, press P) has a new DRIFT page with every setting for drifting and reversing: start speed, turn boost, slide angle, drift thrust, reverse thrust, trail length, engine sound and trail width.\n\n### UPDATE 20 - 2026-10-14 - Smooth camera zoom\n\n- When a player dies (or comes back after respawning) the camera no longer jumps straight to the players that are left. It zooms and moves smoothly, in about a second.\n\n### UPDATE 19 - 2026-10-14 - Railgun\n\n- New powerup: RAILGUN. Pick it up and hold the powerup button (B) for 4 seconds. A glowing ball grows in front of the ship and turns white when it is charged. Let go to fire: a beam in your colour shoots through the whole map, over every wall and object, reaches the other side in half a second, stays for 2 seconds and fades out in 1. It kills a ship in one hit.\n- Sounds: a wobbling charge-up sound that grows stronger and higher while you charge, a ready sound when the Railgun is charged, and a powerful sci-fi laser sound when it fires. Hold the button for 3 seconds after it is charged and it fires by itself. Let go too early and nothing is fired.\n- The Powerup Editor has a Railgun page with charge time, beam speed, hold and fade time, beam width, damage, camera shake and ball size.\n- The title song now keeps playing when you go from the title screen to the main menu.\n\n### UPDATE 18 - 2026-10-14 - Powerups: Mini Nuke\n\n- New powerup system. A rotating, colour-cycling orb with an icon appears on the map 5 seconds after a round starts, on a random spot away from walls and objects. Fly into it to pick up the powerup. A new one appears 10 seconds after one is picked up.\n- First powerup: MINI NUKE. Press B on the gamepad to fire it: a big glowing projectile that explodes with a growing shockwave, a cloud of pixel particles and a camera shake.\n- Game modes: new POWERUPS ON/OFF setting for Classic and Astro Duel (default ON).\n- Secret Powerup Editor: open Options and press P. Set projectile size, speed, shockwave radius, particles, damage and camera shake for every powerup.\n- Music: the title song (3LE - Das Bratwurst, DnB edit) now plays on the title screen only. Menus and matches play the other songs.\n- Gamepad: Y fires the special weapon, B fires the powerup, Back switches special weapon. The button that cycled the number of players is gone.\n- New pause menu with match stats and a list of all controls.\n\n### UPDATE 17 - 2026-10-14 - Sausage, drift sound, round win text\n\n- A wireframe sausage (for the future Capture the Bratwurst mode) now drifts and rotates in the background of the title screen and menu together with the ships. The model is drawn as an SVG that you can edit yourself (assets/models).\n- Drift has its own sound: a looping spaceship engine that plays as long as you drift.\n- When a round is won the screen says WELL HOT DOG, WE HAVE A WEINER! with the winning player underneath.\n- New LIFE setting for Classic (1 to 6 lives, 6 is the default and the maximum).\n- The outer line of the arena frame is gone on all maps (your own maps are updated automatically, with a backup).\n- Ship select: PRESS FIRE TO JOIN blinks on every open slot.\n\n### UPDATE 16 - 2026-10-14 - New pause menu, new gamepad layout\n\n- New pause menu: a compact PAUSED box in the middle, a MATCH STATS box on the left (mode, round, map, song, time, players, leader, and for every player the ship, wins, lives and energy) and a CONTROLS box on the right that lists what every button does.\n- Gamepad: Special weapon is now on Y, Next special weapon on Back. The \"cycle number of players\" button is gone (join players on the ship select screen or choose Players in the menu).\n\n### UPDATE 15 - 2026-10-14 - Glowing missiles, shots go where you aim\n\n- All missiles are now a glowing ball with a solid core that pulses and flickers, with small pixel particles flying out behind it.\n- Shots and missiles always fire exactly in the direction the ship is pointing, even when you drift or slide sideways at full speed. They no longer inherit the speed of your ship.\n\n### UPDATE 14 - 2026-10-14 - Drift light trails\n\n- Drifting now leaves light trails behind the ship in the colour of the ship: two trails for wide ships, one for narrow ones. The trails grow out as you start to drift, follow the path you move along and fade out towards the tail. When you stop drifting the whole trail fades away.\n- A glowing ball sits where each trail starts, to show that the engine is working: a solid core with a soft glow that pulses and flickers.\n- Drift slides more to the side and has stronger thrust. The trails are thinner and half as long, and the trail keeps hanging on the ship while it fades out when you let go of the drift button.\n\n### UPDATE 13 - 2026-10-14 - Pause menu, drift and reverse\n\n- Pause menu: press Esc or Start during a match for Resume Game and Quit to Menu. The game stands still while it is open.\n- Drifting (new, experimental): hold the left trigger while you thrust to slide sideways. Faster turning, thrust pushed outwards from the turn, sparks behind the ship. It only works while you thrust and move. Special weapon switch moved from the left trigger to Y.\n- Reverse: press only the left trigger (no thrust) to back the ship up very slowly, for example out of a wall.\n- Missile explosions are 30 percent bigger when the missile hits a wall or a player.\n- Ship select: every open slot shows a smaller, centred PRESS FIRE TO JOIN, also slot 4.\n- Music: five Thermoptic tracks added to the playlist, music plays during matches (a new random song every round, shown in the top bar), and a Volume setting in Options (10 to 100 percent, default 70).\n\n### UPDATE 12 - 2026-10-14 - Music playlist, camera lock\n\n- The main menu shows NOW PLAYING with the name of the current song under the spectrum. Press LB / RB on a gamepad (or PageUp / PageDown) on the title screen, in the menu or on ship select to switch song.\n- Six songs in the playlist: 3LE - Das Bratwurst (DnB edit, played on the title screen only) and five Thermoptic tracks (No Safe Orbit, Sectorwurst, We Were Never Organic - Disco Edit, Nothing Good Beyond Neptune, The Final Frankfurter). The spectrum follows each song, and long titles scroll.\n- Music now plays during matches too: a random song starts every round and its name is shown in the top bar. New Volume setting in Options (10 to 100 percent, default 70).\n- When only one player is left the camera stays where it is instead of zooming in on the winner.\n- The map name is part of the header line during a match.\n\n### UPDATE 11 - 2026-10-14 - Ship select redesign, respawn countdown, bigger explosions\n\n- New ship select screen: every player pane is divided into a step strip, a numbered row list, weapon chips, a framed rotating ship with radar rings, and stat bars (speed, energy, turn, ammo, rate). Up/Down changes the row, Left/Right changes the value.\n- Respawn: after losing a life the ship waits 3 seconds. The player panel shows 3, 2, 1 and then the ship spawns as usual.\n- Missile explosions are twice as big, with a large cloud of pixel particles. The expanding ring now hurts ships it reaches: 3 energy, once per explosion (Classic).\n- Sparks when ships crash into each other and when shots hit walls. Ramming a ship now pushes and slightly twists it depending on speed and where you hit, and ships that overlap are pushed apart so they cannot get stuck.\n- Map editor: Load Map window (L) with a table of which game modes each map is made for.\n- The main menu shows a picture of the selected map on the MAP row. The map name is shown in the header while you play.\n\n### UPDATE 10 - 2026-10-14 - Maps per game mode, menu spectrum\n\n- Map editor save window: type a name (or press Generate name for a random star-and-sausage name) and tick the game modes where the map should be available.\n- The map list in each game mode only shows the maps made for that mode. Classic and Astro Duel now have their own map choice.\n- Rotate a start position in the map editor with the mouse wheel.\n- The main menu has the same background as the title screen: grid, twinkling stars and drifting ships.\n- New spectrum visualizer in the menu: 32 bars, falling peaks, a mirror image, an oscilloscope line and a short history strip. It follows the music and uses the colours of the selected theme.\n- After the last opponent is destroyed there are 4 more seconds of play before the round result appears.\n\n### UPDATE 9 - 2026-10-13 - New title screen, no gravity\n\n- New title screen: a centred line logo, a circular equalizer ring around it that dances to the music, pulsing planets, twinkling stars and the drifting ships in the background.\n- Ships no longer sink when you let go of the controls. A ship you are not steering stands completely still.\n\n### UPDATE 8 - 2026-10-13 - Astro Duel\n\n- New game mode: ASTRO DUEL. Every hit costs a life (default 1 life, so one hit kills). Choose 1-9 lives.\n- No damage from crashing into walls.\n- Only 3 shots, then a 4 second reload. Fire them as fast or as slow as you like.\n- Bigger projectiles (30 percent) that are easier to hit with.\n- Only Missile (twice as fast) and Turbo Boost, for every ship.\n\n### UPDATE 7 - 2026-10-13 - Explosions and sparks\n\n- Ships explode when they lose a life: pixel particles in all directions plus five pieces of the hull that spin away and fade out.\n- Sparks fly when a ship is hit and when it crashes into a wall. The harder the crash, the more sparks.\n- Fixed shots and missiles that could fly straight through thin walls.\n\n### UPDATE 6 - 2026-10-13 - Music and sound\n\n- The seven sound effects from the Amiga original are in the game: cannon, missile, guided missile, explosion, wall crash, ship against ship and cannon hit.\n- Title music and a live equalizer on the title screen and in the menu.\n- Options: music and sound effects can be switched on and off.\n\n### UPDATE 5 - 2026-10-13 - Rounds and game modes\n\n- Rounds: play several rounds in a match (default 3). The last ship flying wins a round.\n- Results screen after the last round with rematch or main menu. A rematch lets you pick new ships.\n- Game Modes menu with Classic and Astro Duel. Astro Duel is playable, Race and Capture the Bratwurst are on the way.\n\n### UPDATE 4 - 2026-10-13 - Maps and map editor\n\n- Three maps: the original arena (Sirius Bratwurst) and two remixes (Kepler Chorizo, Proxima Merguez). Pick the map in the menu.\n- Map editor: draw solid walls and boxes with the mouse, place start positions and save your own maps. New maps get a random name (a star or planet plus a sausage).\n- Every wall object has its own colour from the colour theme.\n\n### UPDATE 3 - 2026-10-13 - Ships and weapons\n\n- Ships can collide with each other and knock each other away. A boosting ship hits much harder.\n- Every player has a unique colour from the theme, on the ship and on the player panel.\n- Switch special weapon and weapon position during a match, with the left trigger (weapon) and left bumper (weapon position).\n- Player panels along the bottom of the screen show energy, ammo, lives, special weapon and the weapon position.\n\n### UPDATE 2 - 2026-10-13 - Terminal look\n\n- New menus in a terminal style: title screen, main menu, ship select and the match screen.\n- 30 dark colour themes (Base16) and a choice of accent colour. Settings are saved in files next to the game.\n- Sharp text at every resolution, a wide playfield option, scanlines and glow.\n- Players can join on the ship select screen, up to four.\n\n*The rest of this readme is on GitHub.*",
+      "readmeEdited": false,
       "stats": {
         "stars": 0,
         "forks": 0,
@@ -142,7 +218,60 @@
           "Java": 8555,
           "NSIS": 5527
         },
-        "weeks": [],
+        "weeks": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          21,
+          3,
+          6,
+          0,
+          0,
+          0
+        ],
         "punch": [
           [
             0,
@@ -325,7 +454,7 @@
             "url": "https://github.com/Thermoptic"
           }
         ],
-        "syncedAt": "2026-11-15T18:31:08Z"
+        "syncedAt": "2026-11-24T10:06:44.988Z"
       }
     },
     {
@@ -350,6 +479,7 @@
       "links": [],
       "itchId": "",
       "readme": "<div align=\"center\">\n    \n# 📻 Mousiki Plus v4.6.0 - Music, Radio and Audio Book Player 🎵 \n(Windows · Linux · macOS)  \n\n<p align=\"center\">\n  <a href=\"https://opensource.org/\" target=\"_blank\">\n    <img src=\"https://i0.wp.com/opensource.org/wp-content/uploads/2023/03/cropped-OSI-horizontal-large.png?fit=640%2C229&quality=80&ssl=1\" alt=\"OSI\" height=\"52\" /></a>\n&nbsp;\n  <a href=\"https://www.apache.org/\" target=\"_blank\">\n    <img src=\"https://www.apache.org/images/oakleaf.svg\" alt=\"Apache\" height=\"52\" /></a>\n</p>\n\n\n> [!NOTE]\n> **Developer note:** Mousiki is released under the Apache License 2.0.\n> You are free to use, modify, fork, re-distribute, and sell the software,\n> subject to the terms of the license.\n\n[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)\n[![Language](https://img.shields.io/badge/Language-C++17-orange.svg)](https://github.com/StSchwerdtfeger/mousiki-plus/tree/main)\n[![Windows](https://img.shields.io/badge/Windows-x64-0078D4.svg?logo=windows&logoColor=white)](https://github.com/StSchwerdtfeger/mousiki-plus/tree/main) [![Linux](https://img.shields.io/badge/Linux-x64-FCC624.svg?logo=linux&logoColor=black)](https://github.com/StSchwerdtfeger/mousiki-plus/tree/main) [![macOS](https://img.shields.io/badge/macOS-x64-000000.svg?logo=apple&logoColor=white)](https://github.com/StSchwerdtfeger/mousiki-plus/tree/main)\n</div>\n\n<!-- PLUSONE-CHANGELOG-START (mirrors plusone_changelog.txt) -->\n<h2 align=\"center\">🚀 Mousiki PlusOne — what's new</h2>\n\n<p align=\"center\">\n  <i>Changes made on top of Mousiki Plus in this fork, newest first.<br>\n  The same list ships as <a href=\"plusone_changelog.txt\"><code>plusone_changelog.txt</code></a>.</i>\n</p>\n\n<h3>📅 2026-10-25</h3>\n\n<details open>\n<summary><b>⌨️ Keys: playback</b></summary>\n<br>\n\nNew default keys (Settings → REFERENCE → Playback). All of them can be rebound as before.\n\n<table>\n  <tr><th align=\"left\">Action</th><th align=\"left\">New key</th><th align=\"left\">Was</th></tr>\n  <tr><td>Toggle Play / Pause</td><td><kbd>SPACE</kbd></td><td><kbd>p</kbd></td></tr>\n  <tr><td>Volume Up</td><td><kbd>Shift</kbd> + <kbd>↑</kbd></td><td><kbd>+</kbd></td></tr>\n  <tr><td>Volume Down</td><td><kbd>Shift</kbd> + <kbd>↓</kbd></td><td><kbd>-</kbd></td></tr>\n  <tr><td>Next Track</td><td><kbd>Shift</kbd> + <kbd>→</kbd></td><td><kbd>n</kbd></td></tr>\n  <tr><td>Prev Track</td><td><kbd>Shift</kbd> + <kbd>←</kbd></td><td><kbd>b</kbd></td></tr>\n</table>\n\n<ul>\n  <li>Shift + arrow combinations can now be bound: press the combination in a key field, or type e.g. <code>SHIFT+UP</code>.</li>\n  <li>Where a shifted arrow is not bound it still acts as the plain arrow. The big list and queue overlays keep <kbd>Shift</kbd> + <kbd>↑</kbd>/<kbd>↓</kbd> for paging.</li>\n  <li><b>Radio Player:</b> <kbd>Shift</kbd> + <kbd>↑</kbd>/<kbd>↓</kbd> changes the volume and <kbd>Shift</kbd> + <kbd>→</kbd>/<kbd>←</kbd> tunes the next / previous channel. The preset banks moved to <kbd>Alt</kbd> + <kbd>←</kbd>/<kbd>→</kbd>.</li>\n</ul>\n</details>\n\n<details open>\n<summary><b>🧭 Keys: navigation</b></summary>\n<br>\n\nNew keys under Settings → REFERENCE → Navigation &amp; View (also in the cheat sheet):\n\n<table>\n  <tr><th align=\"left\">Action</th><th align=\"left\">Key</th><th align=\"left\">What it does</th></tr>\n  <tr><td>Fast Navigate Up</td><td><kbd>PgUp</kbd></td><td>jump 10 rows up</td></tr>\n  <tr><td>Fast Navigate Down</td><td><kbd>PgDn</kbd></td><td>jump 10 rows down</td></tr>\n  <tr><td>Navigate Top</td><td><kbd>Home</kbd></td><td>jump to the first row</td></tr>\n  <tr><td>Navigate Bottom</td><td><kbd>End</kbd></td><td>jump to the last row</td></tr>\n</table>\n\n<ul>\n  <li>They work in the track list and in the queue, can be rebound, and are stored in <code>config.txt</code> (<code>HKeyNavigateFastUp</code>, <code>HKeyNavigateFastDown</code>, <code>HKeyNavigateTop</code>, <code>HKeyNavigateBottom</code>).</li>\n  <li><kbd>ESC</kbd> twice in a row (within 0.8 s) in the main view quits the program. The first <kbd>ESC</kbd> still goes back to the home view.</li>\n</ul>\n</details>\n\n<details open>\n<summary><b>🔀 Play mode box</b></summary>\n<br>\n\n<ul>\n  <li>The box next to the search bar now shows the play mode as a word: <code>LIST</code>, <code>REPEAT</code>, <code>SHUFFLE</code>, <code>STOP</code> or <code>QUEUE</code> (queue then stop). <kbd>M</kbd> still steps through the modes.</li>\n  <li>The mode is saved at once and is back the next time Mousiki starts.</li>\n  <li>The <b>sort mode</b> chosen with <kbd>Shift</kbd> + <kbd>T</kbd> is remembered: it stays when you change folder, filter or search, and is back the next time Mousiki starts.</li>\n  <li><b>Next Track follows the play mode:</b> with <code>SHUFFLE</code> on it jumps to a random track. The queue still plays in order.</li>\n</ul>\n</details>\n\n<details open>\n<summary><b>📁 Folders pane (Music Player)</b></summary>\n<br>\n\n<kbd>F6</kbd> swaps the QUEUE pane for a FOLDERS pane, <kbd>F7</kbd> brings the queue back. The last choice is remembered (<code>plusone_state.txt</code> next to <code>config.txt</code>).\n\nThe FOLDERS pane is a small file explorer over the local music paths (Settings → PATHS → Local Path):\n\n<ul>\n  <li>Only folders with music files in them or below them are listed, with the number of files in each.</li>\n  <li>At the top level an <b>All</b> row comes first. It is not a folder: <kbd>ENTER</kbd> on it lists every track of all the paths. It is only there at the top.</li>\n  <li><kbd>ENTER</kbd> on a folder lists the music files lying directly in it in the LOCAL AUDIO FILES pane. If the folder holds more folders, the pane goes into it and shows those (a <code>&gt;</code> marks such a folder).</li>\n  <li><kbd>BACKSPACE</kbd> goes one step back; at the top level the paths themselves are shown.</li>\n  <li><kbd>TAB</kbd> moves the keys between the track list and the FOLDERS pane. Up, Down, <kbd>PgUp</kbd>, <kbd>PgDn</kbd>, <kbd>Home</kbd> and <kbd>End</kbd> work as in the lists.</li>\n</ul>\n</details>\n\n<details open>\n<summary><b>🖥️ Modes and screens</b></summary>\n<br>\n\n<ul>\n  <li><kbd>F1</kbd> / <kbd>F2</kbd> / <kbd>F3</kbd> jump straight to the Music Player / Radio Player / Audio Book Player. A mode that is switched off under Settings → ON/OFF → MODES is skipped with a short note.</li>\n  <li><kbd>F4</kbd> opens the help wizard, <kbd>F5</kbd> opens the settings.</li>\n  <li>A <b>key legend</b> now fills the bottom row, in the colours of the player, with the current mode highlighted:<br>\n      <code>F1 music · F2 radio · F3 books · F4 wizard · F5 settings · F6 folders · F7 queue · ESC quit</code><br>\n      It is shown in all three players. <kbd>F6</kbd> / <kbd>F7</kbd> only exist in the Music Player.</li>\n  <li><b>Hold <kbd>F12</kbd></b> (<code>F12 controls</code> in the right corner) and the legend shows the playback keys while the key is down:<br>\n      <code>SPACE play · S← prev track · S→ next track · S↑ volume up · S↓ volume down · M mode · S+T sort · F11 fullscreen</code><br>\n      Their key boxes use another theme colour than the usual ones, and the F12 box itself a third one, so it is clear that other keys are showing. Let go and the normal legend is back. (Windows only; it is a hint about the default keys.)</li>\n  <li>Started with <code>mousiki.cmd</code> or <code>lala.cmd</code> (not <code>mousiki-wt.cmd</code>) the legend names these keys after <kbd>F12</kbd> (<code>F12↑</code>, <code>F12←</code> ...) so they are unique.</li>\n  <li><b><kbd>F12</kbd> also works as <kbd>Shift</kbd>:</b> hold <kbd>F12</kbd> and press <kbd>↑</kbd>/<kbd>↓</kbd> for volume, <kbd>←</kbd>/<kbd>→</kbd> for previous / next track, <kbd>T</kbd> for sort, and so on.</li>\n</ul>\n</details>\n\n<details open>\n<summary><b>🪟 Window and launchers</b></summary>\n<br>\n\n<ul>\n  <li>Portable folder <code>Mousiki-Plus</code> with the three launchers <code>mousiki.cmd</code>, <code>mousiki-wt.cmd</code> and <code>lala.cmd</code>. <code>mousiki-wt.cmd</code> opens Windows Terminal in a roughly square window (100 × 48 characters by default).</li>\n  <li><b>The window size is remembered.</b> When Mousiki quits it saves the size to <code>window_size.txt</code> next to the launchers, and <code>mousiki-wt.cmd</code> opens the next window in that size.</li>\n  <li><b>Maximized and full screen are remembered too</b> (<code>window_state.txt</code>). The normal size from before is kept, so leaving maximized brings it back.</li>\n  <li>Closing the window with the X button does not save the size; quit with the keys.</li>\n  <li><b>Old console window:</b> <code>mousiki.cmd</code> / <code>lala.cmd</code> in <code>cmd.exe</code> have no font with Braille characters, so the disk and visualizers showed as boxes. Mousiki now notices this and draws block characters instead (coarser, same shapes). Windows Terminal, VS Code and ConEmu keep the Braille look. <code>MOUSIKI_BLOCKS=1</code> / <code>0</code> forces blocks / Braille.</li>\n  <li><b>Alacritty:</b> <code>mousiki-alacritty.cmd</code> starts Mousiki in <a href=\"https://github.com/alacritty/alacritty\">Alacritty</a>, a fast terminal that needs no installation (a portable <code>alacritty.exe</code> v0.17.0 with its licence files sits in the <code>alacritty</code> folder). No scroll bar, real Braille dots, remembers the window size and maximized / full screen, <kbd>F11</kbd> toggles full screen. Needs Windows 10 1809 or later.</li>\n  <li>The program now finds the window of whichever terminal it runs in, so holding <kbd>F12</kbd> and the saved window size also work in Alacritty and other terminals.</li>\n  <li><b>Full width:</b> the screen used to stop at 200 columns and leave an empty strip on the right; it now goes up to 400 columns in all three players.</li>\n</ul>\n</details>\n\n<hr>\n<!-- PLUSONE-CHANGELOG-END -->\n\n\nMousiki is a terminal music player that was originally built for macOS/Linux by the amazing [itzender5820/mousiki, v1.0](https://github.com/itzender5820/mousiki) for people who prefer control, simplicity, and a keyboard (mousi-**key**). This Mousiki fork lets it also run natively on Windows (including quite a bunch of modifications and additions; code grew 6-7x the original length; design maintained for obvious reasons). All credits for the design, main feature set, and the core code goes to the original author. Since v2.5.0 the code base builds natively on **Linux and macOS** again (see [Build it yourself (Linux / macOS)](#build-it-yourself-linux--macos) or use the [setup packages or portable versions for all three platforms in the latest release](https://github.com/StSchwerdtfeger/mousiki-plus/releases/latest)). Windows remains the primary and most tested platform (only tested Linux via WSL and works fine so far, a few bugs were recently fixed; not much tested for macOS and non-WSL Linux systems). Feel free to give feedback in the discussions and report issues you might experience using this modified port. \n\nBuild yourself (see [prerequisites](#prerequisites-windows) below) **or use the installer/portable (x64) version** that is included in every new release (since v2.1.0). A full **[user manual](Mousiki_User_Manual/Mousiki_User_Guide.md)** (also as [PDF](Mousiki_User_Manual/Mousiki_User_Guide.pdf)) walks through every entry of the in-app cheat sheet, every settings tab and every overlay.\n\nThis fork exists because the original targets POSIX (Linux/macOS/Termux) and had no Windows build path at all. The Windows build uses no WSL, no MSYS runtime, no POSIX emulation layer, just a plain `mousiki.exe` built against the Win32 API and WASAPI. All Windows-specific code is guarded by `_WIN32`, so the very same sources also build on Linux (PulseAudio/PipeWire/ALSA) and macOS (CoreAudio) with the included `setup.sh`. Porting the original repository surfaced a long list of platform differences beyond the obvious ones (see [What had to change](Changes_from_the_Original.md#what-had-to-change-for-the-windows-port) in the separate file *Changes from the Original*), plus a small number of pre-existing bugs in the original codebase that had nothing to do with Windows and got fixed along the way.\n\nAlong the Win32 port, **a lot of minor and major additions were made too**. The major ones are a e.g. **radio player mode**, **audio book mode**, **playlist menu** to create playlists from local (or downloaded) tracks, a **meta data editor** including **fetching artist/title via AcoustID/MusicBrainz** (audio fingerprinting done via chromaprint), a **listening history** (incl. the ability to add top tracks to the playback queue), an **XY/YT mode ASCII-Braille / full res. image oscilloscope and Audacity style spectrogram** as an alternative to the lyrics ball and lyrics, a **10 band EQ with 12 presets** and the ability to create and save custom presets, enlarged **list/queue overlays**, **sleep timer**, a **user manual** (.md and .pdf)... Minor changes/additions are e.g. a general key to shuffle to a next title (before only the next title in the list was possible or switching to shuffle mode), stereo audio playback and loudness normalization, adding paths via the settings menu, toggling the lyrics on/off via a hotkey command, an optimized search engine for Windows (searching meta data was very slow and only available 2-3 min. after starting the app), fuzzy search (e.g. \"X-Files\" didn't show up when searching \"X Files\" without the dash), a categorized cheat sheet... As mentioned, the design remained the same for obvious reasons; the design assets added are a Braille-ASCII music cassette, shown when no track is loaded, different volume bar symbols (one version acting like the changing ASCII pattern on the disk) and the default image in the audio book player... See [Changes from the Original](Changes_from_the_Original.md#added-features-beyond-the-port) for a full detailed list of modifications and added features, and [Features at a glance](#features-at-a-glance) below for an overview with screenshots.  \n\nThe latest larger feature additions are the mentioned **[radio player mode](#radio-player)** (online radio with a tuning-dial look, presets, Radio Browser search, recording option and its own listening history) and an **[audio book player mode](#audio-book-player)** (books and chapters, showing cover images, auto-marks, bookmarks, notes you write while you listen, chapter marks and cutting of long files, its own look and settings), both part of the very same program: press `SHIFT` and `+` (the `*` character) to go to the next mode (music player → radio → audio books) and `SHIFT` and `-` to go back; the order and the modes that are on are set in the settings. The radio is closed completely when you leave it, while the player and the audio book player only wait in the background (playback paused), so coming back to them is instant.\n\n- **Original:** [github.com/itzender5820/mousiki](https://github.com/itzender5820/mousiki) — ender ([itzender5820](https://github.com/itzender5820))\n- **License:** Apache 2.0 — see [LICENSE](LICENSE)\n- **Windows port:** Steffen Schwerdtfeger ([StSchwerdtfeger](https://github.com/StSchwerdtfeger)), ported and adjusted with the help of AI tools (at first free chat versions, mostly Sonnet 5.5 set on medium and for some time MiMo V2.6; later also Claude with file and build tools in a sandbox, never on my own computer), then continuously adjusted, extended, tested, and debugged by me. I am not a professional developer of applications like this and I do not fully understand every detail of the original C++ code, but I had a lot of fun thinking my way into it and learned a lot (usually doing more data science / math coding and AI in such an extent makes little sense for me in the context of science). So far it took me around 180h over the last weeks to port it to Windows, design and add new features, test and debug (obsessively and escapistically spent my free time on it and just fell in love with the original design by itzender5820). The code quality seems good so far (from the feedback I got and my own evaluation, as far as I am capable of judging it), but there is surely room to optimize it, and reviews are welcome. So far I mostly smoothed the code to be more readable and similar to each other in general. The code is also scanned by CodeQL and tested via various test workflows, I added dependabot and weekly check on updates on the smaller third_party software that comes directly with Mousiki Plus. See the [Dependencies and security](#dependencies-and-security)chapter further below.  \n\n*In general, a huge shout out for the great work by itzender5820 for this beautiful music player.* <3 It's the best and most fun music player I ever found. Makes me want to listen to music all the time :D \n\n<p align=\"center\"><img width=\"800\" alt=\"preview\" src=\"readme_images/preview.gif\" /></p>\n\n<p align=\"center\"><img width=\"800\" alt=\"preview\" src=\"readme_images/mousiki_xy_mode_osci.gif\" /></p>\n\nMy current setup looks like the last .gif and the below images. The current default config.txt uses the below theme too. It is adjusted to fit my cyber-cat themed **MeowerShell** terminal setup [(see Gihub repository for config files)](https://github.com/StSchwerdtfeger/Meower-Shell), which includes FastFetch, Oh-My-Posh and loads of recommendations for lovers of the terminal, e.g. helpful apps like yazi, fzf fuzzy search ...\n\n<p align=\"center\"><img width=\"850\" height=\"397\" alt=\"grafik\" src=\"readme_images/intro_main_ui.png\" /></p>\n\nThe new main UI of the radio mode looks like the below:\n\n<p align=\"center\"><img width=\"850\" height=\"412\" alt=\"grafik\" src=\"readme_images/intro_radio_ui.png\" /></p>\n\nAnd the audio book mode, the third one, with bookmarks, notes, cutting audio files into chapters...:\n\n<p align=\"center\"><img width=\"850\" alt=\"The main UI of the audio book mode\" src=\"readme_images/audio_book_main_ui.png\" /></p>\n\n\n\n## Table of contents\n\n- [Current Status of the Port and Modification (v4.6.0)](#current-status-of-the-port-and-modification-v460)\n- [Features at a glance](#features-at-a-glance)\n  - [Music player](#music-player)\n  - [Visualizations](#visualizations)\n  - [Lyrics and Karaoke mode](#lyrics-and-karaoke-mode)\n  - [Playlists, meta data, history, conversion](#playlists-meta-data-history-conversion)\n  - [Sound](#sound)\n  - [Radio player](#radio-player)\n  - [Audio book player](#audio-book-player)\n  - [Themes and colours](#themes-and-colours)\n    - [Colour-blind friendly themes](#colour-blind-friendly-themes)\n  - [Help, settings and keys](#help-settings-and-keys)\n  - [Remote control and phone app](#remote-control-and-phone-app)\n- [Quick start](#quick-start)\n  - [Installers and portables for Windows / macOS / Linux](#installers-and-portables-for-windows--macos--linux)\n  - [Build it yourself (Windows)](#build-it-yourself-windows)\n    - [Prerequisites (Windows)](#prerequisites-windows)\n    - [Use Windows Terminal](#use-windows-terminal)\n    - [Where your files go (Windows)](#where-your-files-go-windows)\n  - [Build it yourself (Linux / macOS)](#build-it-yourself-linux--macos)\n    - [Where your files go (Linux/macOS)](#where-your-files-go-linuxmacos)\n- [Verifying downloads](#verifying-downloads)\n- [Dependencies and security](#dependencies-and-security)\n- [Changes compared to the original Mousiki](#changes-compared-to-the-original-mousiki)\n- [Images](#images)\n\n## Current Status of the Port and Modification (v4.6.0)\n\nFor now the Mousiki port works well and also includes everything I at least wanted and made sense to me for a music player, so there might be no further major releases that add new features, except of bug-fixes that might appear to me or others in the future (feel free to start discussions or report issues!!). I might adjust the code to be more polished / robust and might optimize the setup release (Win version results currently in ~250MB size, setup itself ~80MB, portable .zip ~100MB)... Since v2.5.0 my version of Mousiki also builds on macOS/Linux again (`setup.sh`), which is a first step towards making it potentially integratable into the main branch of the original project (which still seems way too hard after dozens of comments in the last two weeks, at least from my perspective). The Linux/macOS builds are less tested than the Windows one, so reports from users on those platforms would help finalize it more. \nConcerning potential new features: the online-radio function is now included (see [radio mode](#radio-player)); a mixtape creator would be cool, but I'll see. Again, feel free to give feedback in the discussions, report issues you might experience using this modified port or contributing in any other way...\n\n## Features at a glance\n\nEverything below is in the current version (v4.6.0) and works the same on Windows, Linux and macOS but was only tested on Windows and WSL. The **[user manual](Mousiki_User_Manual/Mousiki_User_Guide.md)** describes every key and every setting; inside the app `?` opens the cheat sheet, `<` (German keyboard; `SHIFT+,` on an English one) a list of all menus and overlays to choose from, and `SHIFT+w` the help wizard. All pictures of this README are in the folder **[readme_images/](readme_images/)**.\n\n### Music player\n\n<p align=\"center\"><img width=\"850\" alt=\"The main screen of the music player (theme SeriousMeowerShell(Default))\" src=\"readme_images/theme_default.png\" /></p>\n\n- **Local library** from as many folders as you like (MP3, FLAC, WAV, ALAC, M4A, OGG, OPUS, AAC, tracker modules, console and C64 music ...), sorted by folder, title, artist or length, with **fuzzy search** over file names and tags (`/` and the prefixes `/a:` artist, `/r:` ... ).\n- **Online:** search, stream and **download** from YouTube, SoundCloud and Bandcamp (yt-dlp), whole YouTube playlists in one go (bulk add), with a shared download archive.\n- **Queue** with lock, undo and \"save as playlist\", big list / folder / queue overlays, play modes list, repeat, shuffle, stop and queue-then-stop, and a shuffle-next key.\n- **Meta data panel** with the spinning braille disk, waveform progress bar, spectrum bars and the dummy buttons of the original design.\n- **Album covers** in the disk's place (Settings → ON/OFF → *Album Cover*, off by default): the picture inside the audio file or a picture in its folder whose name is close to the track's title or album (a fuzzy match, so one folder can hold the covers of several albums), shown as a real image in Kitty / Sixel terminals (braille dots otherwise): just the cover, the cover under the disk's moving gradient, or the grey cover in full resolution **behind the turning disk**, whose braille dots become pinholes the cover shines through (also with the dots themselves turning, or with the disk's full animation, the dots that come and go); the phone remote shows the cover too. Folder pictures can be jpg, png, webp, bmp, gif, tiff, avif, heic, jxl and more. *Cover Contrast* adds contrast to the picture, *Cover Search* sets where to look first (file or folder, or only one of them; any picture in the folder is the last resort).\n\n| |\n|:---:|\n| <img width=\"600\" alt=\"Album cover, Just Cover\" src=\"readme_images/cover.png\" /><br>**Just Cover** |\n| <img width=\"600\" alt=\"Album cover, Cover with Gradient\" src=\"readme_images/cover_gradient.png\" /><br>**Cover with Gradient** |\n| <img width=\"600\" alt=\"Album cover, Cover behind Disk\" src=\"readme_images/cover_behind_disk.png\" /><br>**Cover behind Disk** |\n\n### Visualizations\n\n<p align=\"center\"><img width=\"850\" alt=\"Oscilloscope music in XY mode in the visualization field (theme Vaporwave)\" src=\"readme_images/theme_vaporwave.png\" /></p>\n<p align=\"center\"><img width=\"850\" alt=\"The big oscilloscope overlay: YT and XY at once (theme Dracula)\" src=\"readme_images/theme_dracula.png\" /></p>\n<p align=\"center\"><img width=\"850\" alt=\"The oscilloscope in image mode (Kitty / Sixel terminals): YT and XY with oscilloscope music (theme Outrun)\" src=\"readme_images/osci_image.png\" /></p>\n\n- **Oscilloscope** in braille or as a real picture (Kitty / Sixel terminals): XY, YT and both together, a CRT beam with afterglow for **oscilloscope music**, grid, metrics and many tuning rows (`SHIFT+o`); full screen (`=`) and its own window (`)`).\n- **Creator** (`^`): turns a text into sound – **oscilloscope music** that draws the text on the XY scope, or a **spectrogram sound** that plays it as notes of a musical scale (so it always sounds pleasant) – saved as a WAV, played in a looping full-screen preview, and listed under *Created files* to open again. The folder with creations is excluded from the library scan, since at the oscilloscope version don't sound pleasent :D A second mode shows your **microphone live** (spectrogram or oscilloscope XY / YT, grid optional) and records it with `ENTER`.\n- **Spectrogram** in the field, over the whole screen (`SHIFT+u`) and in its own window (`(`), with its own options (`SHIFT+i`).\n- **Lyric sphere** and **spectrum bars**; the visualization field cycles with `.`.\n\n<p align=\"center\"><img width=\"850\" alt=\"The spectrogram in the visualization field (theme Lavender Haze)\" src=\"readme_images/theme_lavender_haze.png\" /></p>\n<p align=\"center\"><img width=\"850\" alt=\"The spectrogram in image mode in the visualization field, both channels\" src=\"readme_images/spectrogram_inapp.png\" /></p>\n<p align=\"center\"><img width=\"850\" alt=\"The spectrogram over the whole screen\" src=\"readme_images/spectro_full.png\" /></p>\n<p align=\"center\"><img width=\"850\" alt=\"The spectrogram in image mode over the whole screen, both channels (theme Tokyo Night)\" src=\"readme_images/spectro_image.png\" /></p>\n\n### Lyrics and Karaoke mode\n\n- **Synchronized lyrics** fetched for local and online tracks, word-by-word animations, a timing editor for the offset (`ALT+L`), several versions kept per song.\n\n<p align=\"center\"><img width=\"850\" alt=\"Synchronized lyrics on the main screen\" src=\"readme_images/lyrics_main_ui.png\" /></p>\n\n- **Read lyrics** with **translations** (`CTRL+L`) and a full-screen **karaoke mode** with big braille letters (also Japanese, Chinese and Korean).\n\n- **Karaoke mode** open via `k`.\n  \n<p align=\"center\"><img width=\"850\" alt=\"Karaoke mode\" src=\"readme_images/karaoke_mode.png\" /></p>\n<p align=\"center\"><img width=\"850\" alt=\"Karaoke mode\" src=\"readme_images/changes_19_2.png\" /></p>\n\n### Playlists, meta data, history, conversion\n- **Playlist editor** (`SHIFT+p`): create and edit playlists from local or downloaded tracks (library sortable with `SHIFT+t`, `/f:` searches folders), import and export M3U / M3U8.\n\n<p align=\"center\"><img width=\"850\" alt=\"The playlist editor\" src=\"readme_images/changes_09.png\" /></p>\n\n- **Meta data editor** (`SHIFT+m`): edit tags, rename files, and **fetch missing tags by audio fingerprint** (AcoustID / MusicBrainz) for one title or a whole list.\n  \n<p align=\"center\"><img width=\"850\" alt=\"The meta data editor, fetch list\" src=\"readme_images/changes_11.png\" /></p>\n<p align=\"center\"><img width=\"850\" alt=\"Listening history, top tracks\" src=\"readme_images/history_top_tracks.png\" /></p>\n\n- **File conversion** between audio formats.\n- **Listening history** (`SHIFT+h`): history, top tracks, top playlists and listening habits, plus **smart lists** to queue (top 25 of the week, by time of day ...).\n\n### Sound\n\n- **10-band equalizer** with 12 presets and your own presets, **loudness normalization**, stereo / mono, a **sleep timer**.\n\n<p align=\"center\"><img width=\"850\" alt=\"The 10-band equalizer\" src=\"readme_images/equalizer.png\" /></p>\n\n### Radio player\n\nThe radio is part of the same program: `*` (`SHIFT` and `+` on a German keyboard, `SHIFT+8` on an English one) goes to the next mode, `_` (`SHIFT` and `-`) to the previous one.\n\n- An **ON AIR / OFF AIR sign** with a colour wave, a tuning-dial frequency band, its own oscilloscope, spectrogram and equalizer.\n- **Radio Browser** search through tens of thousands of stations, **16 presets** in several preset lists, **station lists**, a big stations overlay.\n- **Timeshift** (pause, jump back, back to live), **recording** (also from the past buffer), its own **listening history**, and finding the current song on YouTube to download it.\n\n<p align=\"center\"><img width=\"850\" alt=\"The radio player, tuned to a station (theme Cyberpunk)\" src=\"readme_images/theme_cyberpunk.png\" /></p>\n\n<p align=\"center\"><img width=\"850\" alt=\"The radio's presets menu\" src=\"readme_images/radio_presets.png\" /></p>\n\n### Audio book player\n\nThe audio book player is the third mode, switched to with the same key as to the other modes (`SHIFT` and `+`; `SHIFT` and `-` goes back). **Settings → ON/OFF → MODES** switches modes off (one always stays on) and changes their order; **Settings → PATHS → AUDIO BOOK PATH** is the folder of your books (shown in every mode). Files/folders placed there wont show up in the music player mode...\n\n*The rest of this readme is on GitHub.*",
+      "readmeEdited": false,
       "stats": {
         "stars": 1,
         "forks": 0,
@@ -375,7 +505,60 @@
           "JavaScript": 1205,
           "C": 372
         },
-        "weeks": [],
+        "weeks": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          36,
+          15,
+          134,
+          157,
+          98,
+          100,
+          107,
+          15,
+          0,
+          0,
+          0,
+          0
+        ],
         "punch": [
           [
             0,
@@ -966,7 +1149,7 @@
             "url": "https://github.com/funstuie-bit"
           }
         ],
-        "syncedAt": "2026-11-15T18:31:11Z"
+        "syncedAt": "2026-11-24T10:06:45.516Z"
       }
     },
     {
@@ -996,6 +1179,7 @@
       ],
       "itchId": "",
       "readme": "# musikcube\n\na cross-platform, terminal-based audio engine, library, player and server written in c++.\n\nmusikcube compiles and runs easily on windows, macos and linux. it also runs well on a raspberry pi with raspbian, and can be setup as a streaming audio server.\n\ncheck out the [installation guide](https://github.com/clangen/musikcube/wiki/installing) to get up and running.\n\nbe sure to also read through a [the user guide](https://github.com/clangen/musikcube/wiki/user-guide), which describes app's navigation paradigm and lists all the default keyboard shortcuts.\n\nif you want to build it from source, [the instructions are here](https://github.com/clangen/musikcube/wiki/building).\n\n# screenshots\n\nit looks something like this on windows:\n\n![windows screenshot](https://raw.githubusercontent.com/clangen/clangen-projects-static/master/musikcube/screenshots/windows.png)\n\nand this on macos:\n\n![osx screenshot](https://raw.githubusercontent.com/clangen/clangen-projects-static/master/musikcube/screenshots/osx.png)\n\nand on linux:\n\n![linux screenshot](https://raw.githubusercontent.com/clangen/clangen-projects-static/master/musikcube/screenshots/linux.png)\n\nhere's a demo (made with asciinema):\n\n[![asciicast](https://asciinema.org/a/129748.png)](https://asciinema.org/a/129748)\n\nwhile the main musikcube app runs in the console, you can also stream audio from (and even remote control) musikcube using the `musikdroid` android app, which can be downloaded in the `releases` section above. it looks like this:\n\n![android screenshot](https://raw.githubusercontent.com/clangen/clangen-projects-static/master/musikcube/screenshots/android.png)\n\n# installation\n\nbinaries are available in the [releases](https://github.com/clangen/musikcube/releases) page.\n\nwhile macos binaries are provided, you can also install via homebrew as follows:\n\n- `brew install musikcube`\n\non freebsd musikcube can be installed as follows:\n\n- `pkg install musikcube`\n\non openbsd musikcube can be installed as follows:\n\n- `pkg_add install musikcube`\n\non windows, you can install via chocolatey:\n\n- `choco install musikcube`\n\nthen run using shell, Win+R dialog or by typing in Start Menu `musikcube` or `mcube`.\n\n# raspberry pi\n\nmusikcube runs well on a raspberry pi, connected to your home stereo. [see here for detailed setup instructions](https://github.com/clangen/musikcube/wiki/raspberry-pi).\n\n# compiling\n\nif you'd like to compile the project yourself, you can check out the [build instructions](https://github.com/clangen/musikcube/wiki/building).\n\n# keyboard shortcuts\n\na list of all keyboard shortcuts can be found in the [user guide](https://github.com/clangen/musikcube/wiki/user-guide)\n\n# streaming server\n\nmusikcube ships with a streaming audio server enabled by default. it runs a websocket server on port 7905, used for metadata retrieval. an http server runs on port 7906, and is used to serve (optionally transcoded) audio data to clients.\n\n**it's important to understand that, out of the box, the server (and remote api) should NOT be considered safe for use outside of a local network**. the websockets service only supports a simple password challenge, and the audio http server just handles Basic authorization. it does not provide ssl or tls. the server also stores the password in plain text in a settings file on the local machine.\n\nyou can fix some of this using a reverse proxy to provide ssl termination. details in the [ssl-server-setup section](https://github.com/clangen/musikcube/wiki/ssl-server-setup). while this improves things, you should exercise caution exposing these services over the internet.\n\nif you're interested in writing your own frontend, [api documentation is available here](https://github.com/clangen/musikcube/wiki/remote-api-documentation).\n\n# sdk\n\nthe musikcube sdk is a set of small, pure-virtual c++ classes and a handful of enums and constants. they're still in the process of being slimmed down. you can see what they currently look like here: https://github.com/clangen/musikcube/tree/master/src/musikcore/sdk\n\n# dependencies\n\nmusikcube would not be possible without the following excellent free, open source, and (in the case of some macos and win32 APIs) non-free projects and libraries:\n\n| core                                                      | decoders                                                        | outputs                                                                                                                                        | metadata                                   | networking                                                                     | miscellaneous                                                      | ui                                                                        |\n|-----------------------------------------------------------|-----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------|---------------------------------------------------------------------------|\n| [sqlite](https://www.sqlite.org/)                         | [ffmpeg](https://ffmpeg.org/)                                   | [alsa](https://www.alsa-project.org)                                                                                                           | [taglib](http://taglib.org/)               | [websocketpp](https://github.com/zaphoyd/websocketpp)                          | [rxjava](https://github.com/ReactiveX/RxJava)                      | [ncurses](https://www.gnu.org/software/ncurses/)                          |\n| [utfcpp](https://github.com/nemtrif/utfcpp)               | [libopenmpt](https://lib.openmpt.org/libopenmpt/)               | [pulseaudio](https://www.freedesktop.org/wiki/Software/PulseAudio/)                                                                            | [glide](https://github.com/bumptech/glide) | [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/)                   | [rxandroid](https://github.com/ReactiveX/RxAndroid)                | [pdcurses (win32a variant)](https://www.projectpluto.com/win32a.htm)      |\n| [nlohmann json](https://github.com/nlohmann/json)         | [libgme](https://bitbucket.org/mpyne/game-music-emu/wiki/Home)  | [core audio](https://developer.apple.com/library/content/documentation/MusicAudio/Conceptual/CoreAudioOverview/Introduction/Introduction.html) |                                            | [libcurl](https://curl.haxx.se/libcurl/)                                       | [stetho](http://facebook.github.io/stetho/)                        | [recycler-fast-scroll](https://github.com/plusCubed/recycler-fast-scroll) |\n| [kissfft](http://kissfft.sourceforge.net/)                | [exoplayer](https://github.com/google/ExoPlayer)                | [wasapi](https://msdn.microsoft.com/en-us/library/windows/desktop/dd371455(v=vs.85).aspx)                                                      |                                            | [openssl](https://www.openssl.org/  )                                          | [fabric](http://fabric.io)                                         |                                                                           |\n| [sigslot](http://sigslot.sourceforge.net/)                |                                                                 | [directsound](https://msdn.microsoft.com/en-us/library/windows/desktop/ee416960(v=vs.85).aspx)                                                 |                                            | [nv-websocket-client](https://github.com/TakahikoKawasaki/nv-websocket-client) | [AndroidVideoCache](https://github.com/danikula/AndroidVideoCache) |                                                                           |\n| [wcwidth.c](http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c) |                                                                 | [waveout](https://msdn.microsoft.com/en-us/library/windows/desktop/dd743876(v=vs.85).aspx)                                                     |                                            | [okhttp](http://square.github.io/okhttp/)                                      |                                                                    |                                                                           |\n|                                                           |                                                                 | [pipewire](https://pipewire.org/)                                                                                                              |                                            |                                                                                |                                                                    |                                                                           |\n\n# license\n\n```\nCopyright (c) 2004-2023 musikcube team\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n * Redistributions of source code must retain the above copyright notice,\n   this list of conditions and the following disclaimer.\n\n * Redistributions in binary form must reproduce the above copyright\n   notice, this list of conditions and the following disclaimer in the\n   documentation and/or other materials provided with the distribution.\n\n * Neither the name of the author nor the names of other contributors may\n   be used to endorse or promote products derived from this software\n   without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE\nLIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\nCONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\nSUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\nINTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\nCONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\nARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\nPOSSIBILITY OF SUCH DAMAGE.\n```",
+      "readmeEdited": false,
       "stats": {
         "stars": 1,
         "forks": 0,
@@ -1037,8 +1221,8 @@
           0,
           0,
           0,
-          0,
           1,
+          0,
           0,
           0,
           0,
@@ -1907,7 +2091,7 @@
             "url": "https://github.com/KTRosenberg"
           }
         ],
-        "syncedAt": "2026-11-15T18:31:14Z"
+        "syncedAt": "2026-11-24T10:06:55.283Z"
       }
     },
     {
@@ -1932,6 +2116,7 @@
       "links": [],
       "itchId": "",
       "readme": "# Wipeout XL / 2097\n\nThis project is a rewrite of Wipeout XL / 2097 inspired by [wipeout-rewrite](https://github.com/phoboslab/wipeout-rewrite). It is based off a decompilation of the PS1 version of Wipeout XL & 2097 and another partial decompilation of the PC release.\n\nThe goal of this project is to keep the original behavior as much as possible while also upgrading the game with more capabilities. Here is a rough list of the changes in this game compared with the original PS1 version:\n- Higher resolutions (HD Mod support, accurate rendering w/out PGXP)\n- Uncapped framerates (physics & game logic still limited to original framerate)\n- Widescreen support\n- Split-screen for one on one mode\n- Loading in Wipeout and Wipeout 64 tracks (this won't be perfect but it works pretty well right now)\n- Higher render distance (configurable if you prefer older style)\n- Custom music\n- Touch controls for mobile and web (WIP)\n- Autosave & converting save files\n- Minor culling & depth buffer fixes\n\nIf you would like to change any of the settings or files for the game press the <kbd>`</kbd> or <kbd>~</kbd> key on your keyboard to toggle the debug UI. It has multiple tabs with many options to configure.\n\n## Getting Started\n\nTo play this game, you will need a copy of Wipeout XL or Wipeout 2097. Store it somewhere on your computer.\n\nIf you are on Windows & macOS, you can download the latest build from the Releases and select your .cue file or archive of your PS1 rom when the app or exe prompts you for your game files. Users on all other platforms will have to [build](#build) the launcher themselves.\n\n## SLOP LINE - Everything below this line is autogenerated\n\nThe PlayStation game (USA, SCUS-94351) running natively on macOS, Linux and\nWindows, and in a web browser. One code base builds all four (the same game, the\nsame platform layer over SDL3 and OpenGL; the web uses WebGL 2). The game is the console's own code: the decompiled C of the retail\nexecutable, compiled for the PC, with the PlayStation libraries replaced by the\nplatform layer (OpenGL drawing at any resolution, the sound chip, the CD drive,\npads and memory cards). It plays like the console, frame for frame: see\n[docs/LOCKSTEP.md](docs/LOCKSTEP.md) for the comparison with recordings of the\nreal game.\n\n## What you need\n\n- Your copy of the PlayStation disc (Wipeout XL USA, or WipEout 2097 Europe):\n  a `.cue` with its `.bin` tracks, a `.bin` without its `.cue`, or an archive\n  of either (`.7z`, `.zip`, `.rar`, `.tar`, `.gz` and the like). The music\n  plays from the disc's audio tracks, the intro and ending movies from its\n  movie files.\n- To build: CMake, Ninja, a C compiler (Clang or GCC), and SDL3 3.2 or later\n  (zlib for the test traces is optional). Where CMake does not find SDL3 it\n  downloads and builds it (`-DWIPEOUT_BUILD_SDL=ON` always does). The same\n  goes for libarchive (`libarchive-dev` on Linux, Homebrew's `libarchive` on\n  macOS; `-DWIPEOUT_BUILD_LIBARCHIVE=ON` always builds it).\n\n## Build\n\nEach build has its own folder under `build/`. macOS (Homebrew's `sdl3`):\n\n```sh\ncmake -S . -B build/mac -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo\nninja -C build/mac\n```\n\nIt also makes `build/mac/Wipeout XL.app`, with the Mac version's icon and the\nHomebrew libraries it uses inside (copy it to `/Applications`).\n\nLinux (for example Debian 13 or Ubuntu 25.04: `libsdl3-dev libgl-dev`): the\nsame two commands with `build/linux`.\n\nWindows, with MSYS2's MinGW-w64 (UCRT64 or CLANG64 shell, packages `cmake`\n`ninja` `gcc` or `clang`): the same two commands with `build/windows`. From\nmacOS or Linux, with the MinGW-w64 cross compiler, use the toolchain file:\n\n```sh\ncmake -S . -B build/windows -G Ninja -DCMAKE_BUILD_TYPE=Release \\\n      -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-w64-x86_64.cmake\nninja -C build/windows\n```\n\n`wipeoutxl.exe` is a single file, with SDL3 and the C runtime linked in and the\nPC version's icon.\n\nThe web, with Emscripten:\n\n```sh\nemcmake cmake -S . -B build/web -G Ninja -DCMAKE_BUILD_TYPE=Release \\\n      -DWIPEOUT_WEB_DISC=\"path/to/Wipeout XL (USA).cue\"\nninja -C build/web\n```\n\nThis makes `wipeoutxl.html`, `wipeoutxl.js` and `wipeoutxl.wasm`, and, as\nwipeout-rewrite's web build has its data beside the page, the disc the page\nloads by itself: `WIPEOUT_WEB_DISC` (your own copy) links the `.cue` and its\n`.bin` tracks into `build/web/disc/` and writes `wipeoutxl-data.json`, which\nnames it. Put `build/web` on any web server with the links followed\n(`cp -RL build/web site`), or try it with `python3 -m http.server` in\n`build/web` and open `http://localhost:8000/wipeoutxl.html`. A host can also\nput a disc there by hand: `disc/Wipeout XL (USA).cue` with its tracks is found\nwithout a `wipeoutxl-data.json`, and the JSON (`{ \"disc\": \"url/of/the.cue\" }`)\ncan point anywhere on the site. With `-DWIPEOUT_WEB_DISC_MUSIC=OFF` only the\ndata track goes into `disc/` (about 86 MB in place of about 700): the game\nplays, without its music.\n\n## Phones and tablets (iOS, Android)\n\nThe same game runs on iPhone, iPad and Android, landscape and full screen (OpenGL ES 3), with touch controls\n(below) and widescreen on from the start. SDL3 and libarchive are downloaded and built into the app.\n\niOS (Xcode; the simulator needs no signing):\n\n```sh\ncmake -S . -B build/ios -G Ninja -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator \\\n      -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_OSX_DEPLOYMENT_TARGET=15.0 -DCMAKE_BUILD_TYPE=RelWithDebInfo\nninja -C build/ios wipeoutxl\ncodesign --force --sign - \"build/ios/Wipeout XL.app\"\nxcrun simctl install booted \"build/ios/Wipeout XL.app\"\n```\n\nFor a device, configure with `-G Xcode -DCMAKE_SYSTEM_NAME=iOS -DWIPEOUT_IOS_TEAM=<your team id>\n-DWIPEOUT_IOS_BUNDLE_ID=<an id of yours>`, open the project in Xcode and run it on the device (the first\nconfigure takes a while: Xcode checks every one of libarchive's tests). Put the disc image (the `.cue` with its\n`.bin` files, or a `.zip`/`.7z` of them) in the Files app, On My iPhone (or iPad) > Wipeout XL; the game finds\nit there, or says where to put it.\n\nAndroid (the Android SDK with NDK 28 and Gradle 8 with JDK 17 or 21; `platform/android`):\n\n```sh\ncd platform/android\ngradle assembleDebug        # app/build/outputs/apk/debug/app-debug.apk\nadb install -r app/build/outputs/apk/debug/app-debug.apk\n```\n\nAt the first start the game looks for the disc image in its folder on the device's storage\n(`Android/data/com.example.wipeoutxl/files`, reached from a computer over USB, or `adb push`); without one\nit asks, and \"Choose files...\" picks the `.cue` with its `.bin` files (or a `.zip`/`.7z`) with the system's\npicker and copies them in. On both, the debug console (the button at the top left) changes the disc later; the\nnew one is used from the next start. The two-player link modes need a second program, which a phone cannot\nstart: they find no partner, as on the web.\n\n## Debug console\n\nThe ~ key (below Esc) opens a console over the whole game window: frame rates and a\nframe-rate overlay, the draw distance (the console's or the whole track) and\nits fade, the frame rate, widescreen, the resolution, HD textures, skipping the intro movie and the start-up logos, full screen, the\nframe recorder (off by default; up to 240 pictures a second, the ones between the game's frames too; Tab: the last 3 seconds, or from one Tab to the next, with every\nprimitive behind any pixel; while recording, its frames come in as they are drawn, `,` and `.` step back and\nforward a frame, and − / + zoom the picture, kept at the resolution it was drawn at), and where the settings and the memory cards are. Changes are saved at once to\n`wipeoutxl.ini` in the user's data folder; a new saves folder takes effect at\nthe next start. Dear ImGui (`platform/third_party/imgui`, MIT) draws it.\n\n## How it is built\n\n[docs/PLAN.md](docs/PLAN.md) describes the design; [docs/IO.md](docs/IO.md)\nthe sound, CD, pad and card side.",
+      "readmeEdited": false,
       "stats": {
         "stars": 0,
         "forks": 0,
@@ -1953,7 +2138,60 @@
           "Shell": 8686,
           "Java": 960
         },
-        "weeks": [],
+        "weeks": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          171,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
         "punch": [
           [
             1,
@@ -2215,7 +2453,7 @@
             "url": "https://github.com/Yash-Singh1"
           }
         ],
-        "syncedAt": "2026-11-15T18:31:16Z"
+        "syncedAt": "2026-11-24T10:06:58.183Z"
       }
     },
     {
@@ -2240,6 +2478,7 @@
       "links": [],
       "itchId": "",
       "readme": "<div align=\"center\">\n  <img src=\"https://i.imgur.com/HrYPYjh.png\" />\n  <h2>OpenSoldat</h2>\n  <a href=\"https://discord.gg/6TqqtVpRdV\"><img src=\"https://img.shields.io/discord/109442485285052416.svg\" /></a>\n</div>\n\nOpenSoldat is a unique 2D (side-view) multiplayer action game. It has been influenced by the best of games such as Liero, Worms, Quake, Counter-Strike, and provides a fast-paced gaming experience with tons of blood and flesh.\n\nThis repository contains the source code of the so-called 1.8 version. Compared to the original version, the code has undergone many changes but is not in a finished state. We hope that by open-sourcing Soldat we can empower our community to improve the game at a faster pace.\n\n## Dependencies\n\n- FreePascal 3.2.2\n- SDL 2.0.12\n- OpenAL\n- FreeType 2.6.1\n- PhysFS 3.0.2\n- [GameNetworkingSockets v1.4.1](https://github.com/ValveSoftware/GameNetworkingSockets/releases/tag/v1.4.1)\n\n## Building OpenSoldat\n\nOpenSoldat compiles on Windows, Linux and macOS.\n\n### Compilation using CMake\n\nThis approach automates some build steps. OpenSoldat's assets will be downloaded for you, and you will not have to worry about downloading pre-built libraries. This is the simplest way to build OpenSoldat for Linux.\n\nCMake 3.14+ is required.\n\n#### Build steps for Linux (Ubuntu)\n\n1. `sudo apt-get install build-essential g++ cmake git fpc libprotobuf-dev protobuf-compiler libssl-dev libsdl2-dev libopenal-dev libphysfs-dev libfreetype6`\n2. `mkdir build && cd build`\n3. `cmake ..`\n4. `make`\n\n#### Build steps for Windows\n\n1. Install [freepascal 3.2.2](https://sourceforge.net/projects/freepascal/files/Win32/3.2.2/fpc-3.2.2.win32.and.win64.exe/download)\n2. Install [Visual Studio with C++ compiler/build tools](https://visualstudio.microsoft.com/en) and [vcpkg](https://github.com/Microsoft/vcpkg)\n3. Open Developer command prompt for Visual Studio\n4. `vcpkg.exe --triplet x64-windows install sdl2 physfs openssl protobuf freetype openal-soft`\n5. `set PATH=%PATH%;C:\\fpc\\3.2.2\\bin\\i386-win32`\n6. `set OPENSSL_ROOT_DIR=C:\\vcpkg\\installed\\x64-windows`\n7. `set PHYSFSDIR=C:\\vcpkg\\installed\\x64-windows`\n8. `mkdir build`\n9. `cd build`\n10. `cmake -G \"NMake Makefiles\" -DCROSS_WINDOWS_64=1 -DCMAKE_TOOLCHAIN_FILE=\"C:\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake\" -DSDL2_BUILDING_LIBRARY=1 ..`\n11. `nmake`\n\n#### Build steps for macOS\n\n1. `brew install openssl@3 protobuf fpc cmake sdl2 physfs freetype2`\n2. `mkdir build && cd build`\n3. `export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/opt/openssl@3/lib/pkgconfig`\n4. `cmake -DOPENSSL_ROOT_DIR=$(brew --prefix openssl@3) ..`\n5. `make`\n\n#### Available flags\n\nThe build can be customized by passing flags to `cmake` command. For example, you can choose whether you want to build the client, the server, or both. You can decide if you want to include OpenSoldat's assets in the build. There are also options for cross-compilation.\n\nCheck the `CMakeLists.txt` files in this repository to see the available options and their default values.\n\nExample: `cmake .. -DCMAKE_BUILD_TYPE=Release -DADD_ASSETS=1 -DBUILD_CLIENT=0` to get a release build of the server with OpenSoldat's assets\n\n### Compilation using other methods\n\nIf you decide to follow the approaches below, you will have to download OpenSoldat's assets and pre-built libraries for the game to work.\n1. Download pre-built libraries. The best way would probably be to download libraries from the latest build of OpenSoldat (from Github Actions, or Releases). You can download latest from [here](https://nightly.link/opensoldat/opensoldat/workflows/opensoldat/develop) (includes libraries for 3 platforms - pick the ones you need) 2. Copy libraries to `client/build` and `server/build`\n3. Get soldat.smod file from [base repository](https://github.com/opensoldat/base.git). You can either download the file from the [latest release](https://github.com/opensoldat/base/releases/latest) (recommended), or generate the .smod file yourself following the provided instructions\n4. Copy `soldat.smod` file to `client/build` and `server/build`\n5. Download `play-regular.ttf` file from [base repository](https://github.com/opensoldat/base) from the [latest release](https://github.com/opensoldat/base/releases/latest)\n6. Copy `play-regular.ttf` file to `client/build`\n\n#### Compilation using Lazarus IDE\n\n1. Install [Lazarus IDE](https://www.lazarus-ide.org/)\n2. Open `server/opensoldatserver.lpi` with Lazarus, press CTRL + F9 to compile the server\n3. Open `client/opensoldat.lpi` with Lazarus, press CTRL + F9 to compile the game client\n\n## Running OpenSoldat\n\nYou need to start the server first, and then join the game with client.\n1. Run `opensoldatserver`\n2. Run `opensoldat -join 127.0.0.1 23073` (more generically `-join ip port`)",
+      "readmeEdited": false,
       "stats": {
         "stars": 0,
         "forks": 0,
@@ -2263,7 +2502,60 @@
           "Makefile": 233,
           "Batchfile": 28
         },
-        "weeks": [],
+        "weeks": [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
         "punch": [
           [
             0,
@@ -2972,7 +3264,7 @@
             "url": "https://github.com/XvayS"
           }
         ],
-        "syncedAt": "2026-11-15T18:31:19Z"
+        "syncedAt": "2026-11-24T10:07:04.291Z"
       }
     },
     {
@@ -2995,6 +3287,7 @@
       "links": [],
       "itchId": "",
       "readme": "# PSYCHOPOMP\n\n**Psychopomp** is a 2-player tactical board-game/battle game inspired by the classic *Archon: The Light and the Dark*.\n\nThe central structure remains:\n\n1. Two players control opposing teams of creatures.\n2. Players take turns moving creatures on a board.\n3. Capturing a creature starts a battle.\n4. A battle is resolved through a Yahtzee-like dice allocation phase followed by a real creature-vs-creature fight.\n5. Captured power points and creature elimination determine victory.\n6. A surviving creature keeps its remaining HP after the battle.\n\nThe first implementation targets **PC** and **browser**, with offline play and itch.io distribution. The project must be designed so the game rules and content are independent from the rendering/input/platform layer, allowing future ports to systems such as Linux, macOS, Switch, Game Boy Color, NES and C64.\n\n## Design pillars\n\n- **Archon-like strategic board layer**\n- **Dice-driven preparation instead of the original direct combat setup**\n- **Real-time creature combat after preparation**\n- **Persistent surviving HP**\n- **Data-driven creatures**\n- **Built-in creature/content editor**\n- **Offline-first**\n- **Two local players**\n- **Gamepad + keyboard**\n- **Browser build**\n- **itch.io-ready**\n- **Deterministic, portable game rules**\n- **No mandatory online service**\n\n## Important terminology\n\n| Term | Meaning |\n|---|---|\n| Board | The tactical grid on which creatures move |\n| Creature | A playable monster/unit |\n| Power Point | One of the five capturable strategic locations |\n| Battle | The combat sequence triggered when one creature attacks another |\n| Dice Phase | The pre-battle Yahtzee-like allocation phase |\n| Stat Slot | A category receiving one or more dice |\n| Special | A creature-specific ability activated by satisfying dice requirements |\n| Persistent HP | HP remaining after battle and carried into later battles |\n| Roster | The creatures available to a player |\n| Content Pack | A collection of creature definitions and assets |\n| Editor | The built-in tool for creating/testing creature content |\n\n## Project rule\n\nThe implementation must never hard-code individual creatures into combat logic.\n\nA creature should be defined as data:\n\n- identity\n- artwork\n- HP\n- movement\n- combat stats\n- dice allocation rules\n- special ability\n- optional visual/audio metadata\n\nThis makes the game easier to balance and makes the eventual retro ports much more realistic.\n\nSee:\n\n- `GAME_DESIGN.md`\n- `RULES.md`\n- `COMBAT.md`\n- `CONTENT.md`\n- `EDITOR.md`\n- `ARCHITECTURE.md`\n- `UI.md`\n- `CONTROLS.md`\n- `PORTABILITY.md`\n- `TESTING.md`\n- `CLAUDE_CODE.md`\n- `ROADMAP.md`\n\n## Getting started (vertical slice 0.1)\n\nRequires Node.js 20+. Only dev tools are installed (vite, typescript, vitest); the game has no runtime dependencies.\n\n## Development\n\n```text\nnpm install\nnpm run dev        # Vite prints the local URL (served under /Psychopomp/)\n```\n\n## Test\n\n```text\nnpm test           # core test suite (headless)\nnpm run typecheck\nnpm run build      # static build in dist/\n```\n\n## Production preview\n\n```text\nnpm run preview    # serves dist/ at http://localhost:4173/Psychopomp/\n```\n\n## GitHub Pages\n\nLive build: https://thermoptic.github.io/Psychopomp/\n\nEvery push to `main` runs `.github/workflows/deploy.yml` (npm ci → npm test → npm run build → deploy `dist/`).\nThe Vite `base` is `/Psychopomp/` because this is a GitHub Pages project site. Pages is only hosting:\nthe game, its content and all assets are bundled into the build and need no backend or external service.\n\n## Developer editor (/editor)\n\nInternal content tool, not part of the player UI: `npm run dev` then open `/Psychopomp/editor/`.\nMONSTERS (identity, health, P1/P2, 9×9 position, start modifiers, Special slot conditions, Powerup) and\nPOWERUPS (melee/ranged settings on 1-10 scales). Saved content lives in this browser and is used by new\nmatches; EXPORT/IMPORT move items as versioned JSON files (see `src/content/saveFormat.ts`).\n\nCode layout and the assumptions made for this slice: see `IMPLEMENTATION_PLAN.md`.\nContent lives in `content/packs/base/` (ruleset, board, creatures as JSON).",
+      "readmeEdited": false,
       "stats": {
         "stars": 0,
         "forks": 0,
@@ -3013,7 +3306,60 @@
           "JavaScript": 1258,
           "HTML": 968
         },
-        "weeks": [],
+        "weeks": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          34,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
         "punch": [
           [
             0,
@@ -3120,7 +3466,7 @@
             "url": "https://github.com/Thermoptic"
           }
         ],
-        "syncedAt": "2026-11-15T18:31:22Z"
+        "syncedAt": "2026-11-24T10:07:07.175Z"
       }
     },
     {
@@ -3143,6 +3489,7 @@
       "links": [],
       "itchId": "",
       "readme": "## `> WHAT_IS_LIQUEAMP`\n\n**LiqueAmp** is a browser-based music player and internet radio application\ndesigned to feel like an actual piece of software rather than another\ngeneric music website.\n\nIt combines a **music player, radio browser, library, playlists and\naudio visualizer** inside a terminal-inspired interface.\n\nThe visual style mixes **retro software, radio equipment and futuristic\ncontrol panels** with dark surfaces, glowing orange controls, technical\ntypography and an unreasonable number of tiny status indicators.\n\n> **Winamp went to a radio station, got bitten by a cyberpunk llama,\n> and came back as a web app.**\n\n---\n\n## `> SCREENSHOTS`\n\n### `01 // NOW PLAYING`\n\n<div align=\"center\">\n\n<img src=\"screenshots/now-playing.png\" alt=\"LiqueAmp Now Playing\" width=\"100%\">\n\n</div>\n\n### `02 // SETTINGS`\n\n<div align=\"center\">\n\n<img src=\"screenshots/settings.png\" alt=\"LiqueAmp Settings\" width=\"100%\">\n\n</div>\n\n---\n\n## `> FEATURES`\n\n| SYSTEM       | CAPABILITIES                                           |\n| :----------- | :----------------------------------------------------- |\n| `PLAYER`     | Playback, volume, shuffle, repeat & queue              |\n| `RADIO`      | Internet radio, search, genres, locations & popularity |\n| `LIBRARY`    | Local music library & browser storage                  |\n| `PLAYLISTS`  | Create, edit & play playlists                          |\n| `FAVOURITES` | Save tracks & radio stations                           |\n| `HISTORY`    | Recently played media                                  |\n| `VISUALIZER` | Real-time audio spectrum visualization                 |\n| `EQUALIZER`  | Bass, mid, treble & DSP controls                       |\n| `THEMES`     | Custom colours, glow & appearance                      |\n| `BASE16`     | Base16 colour scheme support                           |\n| `OFFLINE`    | Offline-first local data storage                       |\n| `PWA`        | Installable desktop & mobile experience                |\n| `KEYBOARD`   | Keyboard playback controls                             |\n| `CONTROL`    | Manage streams, content, themes & settings             |\n| `RESPONSIVE` | Desktop control room + mobile player                   |\n\n---\n\n## `> DESIGN_PHILOSOPHY`\n\n```text\n01  MUSIC SHOULD BE FUN\n\n02  SOFTWARE SHOULD HAVE PERSONALITY\n\n03  INFORMATION SHOULD BE VISIBLE\n\n04  BUTTONS SHOULD LOOK LIKE BUTTONS\n\n05  NOBODY NEEDS ANOTHER BORING SPOTIFY CLONE\n\n06  THERE SHOULD PROBABLY BE A LLAMA\n```\n\n---\n\n<div align=\"center\">\n\n```text\n┌─────────────────────────────────────┐\n│                                     │\n│          LIQUEAMP v1.0              │\n│                                     │\n│   STREAM // RADIO // WORLDWIDE      │\n│                                     │\n│   ● AUDIO ENGINE: RUNNING           │\n│   ● NETWORK: ONLINE                 │\n│   ● LLAMA: SATISFIED                │\n│                                     │\n└─────────────────────────────────────┘\n```\n\n### `It really Liques the Llamas Ass!`\n\n**Made with questionable amounts of enthusiasm.**\n\n🦙\n\n</div>\n```",
+      "readmeEdited": false,
       "stats": {
         "stars": 0,
         "forks": 0,
@@ -3162,7 +3509,60 @@
           "PLpgSQL": 29490,
           "HTML": 1317
         },
-        "weeks": [],
+        "weeks": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          47,
+          15,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
         "punch": [
           [
             0,
@@ -3319,16 +3719,16 @@
             "url": "https://github.com/Thermoptic"
           }
         ],
-        "syncedAt": "2026-11-15T18:31:24Z"
+        "syncedAt": "2026-11-24T10:07:10.127Z"
       }
     },
     {
       "id": "0space-gravity-reboot",
       "title": "0Space Gravity Reboot",
       "source": "itch",
+      "repo": "",
       "url": "https://thermoptic.itch.io/0space-gravityreboot",
       "category": "games",
-      "repo": "",
       "tags": [
         "game",
         "gamemaker",
@@ -3336,63 +3736,746 @@
       ],
       "summary": "Originally released in 2011, 0Space returns with bugfixes and quality of life upgrades. 0Space is a local multiplayer deathmatch for 2–4 players, set in a zero-gravity environment. Move freely across floors, walls, and c",
       "description": "Rebooted with modern improvements and new features.\nOriginally released in 2011, 0Space returns with bugfixes and quality of life upgrades. 0Space is a local multiplayer deathmatch for 2–4 players, set in a zero-gravity environment. Move freely across floors, walls, and ceilings, or launch yourself into open space and drift between surfaces. The camera rotates with the environment, allowing combat to unfold in every direction.\n\nEach match consists of a series of levels where kills earn points and deaths deduct them. A single hit is enough to eliminate an opponent, making positioning and movement essential to survival.\n\nCreated by Beau Blyth for the 2011 TIGSource Versus Competition, 0Space was inspired by the zero-gravity Battle Room in Orson Scott Card's novel Ender's Game.\n\n\n\nIn 2026 Thermoptic took over the project and updated the game. The goal was to make 0Space run well on modern Windows while keeping the feel of the original exactly as it was. The original release can have problems on current Windows versions: crashes, poor speed and replays that do not work. This version was rebuilt from the original release's data with the help of AI and compiled in GameMaker Studio 1.4, and every change was tested against the way the original plays.\n\n- Crash Fixes, freezes and slow-downs of the original.\n- Working replays, working title demos, music and all sound effects.\n- Controller support for all four players on modern gamepads (XInput)\n\n- Widescreen support, you can still enable 4:3 in the Options menu.\n- New Pause menu (Restart Match, Options, Controls and Quit)\n- Countdown timer at the start of every round and after you resume from pause.\n- A dedicated Sword Button (Y on a gamepad).\n- Games Modes! Classic and the new Reboot Mode\n- Powerups! Crates that spawn during a round, with four different weapons.\n- 4 New levels added.\n- Flux Generator! Procedurally generated levels: every round builds a brand-new map, so no two matches play the same.\n- Analogue Aim! Aim in any direction using the analogue stick. Dont worry, the original digital aim is still there.\n- Crt Filters. Four old-TV looks for more arcade vibes.\n- And more! Read the readme.txt and changes.txt for more info\n\n0Space and all of its original game design, art, levels and music belong to their creators. This version is an unofficial, non-commercial fan update, made out of love for the game. Original game Beau Blyth (Teknopants). Copyright 2011-2014. Original music Max Coburn. Gravity Reboot version: Updated and extended by Thermoptic, 2026.",
-      "readme": "",
-      "created": "2026-11-15",
-      "updated": "2026-11-15",
       "cover": "",
       "screenshots": [],
+      "created": "2026-11-15",
+      "updated": "2026-11-15",
+      "featured": false,
+      "hidden": false,
       "facts": [],
       "links": [],
       "itchId": "5162238",
-      "featured": false,
-      "hidden": false,
+      "readme": "",
+      "readmeEdited": false,
       "stats": null
     },
     {
       "id": "bratwurst-reheated-itch",
       "title": "Bratwurst Reheated",
       "source": "itch",
+      "repo": "",
       "url": "https://thermoptic.itch.io/bratwurst-reheated",
       "category": "games",
-      "repo": "",
       "tags": [
-            "game",
-            "gamemaker",
-            "windows"
-          ],
+        "game",
+        "gamemaker",
+        "windows"
+      ],
       "summary": "A fan remake of the Amiga shooter Bratwurst, built in GameMaker Studio 1.4 as a stand-alone Windows game. Float, shoot, crash and repeat, with one to four players.",
       "description": "A fan remake of the Amiga shooter Bratwurst, built in GameMaker Studio 1.4 as a stand-alone Windows game. Float, shoot, crash and repeat, with one to four players, keyboard and Xbox controllers, and a terminal-style look with 34 colour themes and a team mode, Capture the Bratwurst.\n\nThe goal is to keep the feel and the physics of the original wherever it can be verified, and then grow it with new maps, game modes, ships, weapons and music.",
-      "readme": "",
+      "cover": "https://raw.githubusercontent.com/Thermoptic/Bratwurst-Reheated/main/assets/logo.png",
+      "screenshots": [],
       "created": "2026-10-13",
       "updated": "2026-11-11",
-      "cover": "https://raw.githubusercontent.com/Thermoptic/Bratwurst-Reheated/main/assets/logo.png",
-      "screenshots": [
-    
-              ],
-      "facts": [
-             {
-               "label": "Platform",
-               "value": "Windows"
-             },
-             {
-               "label": "Engine",
-               "value": "GameMaker Studio 1.4"
-             },
-             {
-               "label": "Players",
-               "value": "1–4"
-             }
-           ],
-      "links": [
-             {
-               "label": "Source on GitHub",
-               "url": "https://github.com/Thermoptic/Bratwurst-Reheated"
-             }
-           ],
-      "itchId": "",
       "featured": false,
       "hidden": false,
+      "facts": [
+        {
+          "label": "Platform",
+          "value": "Windows"
+        },
+        {
+          "label": "Engine",
+          "value": "GameMaker Studio 1.4"
+        },
+        {
+          "label": "Players",
+          "value": "1–4"
+        }
+      ],
+      "links": [
+        {
+          "label": "Source on GitHub",
+          "url": "https://github.com/Thermoptic/Bratwurst-Reheated"
+        }
+      ],
+      "itchId": "",
+      "readme": "",
+      "readmeEdited": false,
       "stats": null
+    },
+    {
+      "id": "popampdeluxe",
+      "source": "github",
+      "repo": "Thermoptic/popampdeluxe",
+      "url": "https://github.com/Thermoptic/popampdeluxe",
+      "title": "popampdeluxe",
+      "category": "other",
+      "tags": [
+        "fork"
+      ],
+      "summary": "Winamp-style music player for Linux and Windows: vector skins sharp at any size, classic .wsz skins, toolbar mode, sandboxed plug-ins. Written in Rust.",
+      "description": "",
+      "readme": "<h1 align=\"center\">Popamp Deluxe</h1>\n\n## What's new in Popamp Deluxe\n\n*Updated 2026-11-22. The same list, as a text file that comes with every\ndownload: [popampdeluxe.txt](popampdeluxe.txt).*\n\n- **Palettes** (Skin Browser > Palette). Forty dark Base16 schemes, with *Original* at the top.\n  Pick one, or walk through the list with the arrow keys, and every vector skin is recoloured\n  in the player at once: dark base00 surfaces, base0E title-bar lines, base0B lamps, base05 text.\n\n<p align=\"center\"><img src=\"assets/screenshots/palette.gif\" alt=\"The player, equalizer and playlist in a Base16 palette\"></p>\n\n- **Hotkeys** (Preferences > Hotkeys). Every keyboard shortcut is listed and can\n  be changed, added to, cleared or reset. Kept in `popamp.ini`.\n- **Groups in the Foldertree.** Organise the folders of the left list in\n  groups that fold in and out, and edit them in the Folder and Group Editor\n  (LIST button > Folders and groups). Kept in `popamp.ini`.\n- **Preferences in the skin's own title bar.** The window uses the skin's\n  windowshade strip instead of the system's title bar.\n- **Apply button** in Preferences: OK without closing the window.\n- **Line spacing** (Preferences > Interface). Set the space between the lines\n  of text in the playlist and the Media Library; 0 is the closest, 5 the default.\n- **Hide file extension** (Preferences > Media Library) and an icon of its own\n  for playlist files in the Foldertree.\n- **Playlist files in the Foldertree**. .m3u/.pls files show in the right list;\n  double-click adds all their songs to the playlist.\n- **Copy to clipboard** (right-click in the playlist, Windows). Every song in\n  the playlist is copied to the clipboard as files; press Ctrl+V in an\n  Explorer folder to copy them there.\n- **Media Library Foldertree** (Preferences > Media Library). A second kind\n  of library window: add folders on the left, browse them like Explorer on\n  the right, by file name, sorted by title or date.\n\n<p align=\"center\"><img src=\"assets/screenshots/media-library.png\" alt=\"The Media Library as a Foldertree, with folders and playlist files\"></p>\n\n- **A custom font** (Preferences > Font). Pick any `.ttf` or `.otf`\n  from the `fonts` folder and a size, for the playlist, library, menus and\n  dialogs, or tick *Custom Skin Bmp Font* to write them with the letters of\n  the skin's own `text.bmp`.\n- **Windowshade for the Media Library.** Double-click its title bar and it\n  rolls up to a strip, as the main, equalizer and playlist windows do.\n- **Title-bar shortcuts** (Preferences > Shortcuts). Choose what a right\n  click, a middle click or the mouse wheel on the title bar of the main,\n  equalizer or playlist window does, in full size or windowshade mode:\n  previous or next track, pause, stop, shuffle, repeat, volume up or down.\n  Middle-click the equalizer to pause, or hover its title bar and scroll\n  to change the volume, with no click needed.\n\n<p align=\"center\"><img src=\"assets/screenshots/shortcuts.png\" alt=\"Preferences, Shortcuts page\"></p>\n\n- **A skin comes with the player.** `popamp-classified.psz` is in the `skins`\n  folder with the program; it shows up in the Skin Browser. Popamp starts with\n  its built-in skin.\n- **A `skins` folder beside the program.** Drop any `.wsz` in it and it\n  shows up in the Skin Browser (Alt+S) at once, even while the browser is\n  open.\n- **Volume and balance in the shaded equalizer,** as in Winamp.\n\n\n<p align=\"center\">\n  <a href=\"#install\"><img src=\"assets/readme/hero.png\" alt=\"Popamp with three of its skins: Default, Steel and Modern\" width=\"100%\"></a>\n</p>\n\n<p align=\"center\">\n  <a href=\"https://github.com/popamp/popamp/actions/workflows/ci.yml\"><img src=\"https://github.com/popamp/popamp/actions/workflows/ci.yml/badge.svg\" alt=\"CI\"></a>\n  <img src=\"https://img.shields.io/badge/platform-Linux%20%7C%20Windows-8a5cf6\" alt=\"Linux and Windows\">\n  <a href=\"#license\"><img src=\"https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg\" alt=\"MIT OR Apache-2.0\"></a>\n</p>\n\n<p align=\"center\">\n  <b><a href=\"#install\">Download</a></b> ·\n  <a href=\"docs/features.md\">Features</a> ·\n  <a href=\"docs/usage.md\">Usage</a> ·\n  <a href=\"docs/skin-format.md\">Make a skin</a> ·\n  <a href=\"docs/ROADMAP.md\">Roadmap</a>\n</p>\n\nPopamp is a desktop music player in the spirit of Winamp 2: a main\nwindow, a 10-band equalizer and a playlist that snap together, and a\ndifferent look whenever you want one. It is written in Rust and runs on\nLinux and Windows.\n\n- **Sharp at any size.** Popamp's own skins are drawn as vectors, so they\n  stay crisp from ×1 to ×3 in steps of a quarter, on any monitor.\n- **Thousands of classic skins.** Open any `.wsz` file, or browse, search\n  and install skins from the [Winamp Skin Museum](https://skins.webamp.org)\n  without leaving the player.\n- **A gallery in the player.** Install and update the skins and plug-ins\n  from [popamp.app](https://popamp.app) in a click, each checked against\n  the catalog.\n- **Sounds right.** Gapless playback, ReplayGain, a 10-band equalizer\n  with `.eqf` presets, internet radio, and the common formats: MP3, AAC, FLAC,\n  Ogg Vorbis, Opus, WAV, ALAC, MIDI, tracker modules and more.\n- **At home on your desktop.** Media keys and the system's player\n  controls show the track and its cover.\n- **A player that is a bar.** In [toolbar mode](#toolbar-mode) the main\n  window becomes a strip along the top or bottom of the screen, on Linux\n  and Windows, with the room for it kept like a taskbar's.\n- **Plug-ins you allow.** Sandboxed WebAssembly plug-ins, each switched\n  on by you: [YouTube](https://github.com/popamp/plugin-youtube) as a\n  source, [Crossfeed](https://github.com/popamp/plugin-crossfeed) for\n  headphones, [Monkey's Audio](https://github.com/popamp/plugin-ape) for\n  `.ape` files.\n- **Your music stays yours.** No account, no cloud, no library to import:\n  it plays files and the streams you open.\n\n### Skins\n\n| [Default](https://github.com/popamp/popamp-skin-default) (built in) | [Steel](https://github.com/popamp/skin-steel) | [Modern](https://github.com/popamp/skin-modern) |\n|:---:|:---:|:---:|\n| <img src=\"assets/screenshots/default.png\" width=\"250\" alt=\"Popamp's default skin\"> | <img src=\"assets/screenshots/steel.png\" width=\"250\" alt=\"The Steel skin\"> | <img src=\"assets/screenshots/modern.png\" width=\"250\" alt=\"The Modern skin\"> |\n\n### Toolbar mode\n\nThe whole player in one strip along the bottom or top of the screen:\ntransport, visualizer, clock, title, volume and the EQ and playlist\nswitches, with the equalizer and the playlist above its right end. On\nLinux (X11) the strip is reserved with `_NET_WM_STRUT_PARTIAL`, so\nmaximized windows stop at it as they do at a taskbar, and it keeps clear\nof the desktop's own panels; on Windows it is an application bar. Turn it\non, move it and size it under Main menu > *Toolbar mode*. The built-in\nskin and the Modern, Steel, Classified and D11 skins each carry a bar\nbeside their window, in all their colour sets. More in\n[features](docs/features.md#toolbar-mode).\n\n<img src=\"assets/screenshots/bar.png\" alt=\"Toolbar mode with the Modern skin: a strip along the bottom of the screen with the equalizer and playlist above its right end\">\n\n## Why?\n\nPopamp began with a search for Winamp on a Linux desktop. Two good\nplayers written in Rust already existed,\n[Linamp](https://github.com/sayoojkkarun/linamp) and\n[Ferramp](https://github.com/SpankulatorX/ferramp), but both drew the\nclassic bitmap skins, and on a modern monitor with the desktop scaled up\nthose skins went soft and blurry, even at double size.\n\nSo Popamp took Linamp's code, brought over the best of Ferramp's\nfeatures, and added one new idea: skins drawn as vectors, sharp at any\nsize, fractional ones included. Classic skins got the same care. Then\ncame plug-ins that cannot reach more than you allow, and a Windows\nversion, so one player and its skins work on both systems.\n\n## Install\n\nDownloads are on the [Releases page](https://github.com/popamp/popamp/releases),\nand Debian, Ubuntu, openSUSE and Fedora can install it from a repository\nthat keeps it up to date. Both come in two builds: **popamp**, the player, and **popamp-plus**, the player\nwith [plug-ins](docs/plugins.md) such as YouTube and visualizers.\n\n| System | Download |\n|---|---|\n| Debian, Ubuntu | add the [apt repository](docs/building.md#debian-and-ubuntu), then `sudo apt install popamp`; or download `popamp-<version>-linux-amd64.deb` (ARM64: `-arm64.deb`) and `sudo apt install ./popamp-…deb` |\n| openSUSE, Fedora | add the [repository](docs/building.md#opensuse-and-fedora), then `sudo zypper install popamp` or `sudo dnf install popamp` |\n| Any other Linux | `Popamp-<version>-x86_64.AppImage`: `chmod +x` it and run it |\n| Windows 10 or 11 | `Popamp-<version>-windows-x86_64-setup.exe`, or the portable `…-portable.zip`: unpack it anywhere and run `popamp.exe` |\n\nOr build it yourself with Rust 1.96 or newer:\n\n```sh\ngit clone https://github.com/popamp/popamp.git && cd popamp\ncargo build --release                      # add --features plus for popamp-plus\n./target/release/popamp ~/Music\n```\n\n### More\n\n- [Features](docs/features.md): everything Popamp does, and what it does not do yet.\n- [Usage](docs/usage.md): keys, remote control from the command line, where settings live.\n- [Building and installing](docs/building.md): requirements, packages per distribution, installing from source.\n- [Plug-ins](docs/plugins.md) and [the skin format](docs/skin-format.md), for making your own.\n- [Wayland and COSMIC](docs/wayland.md): what works as a Wayland program, on Pop!_OS in particular, and why some things cannot.\n- [Testing](docs/testing.md): what was tested, where and how.\n- [Contributing](CONTRIBUTING.md), [Changelog](CHANGELOG.md), [Roadmap](docs/ROADMAP.md).\n\n## License\n\nPopamp is free software under the [MIT](LICENSE-MIT) or\n[Apache 2.0](LICENSE-APACHE) license, at your option; contributions are\ntaken under the same terms. Third-party crates keep their own licenses\n(the Symphonia decoders are MPL-2.0), and code taken from Linamp and\nFerramp is listed in [THIRD_PARTY.md](THIRD_PARTY.md).\n\nPopamp contains no Winamp code or artwork. Winamp is a trademark of its\nowner; Popamp is an independent project and is not affiliated with or\nendorsed by it.",
+      "readmeEdited": false,
+      "cover": "",
+      "screenshots": [],
+      "created": "2026-11-18",
+      "updated": "2026-11-23",
+      "featured": false,
+      "hidden": false,
+      "facts": [],
+      "itchId": "",
+      "stats": {
+        "stars": 0,
+        "forks": 0,
+        "watchers": 0,
+        "issues": 0,
+        "size": 5674,
+        "license": "Apache-2.0",
+        "branch": "main",
+        "language": "Rust",
+        "created": "2026-11-18T18:07:48Z",
+        "pushed": "2026-11-23T20:59:25Z",
+        "commits": 400,
+        "languages": {
+          "Rust": 1931254,
+          "Shell": 32734,
+          "Inno Setup": 24683,
+          "Python": 13730,
+          "HTML": 2789
+        },
+        "weeks": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          10,
+          0,
+          106,
+          97,
+          72,
+          24
+        ],
+        "punch": [
+          [
+            0,
+            0,
+            4
+          ],
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            0,
+            10,
+            1
+          ],
+          [
+            0,
+            11,
+            4
+          ],
+          [
+            0,
+            12,
+            2
+          ],
+          [
+            0,
+            13,
+            7
+          ],
+          [
+            0,
+            14,
+            1
+          ],
+          [
+            0,
+            15,
+            2
+          ],
+          [
+            0,
+            16,
+            2
+          ],
+          [
+            0,
+            17,
+            1
+          ],
+          [
+            0,
+            18,
+            8
+          ],
+          [
+            0,
+            19,
+            5
+          ],
+          [
+            0,
+            20,
+            2
+          ],
+          [
+            0,
+            21,
+            4
+          ],
+          [
+            0,
+            22,
+            6
+          ],
+          [
+            1,
+            12,
+            1
+          ],
+          [
+            1,
+            13,
+            10
+          ],
+          [
+            1,
+            15,
+            1
+          ],
+          [
+            1,
+            16,
+            7
+          ],
+          [
+            1,
+            17,
+            9
+          ],
+          [
+            1,
+            18,
+            4
+          ],
+          [
+            1,
+            19,
+            6
+          ],
+          [
+            1,
+            20,
+            5
+          ],
+          [
+            1,
+            21,
+            2
+          ],
+          [
+            2,
+            9,
+            1
+          ],
+          [
+            2,
+            10,
+            3
+          ],
+          [
+            2,
+            11,
+            1
+          ],
+          [
+            2,
+            12,
+            2
+          ],
+          [
+            2,
+            13,
+            3
+          ],
+          [
+            2,
+            14,
+            2
+          ],
+          [
+            2,
+            15,
+            1
+          ],
+          [
+            2,
+            16,
+            5
+          ],
+          [
+            2,
+            18,
+            2
+          ],
+          [
+            3,
+            9,
+            2
+          ],
+          [
+            3,
+            11,
+            6
+          ],
+          [
+            3,
+            12,
+            5
+          ],
+          [
+            3,
+            13,
+            1
+          ],
+          [
+            3,
+            14,
+            2
+          ],
+          [
+            3,
+            15,
+            5
+          ],
+          [
+            3,
+            16,
+            5
+          ],
+          [
+            3,
+            17,
+            1
+          ],
+          [
+            3,
+            18,
+            4
+          ],
+          [
+            3,
+            19,
+            2
+          ],
+          [
+            3,
+            20,
+            6
+          ],
+          [
+            4,
+            6,
+            5
+          ],
+          [
+            4,
+            7,
+            1
+          ],
+          [
+            4,
+            8,
+            1
+          ],
+          [
+            4,
+            9,
+            3
+          ],
+          [
+            4,
+            11,
+            7
+          ],
+          [
+            4,
+            12,
+            9
+          ],
+          [
+            4,
+            14,
+            9
+          ],
+          [
+            4,
+            15,
+            9
+          ],
+          [
+            4,
+            16,
+            2
+          ],
+          [
+            4,
+            17,
+            3
+          ],
+          [
+            4,
+            18,
+            5
+          ],
+          [
+            4,
+            19,
+            5
+          ],
+          [
+            4,
+            22,
+            4
+          ],
+          [
+            5,
+            6,
+            6
+          ],
+          [
+            5,
+            7,
+            2
+          ],
+          [
+            5,
+            10,
+            6
+          ],
+          [
+            5,
+            11,
+            1
+          ],
+          [
+            5,
+            12,
+            2
+          ],
+          [
+            5,
+            13,
+            4
+          ],
+          [
+            5,
+            15,
+            2
+          ],
+          [
+            5,
+            16,
+            6
+          ],
+          [
+            5,
+            17,
+            3
+          ],
+          [
+            5,
+            18,
+            6
+          ],
+          [
+            5,
+            19,
+            8
+          ],
+          [
+            5,
+            20,
+            4
+          ],
+          [
+            5,
+            21,
+            3
+          ],
+          [
+            5,
+            22,
+            10
+          ],
+          [
+            5,
+            23,
+            4
+          ],
+          [
+            6,
+            9,
+            3
+          ],
+          [
+            6,
+            12,
+            3
+          ],
+          [
+            6,
+            15,
+            1
+          ],
+          [
+            6,
+            18,
+            2
+          ],
+          [
+            6,
+            19,
+            6
+          ],
+          [
+            6,
+            20,
+            6
+          ],
+          [
+            6,
+            21,
+            2
+          ]
+        ],
+        "releases": [
+          {
+            "name": "v1.0.1",
+            "date": "2026-11-20",
+            "downloads": 4
+          },
+          {
+            "name": "v1.1.0",
+            "date": "2026-11-22",
+            "downloads": 3
+          }
+        ],
+        "contributors": [
+          {
+            "login": "gunyakov",
+            "commits": 243,
+            "avatar": "https://avatars.githubusercontent.com/u/11561182?v=4",
+            "url": "https://github.com/gunyakov"
+          },
+          {
+            "login": "Thermoptic",
+            "commits": 82,
+            "avatar": "https://avatars.githubusercontent.com/u/229534962?v=4",
+            "url": "https://github.com/Thermoptic"
+          },
+          {
+            "login": "popamp",
+            "commits": 50,
+            "avatar": "https://avatars.githubusercontent.com/u/351510360?v=4",
+            "url": "https://github.com/popamp"
+          },
+          {
+            "login": "miraclebg",
+            "commits": 15,
+            "avatar": "https://avatars.githubusercontent.com/u/126405?v=4",
+            "url": "https://github.com/miraclebg"
+          },
+          {
+            "login": "sayoojkkarun",
+            "commits": 10,
+            "avatar": "https://avatars.githubusercontent.com/u/153893263?v=4",
+            "url": "https://github.com/sayoojkkarun"
+          }
+        ],
+        "syncedAt": "2026-11-24T10:06:42.656Z"
+      },
+      "links": [
+        {
+          "label": "Website",
+          "url": "https://popamp.app"
+        }
+      ]
+    },
+    {
+      "id": "thelastfolder",
+      "source": "github",
+      "repo": "Thermoptic/TheLastFolder",
+      "url": "https://github.com/Thermoptic/TheLastFolder",
+      "title": "TheLastFolder",
+      "category": "other",
+      "tags": [],
+      "summary": "Tiny native Windows utility: Open/Save As dialogs jump to the folder of the file manager (Explorer, Total Commander) you last used.",
+      "description": "",
+      "readme": "<p align=\"center\">\n  <img src=\"assets/icon-source/06_violet_chrome.png\" alt=\"The Last Folder\" width=\"256\" height=\"304\">\n</p>\n\n# The Last Folder\n\n**The Open and Save As dialog finally knows where you were headed.**\n\nYou know the routine. You are deep in a folder in Explorer, Total Commander or Double Commander, you alt-tab to some other program, hit\n*File > Open*, and the dialog cheerfully offers you whatever directory that program last touched in 2019. Then comes the\nclick-through: drive, folder, folder, folder, pause to question your life choices, folder.\n\nThe Last Folder is a small background utility that closes that loop. Use a file manager, return to the dialog, and the\ndialog is already sitting in the folder you just left. No hotkey, no overlay, no window. Take the path of least\nresistance, quite literally.\n\n## How it feels in use\n\n1. The dialog opens as it always has, in the folder the program normally picks.\n2. You switch to Explorer, Total Commander or Double Commander and go where you want to be.\n3. You switch back to the dialog. It jumps to that folder.\n4. You open or save the file like you would have anyway.\n\nIt only acts if you have actually used a file manager since the dialog appeared. If you have not, the dialog is left\nalone. It does not second-guess you, and it does not redecorate while you are still thinking.\n\n## Supported file managers\n\n| File manager | Works out of the box | What it reads |\n|---|---|---|\n| **Windows Explorer** | Yes | The folder of the window you were in, via the Shell's documented window list |\n| **Total Commander** | Yes | The path bar of the panel you used last (tested with Total Commander 7.50) |\n| **Double Commander** | **Only with one setting turned on** | The folder shown in its window title |\n\n**Double Commander needs a setting.** It works only if you open *Configuration > Options > Miscellaneous* and tick\n**Show current directory in the main window title bar**. Double Commander draws its path bar itself, so the title bar is\nthe only place the folder can be read from, and by default it is not there. Without the box ticked the program does\nnothing for Double Commander (it will not guess), which is the safe kind of useless.\n\nWhichever you use, the same rules apply: it reads, it never writes, and it only sees local drive-letter folders. Notes on\nwhat is untested are under [Status](#status).\n\n## Small on purpose\n\nThere is no UI to speak of. The tray icon is the whole interface, and the whole menu is **About** and **Exit**. A\nutility that needs a settings page to explain what it does has already lost the argument.\n\n- **One portable exe, roughly 150 KB.** No installer, no runtime to hunt down, nothing beyond the Windows system\n  libraries. You can carry it on a USB stick, in your pocket, or in a small bird's beak.\n- **Idle means idle.** It is event-driven, so it does nothing until Windows tells it something happened. One measurement on\n  Windows 10 showed 0 ms of CPU over 15 seconds and about 8 MB of memory, on a single thread.\n- **Nothing to configure, and nothing to leak.** No settings, config files, database, indexer, logging, telemetry or network\n  access. It cannot phone home because it has never learned the number.\n- **Native.** C++20 and plain Win32, built with MSVC. No framework was harmed.\n\n## Under the hood\n\n- **Tracking your file manager.** A WinEvent hook reports every change of the foreground window. When a supported file\n  manager comes to the front it is noted, and when you leave it, the folder it was showing is remembered. Explorer is\n  read through the Shell's documented window list (`IShellWindows`). For Total Commander it reads the path bar of the\n  panel that last had focus. Double Commander draws its path bar itself, so nothing there can be read; it is read from\n  the window title instead (see [Supported file managers](#supported-file-managers)). Double Commander wears the same\n  window class as Total Commander, so the title is also how the two are told apart. All of it is strictly read-only:\n  nothing is sent to any of these programs, and your clipboard is left alone.\n- **Recognising a dialog.** A standard Open or Save As dialog is identified by structure (the dialog window class, a\n  filename box with a known control id, and a default button), never by title. That keeps it language-independent.\n- **The jump.** The existing dialog is navigated, not replaced. The folder path goes into the filename box and the\n  default button is pressed, which is the dialog's own way of being told to go somewhere. The box is filled by selecting\n  all and replacing the text rather than with a plain `WM_SETTEXT`, because a Save As dialog that already holds a name\n  ignores the latter and offers to save the old file instead. The existing file name is restored afterwards, and the\n  move is verified before it counts.\n- **Polite by construction.** No code injection, no patching, no hooks inside other processes. If the folder is\n  unknown, unreadable or not a local drive-letter path, it does nothing. It would rather stay put than guess wrong.\n\n## Status\n\nA working prototype, version 0.4. Tried by hand and automatically tested against test dialogs, on Windows 10 x64 only.\nExpect rough edges, and treat anything not listed below as unverified rather than supported.\n\nKnown limits:\n\n- Local drive-letter folders only. Network paths, virtual locations such as *This PC*, and archives are skipped.\n- Folder-selection dialogs (\"Browse for folder\") are not supported. Their *OK* means *pick this*, not *go there*.\n- Double Commander only works with the title-bar setting above, and its title can only show the active panel's folder.\n- Windows 11 is untested, and Explorer tabs are not handled.\n- Dialogs of programs running elevated are untested.\n- Dialogs a program draws itself rather than leaving to Windows (some Electron, Qt and Java applications) are not\n  recognised.\n\n[`STATUS.md`](STATUS.md) has the exact test matrix, including what was not tested.\n\n## Build\n\nYou need the Visual Studio Build Tools (MSVC) and a Windows 10 or 11 SDK. From the `src` folder:\n\n```\nbuild.bat\n```\n\nThat produces `src\\out\\thelastfolder.exe` (x64, Release, static runtime). The script expects the Build Tools in\n`C:\\BuildTools2022`, so adjust the path at the top if yours live elsewhere. If the program is running, exit it from the\ntray first, or build elsewhere with `build.bat some-other-folder`. Windows will not let a linker overwrite an exe that is\nin use, which is the one thing it is consistent about.\n\n## Repository layout\n\n- `src/` the application\n- `assets/` the application icon (`icon.ico`, 16 to 256 px, embedded in the exe). `make-icon.ps1`\n  rebuilds it from the images in `icon-source/`\n- `poc/` the navigation proof of concept and the test tools: a test dialog host, an imitation Total Commander and a few\n  window probes\n- `docs/` product specification, technical notes, design note and implementation plan\n- `STATUS.md` current behavior, test results and known limitations\n- `CLAUDE.md` working rules used during AI-assisted development",
+      "readmeEdited": false,
+      "cover": "",
+      "screenshots": [],
+      "created": "2026-11-22",
+      "updated": "2026-11-23",
+      "featured": false,
+      "hidden": false,
+      "facts": [],
+      "itchId": "",
+      "stats": {
+        "stars": 0,
+        "forks": 0,
+        "watchers": 0,
+        "issues": 0,
+        "size": 104,
+        "license": "",
+        "branch": "main",
+        "language": "C++",
+        "created": "2026-11-22T21:48:52Z",
+        "pushed": "2026-11-23T20:33:26Z",
+        "commits": 12,
+        "languages": {
+          "C++": 53959,
+          "PowerShell": 3800,
+          "Batchfile": 1310,
+          "C": 145
+        },
+        "weeks": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          12
+        ],
+        "punch": [
+          [
+            0,
+            22,
+            2
+          ],
+          [
+            0,
+            23,
+            2
+          ],
+          [
+            1,
+            9,
+            1
+          ],
+          [
+            1,
+            20,
+            2
+          ],
+          [
+            1,
+            21,
+            5
+          ]
+        ],
+        "releases": [
+          {
+            "name": "v0.4.0",
+            "date": "2026-11-23",
+            "downloads": 3
+          }
+        ],
+        "contributors": [
+          {
+            "login": "Thermoptic",
+            "commits": 12,
+            "avatar": "https://avatars.githubusercontent.com/u/229534962?v=4",
+            "url": "https://github.com/Thermoptic"
+          }
+        ],
+        "syncedAt": "2026-11-24T10:06:43.917Z"
+      },
+      "links": []
     }
   ]
 }

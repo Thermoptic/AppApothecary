@@ -2,7 +2,8 @@
 // a sort knob and a random-project button on the right.
 
 import { h, set, icon, fmtDate, fmtNum, modColors, toast, SOURCE } from '../ui.js';
-import { state, isAdmin, visibleProjects, catOf, tagCounts, mode, touch } from '../store.js';
+import { state, isAdmin, visibleProjects, catOf, tagCounts, mode, touch, imgSrc } from '../store.js';
+import { firstReadmeImage } from '../md.js';
 import { syncFromGitHub } from '../sync.js';
 import { openEditor } from './editor.js';
 import { wipe } from '../fx.js';
@@ -190,13 +191,29 @@ export function renderHome(root) {
   draw();
 }
 
+/** A round picture for the list: the cover, else the first picture in the readme, else one of the UI patterns. */
+function ball(p) {
+  const el = h('span', { class: 'ball' });
+  const pattern = () => {
+    let hash = 0;
+    for (const ch of p.id) hash = (hash * 31 + ch.charCodeAt(0)) >>> 0; // the same project always gets the same pattern
+    return h('span', { class: 'pt pt' + (hash % 4) });
+  };
+  const src = imgSrc(p.cover) || firstReadmeImage(p.readme, { repo: p.repo, branch: (p.stats && p.stats.branch) || 'main' });
+  if (!src) { el.append(pattern()); return el; }
+  const img = h('img', { src, alt: '', loading: 'lazy', decoding: 'async' });
+  img.addEventListener('error', () => img.replaceWith(pattern())); // a broken link falls back to the pattern
+  el.append(img);
+  return el;
+}
+
 function row(p, n) {
   const cat = catOf(p);
   const s = p.stats;
   const meta = [cat && cat.name, SOURCE[p.source] || 'Project', s && s.language].filter(Boolean).join(' · ');
   return h('a', { class: 'prj', href: '#/p/' + encodeURIComponent(p.id), style: modColors(cat), 'data-id': p.id },
     h('span', { class: 'n' }, pad3(n)),
-    h('i', { class: 'd' }),
+    ball(p),
     h('span', { class: 't' },
       h('b', {}, p.title, p.hidden && h('em', { class: 'hid' }, 'Hidden')),
       p.summary && h('span', { class: 'sub' }, p.summary),

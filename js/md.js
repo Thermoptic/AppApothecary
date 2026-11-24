@@ -87,6 +87,25 @@ function list(lines, i, base) {
 
 const cells = (row) => row.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
 
+// Badges and counters are images too, but they are not pictures of the project.
+const BADGE = /shields\.io|badgen\.net|badge\.svg|\/badges?\/|travis-ci|codecov|circleci|\/(workflows|actions)\/|flat-square|for-the-badge|buymeacoffee|ko-fi|sponsors|visitor-badge|seeyoufarm|komarev|githubusercontent\.com\/u\/\d+/i;
+
+/** The first real picture in a README (Markdown or HTML), as an absolute https URL, or ''. */
+export function firstReadmeImage(src, base) {
+  let inFence = false;
+  for (const raw of String(src || '').split('\n')) {
+    if (/^\s*(```|~~~)/.test(raw)) { inFence = !inFence; continue; }
+    if (inFence) continue;
+    const re = /!\[[^\]]*\]\(\s*([^)\s]+)|<img\b[^>]*?\bsrc=["']([^"']+)["']/gi;
+    let m;
+    while ((m = re.exec(raw))) {
+      const url = resolve(m[1] || m[2], 'img', base);
+      if (url && !BADGE.test(url)) return url;
+    }
+  }
+  return '';
+}
+
 export function renderMarkdown(src, base) {
   const out = h('div', { class: 'md' });
   const lines = String(src || '').replace(/\r\n?/g, '\n').split('\n');

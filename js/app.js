@@ -1,6 +1,7 @@
 // Entry point: loads data, draws the header and routes between views.
 
-import { h, set, icon, toast, effectiveTheme, setTheme, confirmDialog } from './ui.js';
+import { h, set, icon, toast, confirmDialog } from './ui.js';
+import { applyLook, currentLook, setSiteData, toggleDark, isDark } from './look.js';
 import { state, load, onChange, mode, isAdmin, publish, visibleProjects } from './store.js';
 import { destroyCharts } from './charts.js';
 import { initFx, pageSweep, coverSweep } from './fx.js';
@@ -18,7 +19,7 @@ let lastRoute = '';
 
 function chrome() {
   const m = mode();
-  const dark = effectiveTheme() === 'dark';
+  const dark = isDark();
   const onHome = (location.hash.replace(/^#/, '') || '/') === '/';
   const vis = state.data ? visibleProjects() : [];
   const cats = state.data ? state.data.categories.filter((c) => isAdmin() || vis.some((p) => p.category === c.id)) : [];
@@ -32,7 +33,7 @@ function chrome() {
     m !== 'view' && h('span', { class: 'lb mode' }, m === 'remote' ? 'Editing' : 'Local draft'),
     state.data && h('nav', { class: 'nav', 'aria-label': 'Categories' }, tab('', 'All', vis.length), cats.map((c) => tab(c.id, c.name, vis.filter((p) => p.category === c.id).length))),
     h('span', { class: 'spacer' }),
-    h('button', { class: 'hbtn', 'aria-label': dark ? 'Switch to light theme' : 'Switch to dark theme', onclick: () => coverSweep(() => setTheme(dark ? 'light' : 'dark')) }, icon(dark ? 'sun' : 'moon', 16)),
+    h('button', { class: 'hbtn', 'aria-label': dark ? 'Switch to light theme' : 'Switch to dark theme', onclick: () => coverSweep(() => toggleDark()) }, icon(dark ? 'sun' : 'moon', 16)),
     h('a', { class: 'hbtn', href: '#/settings', 'aria-label': 'Settings' }, icon('gear', 16)),
     isAdmin() && state.data && h('button', { class: 'btn', onclick: () => openEditor() }, '+ Add'),
     state.data && refresh));
@@ -84,14 +85,16 @@ function route() {
 async function boot() {
   try { await load(); }
   catch (e) { set(main, h('div', { class: 'empty' }, 'Could not load the project data. ' + e.message)); return; }
+  setSiteData(state.data); applyLook(currentLook());
   chrome(); route();
 }
 
 window.addEventListener('hashchange', route);
-window.addEventListener('themechange', () => { chrome(); route(); });
+window.addEventListener('ma-look', () => { chrome(); route(); });
 window.addEventListener('ma-reload', boot);
 window.addEventListener('ma-chrome', () => chrome());
 window.addEventListener('beforeunload', (e) => { if (state.dirty) { e.preventDefault(); e.returnValue = ''; } });
 onChange(({ rerender }) => { chrome(); if (rerender) route(); });
 initFx();
+applyLook(currentLook());
 boot();

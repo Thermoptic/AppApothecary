@@ -1,7 +1,8 @@
 // Settings: appearance and owner sign-in for everyone; profile, categories, tags,
 // sorting, GitHub import and backup for the owner.
 
-import { h, set, icon, modal, confirmDialog, toast, slug, uid, getThemePref, setTheme } from '../ui.js';
+import { h, set, icon, modal, confirmDialog, toast, slug, uid } from '../ui.js';
+import { PALETTES, FONTS, currentLook, setLocal, clearLocal, hasLocal, contrast } from '../look.js';
 import { state, mode, isAdmin, isLocal, getRepo, setAccess, signOut, touch, load, tagCounts, hasDraft, discardDraft, replaceData } from '../store.js';
 import { getToken, checkAccess, listRepos, fetchStats, fetchReadme, repoFields } from '../github.js';
 import { SORTS } from './home.js';
@@ -21,11 +22,29 @@ export function renderSettings(root) {
 }
 
 function appearance() {
-  return section('Appearance', 'Saved in this browser only.',
-    field('Theme', h('select', { value: getThemePref(), onchange: (e) => setTheme(e.target.value) },
-      h('option', { value: 'system' }, 'Follow system'), h('option', { value: 'light' }, 'Light'), h('option', { value: 'dark' }, 'Dark'))));
+  const look = currentLook();
+  const range = (label, min, max, step, value, unit, onInput) => {
+    const out = h('output', {}, value + unit);
+    const input = h('input', { type: 'range', min, max, step, value, oninput: (e) => { const v = +e.target.value; out.textContent = v + unit; onInput(v); } });
+    return h('label', { class: 'field' }, h('span', { class: 'row', style: { 'justify-content': 'space-between' } }, label, out), input);
+  };
+  const palettes = h('div', { class: 'pals', role: 'group', 'aria-label': 'Color palette' }, PALETTES.map((p) => h('button', {
+    class: 'pal', 'aria-pressed': String(look.palette === p.id), onclick: () => setLocal({ palette: p.id }),
+  }, h('span', {}, p.id), h('span', { class: 'sw' }, [p.paper, p.ink, p.accent, p.smile].map((c) => h('i', { style: { background: c } }))),
+    h('small', {}, 'Contrast ' + contrast(p.ink, p.smile).toFixed(1) + ' : 1'))));
+  const quiet = (patch) => setLocal(patch, true); // while a slider moves: no page redraw, so the slider keeps working
+  return section('Appearance', 'Pick a look for this browser. The owner can make it the default for everyone.',
+    h('div', { class: 'field' }, h('span', {}, 'Color palette'), palettes),
+    field('Font', h('select', { value: look.font, onchange: (e) => setLocal({ font: e.target.value }) }, FONTS.map((f) => h('option', { value: f.id }, `${f.id} · ${f.note}`)))),
+    range('Text size', 9, 24, 0.5, look.size, ' px', (v) => quiet({ size: v })),
+    h('label', { class: 'row' }, h('input', { type: 'checkbox', checked: look.smile.on, onchange: (e) => setLocal({ smile: { on: e.target.checked } }) }), 'Show the giant smiley'),
+    range('Smiley, sideways (x)', -30, 130, 1, look.smile.x, ' %', (v) => quiet({ smile: { x: v } })),
+    range('Smiley, up and down (y)', -30, 130, 1, look.smile.y, ' %', (v) => quiet({ smile: { y: v } })),
+    range('Smiley, size', 20, 240, 1, look.smile.size, ' %', (v) => quiet({ smile: { size: v } })),
+    h('div', { class: 'row wrap' },
+      hasLocal() && h('button', { class: 'btn', onclick: () => clearLocal() }, 'Back to the site look'),
+      isAdmin() && h('button', { class: 'btn primary', onclick: () => { state.data.settings.look = currentLook(); touch(false); clearLocal(); toast('Saved as the look for everyone.' + (mode() === 'remote' ? ' Press Publish.' : '')); } }, 'Save as the site look')));
 }
-
 function access() {
   const m = mode();
   const r = getRepo();

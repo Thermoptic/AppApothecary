@@ -43,6 +43,7 @@ function tokens(p) {
     '--surface-2': mix(p.paper, p.ink, 0.12),
     '--text': p.ink, '--muted': tint(0.24), '--rule': rgba(p.ink, 0.42), '--grid': rgba(p.ink, 0.12),
     '--gl': rgba(p.ink, dark ? 0.055 : 0.07),
+    '--hov': mix(p.paper, p.accent, dark ? 0.14 : 0.3), // the flat color a row turns on hover
     '--accent': p.accent, '--edge': p.edge || p.accent, '--on-accent': p.on, '--bar': p.ink, '--dot': mix(p.paper, p.ink, 0.18), '--smile': p.smile,
     '--danger': dark ? '#FF8A7E' : '#A32D2D',
     '--c1': p.ink, '--c2': tint(0.4), '--c3': tint(0.65), '--c4': mix(p.ink, dark ? '#ffffff' : '#000000', 0.35),

@@ -8,7 +8,7 @@
 :root {
   --bg: #EAF3CF; --surface: #F5F9E8; --surface-2: #D7E6B4;
   --text: #0C3D2C; --muted: #416953; --rule: rgba(12, 61, 44, .42); --grid: rgba(12, 61, 44, .12); --gl: rgba(12, 61, 44, .07);
-  --accent: #C9F76F; --edge: #0C3D2C; --on-accent: #0C3D2C; --bar: #0C3D2C; --danger: #A32D2D; --dot: #CFE0A6; --smile: #C9F76F;
+  --hov: #DEF4AD; --accent: #C9F76F; --edge: #0C3D2C; --on-accent: #0C3D2C; --bar: #0C3D2C; --danger: #A32D2D; --dot: #CFE0A6; --smile: #C9F76F;
   --f-body: "Hanken Grotesk", system-ui, "Segoe UI", sans-serif;
   --pad: 32px; --k: 1.1923;
   --c1: #1D3BD4; --c2: #6A7DE0; --c3: #A5B1EC; --c4: #132693; --c5: #D1D8F5; --c6: #6B80E0; --c7: #8E9DE6; --c8: #E6EAFA;
@@ -138,11 +138,7 @@ label.field > .hint { font-weight: 400; color: var(--muted); text-transform: non
 .item .rt { text-align: right; display: grid; gap: 4px; align-content: start; font-size: calc(12px * var(--k, 1)); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
 .item .rt span:first-child { color: var(--text); }
 .item .rt .fl { color: var(--muted); }
-.item:hover { background: var(--accent); color: var(--on-accent); }
-.item:hover .n, .item:hover .meta, .item:hover .rt .fl { color: var(--on-accent); }
-.item:hover .chip { border-color: var(--on-accent); color: var(--on-accent); }
-.item:hover .chip.fill { background: var(--on-accent); color: var(--accent); }
-.item:hover .lk:hover { background: var(--on-accent); color: var(--accent); }
+.item:hover { background: var(--hov); }
 
 /* the slow background grid and the giant smiley sit behind everything */
 .bg { position: fixed; inset: -56px; z-index: 0; pointer-events: none; background-image: linear-gradient(to right, var(--gl) 1px, transparent 1px), linear-gradient(to bottom, var(--gl) 1px, transparent 1px); background-size: 56px 56px; animation: gridDrift 70s linear infinite; will-change: transform; }
@@ -338,16 +334,6 @@ details summary { cursor: pointer; }
 .fx-shut.cover .fx-edge { -webkit-mask-image: var(--dith, none); mask-image: var(--dith, none); }
 @keyframes fx-out { to { transform: translateX(100%); } }
 @keyframes fx-in { from { transform: translateX(-100%); } }
-.item::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; width: calc(100% + 128px); pointer-events: none; image-rendering: pixelated; background: var(--accent);
-  -webkit-mask: linear-gradient(#000, #000) left / calc(100% - 128px) 100% no-repeat, var(--dith, none) right / 128px 32px repeat-y;
-  mask: linear-gradient(#000, #000) left / calc(100% - 128px) 100% no-repeat, var(--dith, none) right / 128px 32px repeat-y;
-  transform: translateX(-100%); transition: transform .6s steps(16); }
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .item { transition: none; }
-  .item:hover { background: transparent; color: var(--on-accent); }
-  .item:hover::after { transform: translateX(0); }
-}
-@media (hover: none), (prefers-reduced-motion: reduce) { .item::after { display: none; } .item:hover { background: transparent; color: inherit; } }
 .upd.spin { animation: blink .9s steps(2, jump-none) infinite; }
 @keyframes blink { from { opacity: 1; } to { opacity: .45; } }
 

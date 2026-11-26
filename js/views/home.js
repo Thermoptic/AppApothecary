@@ -94,30 +94,17 @@ export function renderHome(root) {
     onclick: () => { const pool = current(); const pick = pool[Math.floor(Math.random() * pool.length)]; if (pick) location.hash = '#/p/' + encodeURIComponent(pick.id); },
   }, 'Random ↗');
 
-  // ---- the sheet header ----
+  // ---- the intro: headline across the top, text on the left, links on the right ----
   const p = d.profile;
-  const gh = all.filter((x) => x.source === 'github').length;
-  const itch = all.filter((x) => x.source === 'itch').length;
-  const synced = Math.max(0, ...all.map((x) => (x.stats && Date.parse(x.stats.syncedAt)) || 0));
-  const refRow = (k, v, ok = 'OK') => h('div', { class: 'r' }, h('span', {}, k), h('span', {}, v), h('span', {}, ok));
 
   set(root,
-    h('div', { class: 'sheet-top' }, h('i', { class: 'reg' }), h('span'), h('i', { class: 'reg' })),
     h('section', { class: 'sheet' },
-      h('div', { class: 'refcard' },
-        refRow('Ref', `${p.title} · marking sheet`),
-        refRow('Name', p.github || p.title),
-        refRow('Items', `${all.length} projects · ${gh} GitHub · ${itch} itch`),
-        refRow('Sync', synced ? fmtShort(new Date(synced).toISOString()) : '—'),
-        h('div', { class: 'barcode' }),
-        h('div', { class: 'f' }, h('span', {}, 'Printed 100%'), h('span', {}, '*' + (p.github || 'sheet').toUpperCase() + '*'))),
-      h('div', { class: 'intro' },
-        h('h1', {}, p.headline || 'Things I have made.'),
-        p.tagline && h('p', {}, p.tagline),
+      h('h1', {}, p.headline || 'Things I have made.'),
+      h('div', { class: 'sheet-row' },
+        h('div', { class: 'tagtext' }, p.tagline && h('p', {}, p.tagline)),
         (p.github || p.itch) && h('div', { class: 'links' },
           p.github && h('a', { class: 'btn sm', href: 'https://github.com/' + encodeURIComponent(p.github), target: '_blank', rel: 'noopener' }, 'GitHub ↗'),
-          p.itch && h('a', { class: 'btn sm', href: p.itch, target: '_blank', rel: 'noopener' }, 'itch.io ↗')))),
-    h('div', { class: 'toolbar' }, h('div', { class: 'search' }, h('span', { class: 'ico' }, icon('search', 15)), search), sortBtn, randomBtn, tagRow),
+          p.itch && h('a', { class: 'btn sm', href: p.itch, target: '_blank', rel: 'noopener' }, 'itch.io ↗')))),    h('div', { class: 'toolbar' }, h('div', { class: 'search' }, h('span', { class: 'ico' }, icon('search', 15)), search), sortBtn, randomBtn, tagRow),
     resultBox,
     list);
   draw();
@@ -181,6 +168,5 @@ function item(p, n) {
       h('div', { class: 'meta' }, metaOf(p).map((t) => h('span', {}, t))),
       links.length ? h('div', { class: 'links' }, links.map((l) => h('a', { class: 'lk', href: l.url, target: '_blank', rel: 'noopener' },
         h('i'), h('span', {}, l.label), l.note ? h('small', {}, l.note) : null, h('span', { class: 'ar' }, '↗')))) : null),
-    h('div', { class: 'rt' }, h('span', {}, fmtShort(p.updated || p.created)), h('span', { class: 'fl' }, flag(p))),
-    h('i', { class: 'stamp' }, 'OK'));
+    h('div', { class: 'rt' }, h('span', {}, fmtShort(p.updated || p.created)), h('span', { class: 'fl' }, flag(p))));
 }

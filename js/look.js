@@ -3,6 +3,7 @@
 // Anyone can try another look for themselves; that is kept in this browser only.
 
 export const PALETTES = [
+  { id: 'Lime Sheet', paper: '#EAF3CF', ink: '#0C3D2C', accent: '#C9F76F', edge: '#0C3D2C', on: '#0C3D2C', smile: '#C9F76F' },
   { id: 'Marking Sheet', paper: '#EBEAE5', ink: '#C8271F', accent: '#C8271F', on: '#EBEAE5', smile: '#F7E993' },
   { id: 'Grått och lime', paper: '#DCDDE2', ink: '#111116', accent: '#D5FA4B', on: '#111116', smile: '#E2F987' },
   { id: 'Kräm och orange', paper: '#F2EFE6', ink: '#1B1B1B', accent: '#FF5A1F', on: '#1B1B1B', smile: '#FFD6C0' },
@@ -12,12 +13,12 @@ export const PALETTES = [
 ];
 export const FONTS = [
   { id: 'DM Mono', note: 'Lugn och jämn', q: 'DM+Mono:wght@400;500' },
-  { id: 'JetBrains Mono', note: 'Tydlig och modern, gjord för kod', q: 'JetBrains+Mono:wght@400;500;700' },
+  { id: 'JetBrains Mono', note: 'Tydlig och modern, gjord för kod', q: 'JetBrains+Mono:wght@400;500;700;800' },
   { id: 'IBM Plex Mono', note: 'Lite varmare, med seriffer', q: 'IBM+Plex+Mono:wght@400;500' },
   { id: 'Space Mono', note: 'Geometrisk och lekfull', q: 'Space+Mono:wght@400;700' },
   { id: 'VT323', note: 'Pixelfont som en gammal skärm (höj storleken)', q: 'VT323' },
 ];
-export const DEFAULT_LOOK = { palette: 'Kobolt', font: 'JetBrains Mono', size: 15.5, smile: { on: true, x: 84, y: 46, size: 92 } };
+export const DEFAULT_LOOK = { palette: 'Lime Sheet', font: 'JetBrains Mono', size: 15.5, smile: { on: true, x: 84, y: 46, size: 92 } };
 export const BASE_SIZE = 13; // the size the stylesheet was drawn for; --k scales every text size from it
 
 const LS = 'ma_look';
@@ -41,7 +42,8 @@ function tokens(p) {
     '--surface': mix(p.paper, '#ffffff', dark ? 0.05 : 0.5),
     '--surface-2': mix(p.paper, p.ink, 0.12),
     '--text': p.ink, '--muted': tint(0.24), '--rule': rgba(p.ink, 0.42), '--grid': rgba(p.ink, 0.12),
-    '--accent': p.accent, '--on-accent': p.on, '--bar': p.ink, '--dot': mix(p.paper, p.ink, 0.18), '--smile': p.smile,
+    '--gl': rgba(p.ink, dark ? 0.055 : 0.07),
+    '--accent': p.accent, '--edge': p.edge || p.accent, '--on-accent': p.on, '--bar': p.ink, '--dot': mix(p.paper, p.ink, 0.18), '--smile': p.smile,
     '--danger': dark ? '#FF8A7E' : '#A32D2D',
     '--c1': p.ink, '--c2': tint(0.4), '--c3': tint(0.65), '--c4': mix(p.ink, dark ? '#ffffff' : '#000000', 0.35),
     '--c5': tint(0.82), '--c6': p.accent !== p.ink ? p.accent : tint(0.25), '--c7': tint(0.5), '--c8': tint(0.9),

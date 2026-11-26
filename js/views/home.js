@@ -130,7 +130,7 @@ function linksFor(p) {
 function metaOf(p) {
   const cat = catOf(p);
   const s = p.stats;
-  const m = [cat && cat.name, SOURCE[p.source] || 'Project'];
+  const m = [SOURCE[p.source] || 'Project'];
   if (s) {
     if (s.language) m.push(s.language);
     if (s.license) m.push(s.license);
@@ -165,7 +165,7 @@ function item(p, n) {
         h('a', { class: 'ttl', href: '#/p/' + encodeURIComponent(p.id) }, p.title),
         p.hidden && h('em', { class: 'hid' }, 'Hidden')),
       p.summary && h('p', { class: 'sum' }, p.summary),
-      h('div', { class: 'meta' }, metaOf(p).map((t) => h('span', {}, t))),
+      h('div', { class: 'meta' }, catOf(p) && h('span', { class: 'chip' + (p.category === 'games' ? ' fill' : '') }, catOf(p).name), metaOf(p).map((t) => h('span', {}, t))),
       links.length ? h('div', { class: 'links' }, links.map((l) => h('a', { class: 'lk', href: l.url, target: '_blank', rel: 'noopener' },
         h('i'), h('span', {}, l.label), l.note ? h('small', {}, l.note) : null, h('span', { class: 'ar' }, '↗')))) : null),
     h('div', { class: 'rt' }, h('span', {}, fmtShort(p.updated || p.created)), h('span', { class: 'fl' }, flag(p))));

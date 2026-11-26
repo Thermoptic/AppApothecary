@@ -88,7 +88,6 @@ function categories() {
   const d = state.data;
   const count = (id) => d.projects.filter((p) => p.category === id).length;
   const rows = d.categories.map((c, i) => h('div', { class: 'list-row' },
-    h('input', { type: 'color', value: c.color, 'aria-label': 'Color for ' + c.name, onchange: (e) => { c.color = e.target.value; safe(() => touch(false)); } }),
     h('input', { value: c.name, 'aria-label': 'Category name', maxlength: 30, onchange: (e) => { c.name = e.target.value.trim() || c.name; safe(() => touch(false)); } }),
     h('span', { class: 'count' }, count(c.id) + ' used'),
     h('button', { class: 'btn ghost sm icon', 'aria-label': 'Move up', disabled: i === 0, onclick: () => { d.categories.splice(i - 1, 0, d.categories.splice(i, 1)[0]); safe(touch); } }, '↑'),
@@ -99,7 +98,7 @@ function categories() {
       d.categories.splice(i, 1); safe(touch);
     } }, icon('trash', 16))));
   const PALETTE = ['#D5FA4B', '#4A4C57', '#70C10A', '#A5A6AA', '#F2F2F5', '#111116'];
-  return section('Categories', 'Each category has its own color on cards and filters.',
+  return section('Categories', 'Categories group the projects and appear as tabs at the top of every page.',
     h('div', { class: 'list' }, rows.length ? rows : h('p', { class: 'muted small' }, 'No categories yet.')),
     h('div', {}, h('button', { class: 'btn', onclick: () => {
       d.categories.push({ id: 'cat-' + uid(), name: 'New category', color: PALETTE[d.categories.length % PALETTE.length] }); safe(touch);

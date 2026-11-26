@@ -3,7 +3,7 @@
 import { h, set, icon, fmtDate, fmtDateTime, fmtNum, fmtSize, modColors, prose, lightbox, toast, SOURCE } from '../ui.js';
 import { state, isAdmin, catOf, imgSrc, touch } from '../store.js';
 import { fetchStats, fetchReadme } from '../github.js';
-import { renderMarkdown } from '../md.js';
+import { renderMarkdown, firstReadmeImage } from '../md.js';
 import { weeklyChart, releasesChart, languagesChart, heatmap } from '../charts.js';
 import { openEditor } from './editor.js';
 import { unitNumbers } from './home.js';
@@ -28,7 +28,7 @@ export function renderProject(root, id) {
   const s = p.stats;
   const shots = p.screenshots.map(imgSrc);
   const primary = { github: 'View on GitHub', itch: 'Play on itch.io', other: 'Open' }[p.source] || 'Open';
-  const cover = imgSrc(p.cover);
+  const cover = imgSrc(p.cover) || firstReadmeImage(p.readme, { repo: p.repo, branch: (p.stats && p.stats.branch) || 'main' });
 
   async function refresh(btn) {
     btn.disabled = true;

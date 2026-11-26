@@ -107,7 +107,7 @@ export function openEditor(project) {
     field('About', f.description, 'Longer text for the project page. Blank lines make paragraphs.'),
     field('Readme', f.readme, 'Markdown, usually the repository readme. Shown on the project page.'),
     h('div', { class: 'grid2' }, field('Created', f.created), field('Last updated', f.updated)),
-    h('div', { class: 'field' }, h('span', { class: 'small', style: { 'font-weight': 550 } }, 'Cover image'), coverBox, pick(false, (u) => { cover = u; })),
+    h('div', { class: 'field' }, h('span', { class: 'small', style: { 'font-weight': 550 } }, 'Picture or icon'), h('span', { class: 'muted small' }, 'Shown on the left of the list row. Without one, the first image in the readme is used, then a placeholder icon.'), coverBox, pick(false, (u) => { cover = u; })),
     h('div', { class: 'field' }, h('span', { class: 'small', style: { 'font-weight': 550 } }, 'Screenshots'), shotsBox, pick(true, (u) => shots.push(u))),
     field('Facts', f.facts, 'One per line as "Label | Value". Shown as tiles on the project page.'),
     field('Extra links', f.links, 'One per line as "Label | https://…".'),

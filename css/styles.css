@@ -125,15 +125,18 @@ label.field > .hint { font-weight: 400; color: var(--muted); text-transform: non
 .item .ttl { font: 800 calc(18px * var(--k, 1))/1.05 var(--f-sans); text-transform: uppercase; letter-spacing: -.02em; overflow-wrap: anywhere; }
 .item .ttl:hover { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
 .hid { font-size: calc(9.5px * var(--k, 1)); font-style: normal; border: 1px solid currentColor; padding: 0 6px; letter-spacing: .08em; text-transform: uppercase; }
-.item .sum { font: 500 calc(14.5px * var(--k, 1))/1.5 var(--f-body); max-width: 64ch; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
-.item .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; font-size: calc(11px * var(--k, 1)); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
-.item .meta span:not(.chip):not(:last-child)::after { content: "·"; margin: 0 .6em 0 .55em; }
-.chip { font-size: calc(11px * var(--k, 1)); font-weight: 800; line-height: 1; letter-spacing: .05em; text-transform: uppercase; padding: 5px 8px; margin-right: 10px; border: 2px solid var(--text); color: var(--text); }
-.chip.fill { background: var(--accent); color: var(--on-accent); }
-.item .links { display: flex; flex-wrap: wrap; gap: 4px 20px; padding-top: 2px; }
-.item .lk { display: inline-flex; align-items: center; gap: 7px; font-size: calc(12px * var(--k, 1)); font-weight: 800; text-transform: uppercase; letter-spacing: .05em; padding: 2px 0; position: relative; z-index: 2; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.item .sum { font: 500 calc(14.5px * var(--k, 1))/1.5 var(--f-body); max-width: 64ch; padding-left: 14px; border-left: 5px solid var(--accent); box-shadow: -1px 0 0 var(--edge); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+/* facts as pill tags */
+.item .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: calc(11px * var(--k, 1)); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--text); }
+.item .meta span { border: 1.5px solid var(--edge); border-radius: 99px; padding: 3px 10px; }
+.chip { font-size: calc(11px * var(--k, 1)); font-weight: 800; line-height: 1; letter-spacing: .05em; text-transform: uppercase; padding: 5px 11px; border: 2px solid var(--edge); border-radius: 99px; background: var(--edge); color: var(--bg); }
+.item .meta .chip { border-width: 2px; padding: 5px 11px; }
+.chip.fill { background: var(--edge); color: var(--accent); }
+.item .links { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }
+/* links as lime buttons with a hard shadow */
+.item .lk { display: inline-flex; align-items: center; gap: 7px; font-size: calc(12px * var(--k, 1)); font-weight: 800; text-transform: uppercase; letter-spacing: .05em; padding: 5px 14px; position: relative; z-index: 2; background: var(--accent); color: var(--on-accent); border: 2px solid var(--edge); border-radius: 99px; box-shadow: 3px 3px 0 var(--edge); text-decoration: none; transition: transform .1s, box-shadow .1s; }
 .item .lk i { display: none; }
-.item .lk:hover { background: var(--accent); color: var(--on-accent); text-decoration: none; }
+.item .lk:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--edge); }
 .item .lk small { opacity: .7; font-size: calc(10.5px * var(--k, 1)); }
 .item .rt { text-align: right; display: grid; gap: 4px; align-content: start; font-size: calc(12px * var(--k, 1)); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
 .item .rt span:first-child { color: var(--text); }
@@ -141,7 +144,7 @@ label.field > .hint { font-weight: 400; color: var(--muted); text-transform: non
 .item:hover { background: var(--hov); }
 
 /* the slow background grid and the giant smiley sit behind everything */
-.bg { position: fixed; inset: -56px; z-index: 0; pointer-events: none; background-image: linear-gradient(to right, var(--gl) 1px, transparent 1px), linear-gradient(to bottom, var(--gl) 1px, transparent 1px); background-size: 56px 56px; animation: gridDrift 70s linear infinite; will-change: transform; }
+.bg { position: fixed; inset: -56px; z-index: 0; pointer-events: none; background-image: linear-gradient(to right, var(--gl) 1px, transparent 1px), linear-gradient(to bottom, var(--gl) 1px, transparent 1px); background-size: 56px 56px; animation: gridDrift 18s linear infinite; will-change: transform; }
 @keyframes gridDrift { to { transform: translate(56px, 56px); } }
 /* the picture: a real image tinted in the ink, or a placeholder that can be swapped for any image later */
 .pic { position: relative; display: block; width: 100%; aspect-ratio: 1; align-self: start; background: transparent; color: inherit; }

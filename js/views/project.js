@@ -36,11 +36,9 @@ export function renderProject(root, id) {
     catch (e) { toast(e.message, true); btn.disabled = false; }
   }
 
-  let hash = 0;
-  for (const ch of p.id) hash = (hash * 31 + ch.charCodeAt(0)) >>> 0;
   const plate = cover
     ? h('div', { class: 'plate', style: colors }, h('img', { src: cover, alt: `${p.title} cover` }))
-    : h('div', { class: 'plate', style: colors }, h('span', { class: 'pt pt' + (hash % 4) }), h('span', { class: 'lb' }, cat ? cat.name : 'Project'), h('div', { class: 'num' }, unitNumbers().get(p.id)));
+    : h('div', { class: 'plate', style: colors }, h('span', { class: 'ph' }));
 
   set(root,
     back,

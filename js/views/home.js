@@ -158,11 +158,7 @@ function metaOf(p) {
 /** The picture: the cover, else the first real image in the readme (tinted in the ink), else a placeholder. */
 function picEl(p) {
   const a = h('a', { class: 'pic', href: '#/p/' + encodeURIComponent(p.id), 'aria-label': p.title });
-  const placeholder = () => {
-    let hash = 0;
-    for (const ch of p.id) hash = (hash * 31 + ch.charCodeAt(0)) >>> 0; // the same project always gets the same pattern
-    return h('span', { class: 'ph' }, h('span', { class: 'pt pt' + (hash % 4) }), h('i', { class: 'reg' }));
-  };
+  const placeholder = () => h('span', { class: 'ph' }); // a plain box with a diagonal line
   const src = imgSrc(p.cover) || firstReadmeImage(p.readme, { repo: p.repo, branch: (p.stats && p.stats.branch) || 'main' });
   if (!src) { a.append(placeholder()); return a; }
   a.classList.add('has-img');
